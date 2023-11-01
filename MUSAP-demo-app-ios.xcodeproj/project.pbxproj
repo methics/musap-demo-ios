@@ -1,0 +1,593 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		C4DBFFA92AF2504100253DE4 /* MUSAP_demo_app_iosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DBFFA82AF2504100253DE4 /* MUSAP_demo_app_iosApp.swift */; };
+		C4DBFFAB2AF2504100253DE4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DBFFAA2AF2504100253DE4 /* ContentView.swift */; };
+		C4DBFFAD2AF2504200253DE4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4DBFFAC2AF2504200253DE4 /* Assets.xcassets */; };
+		C4DBFFB02AF2504200253DE4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4DBFFAF2AF2504200253DE4 /* Preview Assets.xcassets */; };
+		C4DBFFBA2AF2504300253DE4 /* MUSAP_demo_app_iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DBFFB92AF2504300253DE4 /* MUSAP_demo_app_iosTests.swift */; };
+		C4DBFFC42AF2504300253DE4 /* MUSAP_demo_app_iosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DBFFC32AF2504300253DE4 /* MUSAP_demo_app_iosUITests.swift */; };
+		C4DBFFC62AF2504300253DE4 /* MUSAP_demo_app_iosUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DBFFC52AF2504300253DE4 /* MUSAP_demo_app_iosUITestsLaunchTests.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXContainerItemProxy section */
+		C4DBFFB62AF2504300253DE4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C4DBFF9D2AF2504100253DE4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C4DBFFA42AF2504100253DE4;
+			remoteInfo = "MUSAP-demo-app-ios";
+		};
+		C4DBFFC02AF2504300253DE4 /* PBXContainerItemProxy */ = {
+			isa = PBXContainerItemProxy;
+			containerPortal = C4DBFF9D2AF2504100253DE4 /* Project object */;
+			proxyType = 1;
+			remoteGlobalIDString = C4DBFFA42AF2504100253DE4;
+			remoteInfo = "MUSAP-demo-app-ios";
+		};
+/* End PBXContainerItemProxy section */
+
+/* Begin PBXFileReference section */
+		C4DBFFA52AF2504100253DE4 /* MUSAP-demo-app-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MUSAP-demo-app-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C4DBFFA82AF2504100253DE4 /* MUSAP_demo_app_iosApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MUSAP_demo_app_iosApp.swift; sourceTree = "<group>"; };
+		C4DBFFAA2AF2504100253DE4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		C4DBFFAC2AF2504200253DE4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		C4DBFFAF2AF2504200253DE4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		C4DBFFB52AF2504300253DE4 /* MUSAP-demo-app-iosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MUSAP-demo-app-iosTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C4DBFFB92AF2504300253DE4 /* MUSAP_demo_app_iosTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MUSAP_demo_app_iosTests.swift; sourceTree = "<group>"; };
+		C4DBFFBF2AF2504300253DE4 /* MUSAP-demo-app-iosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MUSAP-demo-app-iosUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
+		C4DBFFC32AF2504300253DE4 /* MUSAP_demo_app_iosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MUSAP_demo_app_iosUITests.swift; sourceTree = "<group>"; };
+		C4DBFFC52AF2504300253DE4 /* MUSAP_demo_app_iosUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MUSAP_demo_app_iosUITestsLaunchTests.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		C4DBFFA22AF2504100253DE4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C4DBFFB22AF2504300253DE4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C4DBFFBC2AF2504300253DE4 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		C4DBFF9C2AF2504100253DE4 = {
+			isa = PBXGroup;
+			children = (
+				C4DBFFA72AF2504100253DE4 /* MUSAP-demo-app-ios */,
+				C4DBFFB82AF2504300253DE4 /* MUSAP-demo-app-iosTests */,
+				C4DBFFC22AF2504300253DE4 /* MUSAP-demo-app-iosUITests */,
+				C4DBFFA62AF2504100253DE4 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		C4DBFFA62AF2504100253DE4 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				C4DBFFA52AF2504100253DE4 /* MUSAP-demo-app-ios.app */,
+				C4DBFFB52AF2504300253DE4 /* MUSAP-demo-app-iosTests.xctest */,
+				C4DBFFBF2AF2504300253DE4 /* MUSAP-demo-app-iosUITests.xctest */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		C4DBFFA72AF2504100253DE4 /* MUSAP-demo-app-ios */ = {
+			isa = PBXGroup;
+			children = (
+				C4DBFFA82AF2504100253DE4 /* MUSAP_demo_app_iosApp.swift */,
+				C4DBFFAA2AF2504100253DE4 /* ContentView.swift */,
+				C4DBFFAC2AF2504200253DE4 /* Assets.xcassets */,
+				C4DBFFAE2AF2504200253DE4 /* Preview Content */,
+			);
+			path = "MUSAP-demo-app-ios";
+			sourceTree = "<group>";
+		};
+		C4DBFFAE2AF2504200253DE4 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				C4DBFFAF2AF2504200253DE4 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		C4DBFFB82AF2504300253DE4 /* MUSAP-demo-app-iosTests */ = {
+			isa = PBXGroup;
+			children = (
+				C4DBFFB92AF2504300253DE4 /* MUSAP_demo_app_iosTests.swift */,
+			);
+			path = "MUSAP-demo-app-iosTests";
+			sourceTree = "<group>";
+		};
+		C4DBFFC22AF2504300253DE4 /* MUSAP-demo-app-iosUITests */ = {
+			isa = PBXGroup;
+			children = (
+				C4DBFFC32AF2504300253DE4 /* MUSAP_demo_app_iosUITests.swift */,
+				C4DBFFC52AF2504300253DE4 /* MUSAP_demo_app_iosUITestsLaunchTests.swift */,
+			);
+			path = "MUSAP-demo-app-iosUITests";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		C4DBFFA42AF2504100253DE4 /* MUSAP-demo-app-ios */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C4DBFFC92AF2504300253DE4 /* Build configuration list for PBXNativeTarget "MUSAP-demo-app-ios" */;
+			buildPhases = (
+				C4DBFFA12AF2504100253DE4 /* Sources */,
+				C4DBFFA22AF2504100253DE4 /* Frameworks */,
+				C4DBFFA32AF2504100253DE4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = "MUSAP-demo-app-ios";
+			productName = "MUSAP-demo-app-ios";
+			productReference = C4DBFFA52AF2504100253DE4 /* MUSAP-demo-app-ios.app */;
+			productType = "com.apple.product-type.application";
+		};
+		C4DBFFB42AF2504300253DE4 /* MUSAP-demo-app-iosTests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C4DBFFCC2AF2504300253DE4 /* Build configuration list for PBXNativeTarget "MUSAP-demo-app-iosTests" */;
+			buildPhases = (
+				C4DBFFB12AF2504300253DE4 /* Sources */,
+				C4DBFFB22AF2504300253DE4 /* Frameworks */,
+				C4DBFFB32AF2504300253DE4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C4DBFFB72AF2504300253DE4 /* PBXTargetDependency */,
+			);
+			name = "MUSAP-demo-app-iosTests";
+			productName = "MUSAP-demo-app-iosTests";
+			productReference = C4DBFFB52AF2504300253DE4 /* MUSAP-demo-app-iosTests.xctest */;
+			productType = "com.apple.product-type.bundle.unit-test";
+		};
+		C4DBFFBE2AF2504300253DE4 /* MUSAP-demo-app-iosUITests */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = C4DBFFCF2AF2504300253DE4 /* Build configuration list for PBXNativeTarget "MUSAP-demo-app-iosUITests" */;
+			buildPhases = (
+				C4DBFFBB2AF2504300253DE4 /* Sources */,
+				C4DBFFBC2AF2504300253DE4 /* Frameworks */,
+				C4DBFFBD2AF2504300253DE4 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+				C4DBFFC12AF2504300253DE4 /* PBXTargetDependency */,
+			);
+			name = "MUSAP-demo-app-iosUITests";
+			productName = "MUSAP-demo-app-iosUITests";
+			productReference = C4DBFFBF2AF2504300253DE4 /* MUSAP-demo-app-iosUITests.xctest */;
+			productType = "com.apple.product-type.bundle.ui-testing";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		C4DBFF9D2AF2504100253DE4 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1500;
+				LastUpgradeCheck = 1500;
+				TargetAttributes = {
+					C4DBFFA42AF2504100253DE4 = {
+						CreatedOnToolsVersion = 15.0.1;
+					};
+					C4DBFFB42AF2504300253DE4 = {
+						CreatedOnToolsVersion = 15.0.1;
+						TestTargetID = C4DBFFA42AF2504100253DE4;
+					};
+					C4DBFFBE2AF2504300253DE4 = {
+						CreatedOnToolsVersion = 15.0.1;
+						TestTargetID = C4DBFFA42AF2504100253DE4;
+					};
+				};
+			};
+			buildConfigurationList = C4DBFFA02AF2504100253DE4 /* Build configuration list for PBXProject "MUSAP-demo-app-ios" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = C4DBFF9C2AF2504100253DE4;
+			productRefGroup = C4DBFFA62AF2504100253DE4 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				C4DBFFA42AF2504100253DE4 /* MUSAP-demo-app-ios */,
+				C4DBFFB42AF2504300253DE4 /* MUSAP-demo-app-iosTests */,
+				C4DBFFBE2AF2504300253DE4 /* MUSAP-demo-app-iosUITests */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		C4DBFFA32AF2504100253DE4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C4DBFFB02AF2504200253DE4 /* Preview Assets.xcassets in Resources */,
+				C4DBFFAD2AF2504200253DE4 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C4DBFFB32AF2504300253DE4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C4DBFFBD2AF2504300253DE4 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		C4DBFFA12AF2504100253DE4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C4DBFFAB2AF2504100253DE4 /* ContentView.swift in Sources */,
+				C4DBFFA92AF2504100253DE4 /* MUSAP_demo_app_iosApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C4DBFFB12AF2504300253DE4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C4DBFFBA2AF2504300253DE4 /* MUSAP_demo_app_iosTests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+		C4DBFFBB2AF2504300253DE4 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				C4DBFFC62AF2504300253DE4 /* MUSAP_demo_app_iosUITestsLaunchTests.swift in Sources */,
+				C4DBFFC42AF2504300253DE4 /* MUSAP_demo_app_iosUITests.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXTargetDependency section */
+		C4DBFFB72AF2504300253DE4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C4DBFFA42AF2504100253DE4 /* MUSAP-demo-app-ios */;
+			targetProxy = C4DBFFB62AF2504300253DE4 /* PBXContainerItemProxy */;
+		};
+		C4DBFFC12AF2504300253DE4 /* PBXTargetDependency */ = {
+			isa = PBXTargetDependency;
+			target = C4DBFFA42AF2504100253DE4 /* MUSAP-demo-app-ios */;
+			targetProxy = C4DBFFC02AF2504300253DE4 /* PBXContainerItemProxy */;
+		};
+/* End PBXTargetDependency section */
+
+/* Begin XCBuildConfiguration section */
+		C4DBFFC72AF2504300253DE4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = "DEBUG $(inherited)";
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		C4DBFFC82AF2504300253DE4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ASSETCATALOG_COMPILER_GENERATE_SWIFT_ASSET_SYMBOL_EXTENSIONS = YES;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_USER_SCRIPT_SANDBOXING = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu17;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		C4DBFFCA2AF2504300253DE4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"MUSAP-demo-app-ios/Preview Content\"";
+				DEVELOPMENT_TEAM = 8P3Z9UUPD3;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "fi.methics.MUSAP-demo-app-ios";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		C4DBFFCB2AF2504300253DE4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"MUSAP-demo-app-ios/Preview Content\"";
+				DEVELOPMENT_TEAM = 8P3Z9UUPD3;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "fi.methics.MUSAP-demo-app-ios";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+		C4DBFFCD2AF2504300253DE4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8P3Z9UUPD3;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "fi.methics.MUSAP-demo-app-iosTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MUSAP-demo-app-ios.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MUSAP-demo-app-ios";
+			};
+			name = Debug;
+		};
+		C4DBFFCE2AF2504300253DE4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				BUNDLE_LOADER = "$(TEST_HOST)";
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8P3Z9UUPD3;
+				GENERATE_INFOPLIST_FILE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "fi.methics.MUSAP-demo-app-iosTests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_HOST = "$(BUILT_PRODUCTS_DIR)/MUSAP-demo-app-ios.app/$(BUNDLE_EXECUTABLE_FOLDER_PATH)/MUSAP-demo-app-ios";
+			};
+			name = Release;
+		};
+		C4DBFFD02AF2504300253DE4 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8P3Z9UUPD3;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "fi.methics.MUSAP-demo-app-iosUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "MUSAP-demo-app-ios";
+			};
+			name = Debug;
+		};
+		C4DBFFD12AF2504300253DE4 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_EMBED_SWIFT_STANDARD_LIBRARIES = YES;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_TEAM = 8P3Z9UUPD3;
+				GENERATE_INFOPLIST_FILE = YES;
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = "fi.methics.MUSAP-demo-app-iosUITests";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = NO;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+				TEST_TARGET_NAME = "MUSAP-demo-app-ios";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		C4DBFFA02AF2504100253DE4 /* Build configuration list for PBXProject "MUSAP-demo-app-ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C4DBFFC72AF2504300253DE4 /* Debug */,
+				C4DBFFC82AF2504300253DE4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C4DBFFC92AF2504300253DE4 /* Build configuration list for PBXNativeTarget "MUSAP-demo-app-ios" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C4DBFFCA2AF2504300253DE4 /* Debug */,
+				C4DBFFCB2AF2504300253DE4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C4DBFFCC2AF2504300253DE4 /* Build configuration list for PBXNativeTarget "MUSAP-demo-app-iosTests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C4DBFFCD2AF2504300253DE4 /* Debug */,
+				C4DBFFCE2AF2504300253DE4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		C4DBFFCF2AF2504300253DE4 /* Build configuration list for PBXNativeTarget "MUSAP-demo-app-iosUITests" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				C4DBFFD02AF2504300253DE4 /* Debug */,
+				C4DBFFD12AF2504300253DE4 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = C4DBFF9D2AF2504100253DE4 /* Project object */;
+}
