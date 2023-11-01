@@ -1,0 +1,173 @@
+{
+  "sourceLanguage" : "en",
+  "strings" : {
+    "ACTIVE_SSCD_LIST" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Activated SSCDs"
+          }
+        }
+      }
+    },
+    "Algorithms" : {
+
+    },
+    "Available Keys" : {
+
+    },
+    "Cancel" : {
+
+    },
+    "Choose target keystore" : {
+
+    },
+    "Choose what to sign" : {
+
+    },
+    "Confirm Sign" : {
+
+    },
+    "Country" : {
+
+    },
+    "ENABLED_SSCD_LIST" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Enabled SSCDs"
+          }
+        }
+      }
+    },
+    "ENABLED_SSCDS" : {
+
+    },
+    "Enter key name" : {
+
+    },
+    "Enter PIN" : {
+
+    },
+    "GENERATE     " : {
+
+    },
+    "Home" : {
+
+    },
+    "Key Generation" : {
+
+    },
+    "Keystore Details" : {
+
+    },
+    "Keystore List" : {
+
+    },
+    "MENU_HOME" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Home"
+          }
+        }
+      }
+    },
+    "MENU_KEY_GENERATION" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Key Generation"
+          }
+        }
+      }
+    },
+    "MENU_KEYSTORE_LIST" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Keystore List"
+          }
+        }
+      }
+    },
+    "MENU_SIGN" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Sign"
+          }
+        }
+      }
+    },
+    "Next" : {
+
+    },
+    "OK" : {
+
+    },
+    "PIN" : {
+
+    },
+    "PIN confirm" : {
+
+    },
+    "Select Keystore" : {
+
+    },
+    "Select PINs" : {
+
+    },
+    "Select value" : {
+
+    },
+    "Sign" : {
+
+    },
+    "Sign input" : {
+
+    },
+    "Signing" : {
+
+    },
+    "SSCD Details" : {
+
+    },
+    "SSCD Name" : {
+
+    },
+    "SSCD Provider" : {
+
+    },
+    "SSCD Type" : {
+
+    },
+    "Version: %@" : {
+
+    },
+    "WELCOME_TEXT" : {
+      "extractionState" : "manual",
+      "localizations" : {
+        "en" : {
+          "stringUnit" : {
+            "state" : "translated",
+            "value" : "Welcome to MUSAP Test"
+          }
+        }
+      }
+    }
+  },
+  "version" : "1.0"
+}
