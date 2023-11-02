@@ -21,9 +21,6 @@
     "Cancel" : {
 
     },
-    "Choose target keystore" : {
-
-    },
     "Choose what to sign" : {
 
     },
@@ -53,13 +50,19 @@
     "Enter PIN" : {
 
     },
-    "GENERATE     " : {
+    "Generate the key" : {
 
     },
     "Home" : {
 
     },
+    "Key details" : {
+
+    },
     "Key Generation" : {
+
+    },
+    "Key name" : {
 
     },
     "Keystore Details" : {
@@ -122,6 +125,9 @@
 
     },
     "PIN confirm" : {
+
+    },
+    "Reset form" : {
 
     },
     "Select Keystore" : {
