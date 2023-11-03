@@ -24,6 +24,9 @@
     "Choose what to sign" : {
 
     },
+    "Confirm PIN" : {
+
+    },
     "Confirm Sign" : {
 
     },
@@ -48,6 +51,9 @@
 
     },
     "Enter PIN" : {
+
+    },
+    "Error" : {
 
     },
     "Generate the key" : {
@@ -122,6 +128,9 @@
 
     },
     "PIN" : {
+
+    },
+    "PIN codes" : {
 
     },
     "PIN confirm" : {

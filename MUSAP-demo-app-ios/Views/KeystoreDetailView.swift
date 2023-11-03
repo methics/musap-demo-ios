@@ -56,8 +56,10 @@ struct KeystoreDetailView: View {
                 }
             }
             .navigationTitle("Keystore Details")
+
         }
     }
+    
 }
 
 #Preview {

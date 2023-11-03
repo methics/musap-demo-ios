@@ -36,8 +36,7 @@ struct SigningView: View {
             .padding()
             
             
-            NavigationLink(destination: ChooseKeyForSigningView()
-            ) {
+            NavigationLink(destination: ChooseKeyForSigningView()) {
                 Text("Next")
             }
             

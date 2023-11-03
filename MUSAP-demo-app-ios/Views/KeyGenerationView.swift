@@ -30,7 +30,8 @@ struct KeyGenerationView: View {
                     Text("Key name")
                         .font(.system(size: 16, weight: .semibold))
                     TextField("Enter key name", text: $keyName)
-                        .foregroundColor(/*@START_MENU_TOKEN@*/.blue/*@END_MENU_TOKEN@*/)
+                        .foregroundColor(.blue)
+                        .autocorrectionDisabled()
                         
                 }
                 
@@ -81,6 +82,7 @@ struct KeyGenerationView: View {
                 })
             )
         }
+        
         
     }
     
@@ -136,3 +138,4 @@ struct KeyGenerationView: View {
 #Preview {
     KeyGenerationView()
 }
+
