@@ -6,3 +6,105 @@
 //
 
 import Foundation
+
+public class MusapClient {
+    
+    //TODO: MusapSscdInterface sscd, KeyGenReq req, MusapCallback
+    public static func generateKey() {
+        
+    }
+    
+    //TODO: MusapSscdInterface sscd, KeyBindReq req, MusapCallback callback
+    public static func bindKey() {
+        
+    }
+    
+    //TODO: SignatureReq, MusapCallback
+    public static func sign() {
+        
+    }
+    
+    
+    // Return from keydiscovery
+    public static func listEnabledSscds() {
+        
+    }
+    
+    //TODO: req: String -> SScdSearchReq req
+    public static func listEnabledSscds(req: String) {
+        
+    }
+    
+    //TODO: Return from storage
+    public static func listActiveSscds() {
+        
+    }
+    
+    //TODO: SscdSearchReq replace String
+    public static func listActiveSscds(req: String) {
+        
+    }
+    
+    //TODO: List all avaialbkle keys from storage
+    public static func listKeys() {
+        
+    }
+    
+    //TODO: Replace string
+    public static func listKeys(keySearchReq: String) {
+        
+    }
+    
+    //TODO: MusapSscdInterface
+    public static func enableSscd() {
+        
+    }
+    
+    
+    public static func getKeyByUri(keyUri: String) {
+        // get from metadatastorage
+    }
+    
+    //TODO: Create KeyURI object
+    public static func getKeyByUri(keyUriObject: String) {
+        
+    }
+    
+    //TODO: MusapImportData()
+    public static func importData(data: String) {
+        
+    }
+    
+    //TODO: Export JSON data
+    public static func exportData() {
+        
+    }
+    
+    //TODO: Implement MusapKey
+    public static func removeKey(musapKey: String) {
+        
+    }
+    
+    //TODO: Implement MusapSscd
+    public static func removeSscd(musapSscd: String) {
+        
+    }
+    
+    //TODO: return new MusapLink
+    public static func enableLink() {
+        
+    }
+    
+    public static func disableLink() {
+        
+    }
+    
+    //TODO: returns signatureReq
+    public static func pollLink() {
+        
+    }
+    
+    
+    
+    
+}
