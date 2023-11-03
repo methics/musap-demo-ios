@@ -7,13 +7,25 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C4DBFFA92AF2504100253DE4 /* MUSAP_demo_app_iosApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DBFFA82AF2504100253DE4 /* MUSAP_demo_app_iosApp.swift */; };
-		C4DBFFAB2AF2504100253DE4 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DBFFAA2AF2504100253DE4 /* ContentView.swift */; };
+		C44494E62AF3985200D8096C /* EnterPinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44494E52AF3985200D8096C /* EnterPinView.swift */; };
+		C44494E82AF3B1F300D8096C /* ChooseKeyForSigningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44494E72AF3B1F300D8096C /* ChooseKeyForSigningView.swift */; };
+		C44494EA2AF3B89C00D8096C /* ConfirmSignView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44494E92AF3B89C00D8096C /* ConfirmSignView.swift */; };
+		C44CB1362AF4DF6300C15143 /* MusapClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44CB1352AF4DF6300C15143 /* MusapClient.swift */; };
+		C44CB1382AF4E01900C15143 /* MusapError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44CB1372AF4E01900C15143 /* MusapError.swift */; };
+		C44CB13A2AF4E7A100C15143 /* MusapConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44CB1392AF4E7A100C15143 /* MusapConstants.swift */; };
+		C4DBFFA92AF2504100253DE4 /* MUSAP_demo_app_ios.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DBFFA82AF2504100253DE4 /* MUSAP_demo_app_ios.swift */; };
+		C4DBFFAB2AF2504100253DE4 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DBFFAA2AF2504100253DE4 /* HomeView.swift */; };
 		C4DBFFAD2AF2504200253DE4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4DBFFAC2AF2504200253DE4 /* Assets.xcassets */; };
 		C4DBFFB02AF2504200253DE4 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4DBFFAF2AF2504200253DE4 /* Preview Assets.xcassets */; };
 		C4DBFFBA2AF2504300253DE4 /* MUSAP_demo_app_iosTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DBFFB92AF2504300253DE4 /* MUSAP_demo_app_iosTests.swift */; };
 		C4DBFFC42AF2504300253DE4 /* MUSAP_demo_app_iosUITests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DBFFC32AF2504300253DE4 /* MUSAP_demo_app_iosUITests.swift */; };
 		C4DBFFC62AF2504300253DE4 /* MUSAP_demo_app_iosUITestsLaunchTests.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DBFFC52AF2504300253DE4 /* MUSAP_demo_app_iosUITestsLaunchTests.swift */; };
+		C4DBFFD82AF25EA500253DE4 /* NavigationTabView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DBFFD72AF25EA500253DE4 /* NavigationTabView.swift */; };
+		C4DBFFDA2AF26CD800253DE4 /* KeystoreListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DBFFD92AF26CD800253DE4 /* KeystoreListView.swift */; };
+		C4DBFFDC2AF26CF900253DE4 /* KeyGenerationView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DBFFDB2AF26CF900253DE4 /* KeyGenerationView.swift */; };
+		C4DBFFDE2AF26D0800253DE4 /* SigningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DBFFDD2AF26D0800253DE4 /* SigningView.swift */; };
+		C4DBFFE02AF274DC00253DE4 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = C4DBFFDF2AF274DC00253DE4 /* Localizable.xcstrings */; };
+		C4DBFFE22AF28F9A00253DE4 /* KeystoreDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DBFFE12AF28F9A00253DE4 /* KeystoreDetailView.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -34,9 +46,15 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		C44494E52AF3985200D8096C /* EnterPinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterPinView.swift; sourceTree = "<group>"; };
+		C44494E72AF3B1F300D8096C /* ChooseKeyForSigningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseKeyForSigningView.swift; sourceTree = "<group>"; };
+		C44494E92AF3B89C00D8096C /* ConfirmSignView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmSignView.swift; sourceTree = "<group>"; };
+		C44CB1352AF4DF6300C15143 /* MusapClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusapClient.swift; sourceTree = "<group>"; };
+		C44CB1372AF4E01900C15143 /* MusapError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusapError.swift; sourceTree = "<group>"; };
+		C44CB1392AF4E7A100C15143 /* MusapConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusapConstants.swift; sourceTree = "<group>"; };
 		C4DBFFA52AF2504100253DE4 /* MUSAP-demo-app-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MUSAP-demo-app-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
-		C4DBFFA82AF2504100253DE4 /* MUSAP_demo_app_iosApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MUSAP_demo_app_iosApp.swift; sourceTree = "<group>"; };
-		C4DBFFAA2AF2504100253DE4 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		C4DBFFA82AF2504100253DE4 /* MUSAP_demo_app_ios.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MUSAP_demo_app_ios.swift; sourceTree = "<group>"; };
+		C4DBFFAA2AF2504100253DE4 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
 		C4DBFFAC2AF2504200253DE4 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		C4DBFFAF2AF2504200253DE4 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
 		C4DBFFB52AF2504300253DE4 /* MUSAP-demo-app-iosTests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MUSAP-demo-app-iosTests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
@@ -44,6 +62,13 @@
 		C4DBFFBF2AF2504300253DE4 /* MUSAP-demo-app-iosUITests.xctest */ = {isa = PBXFileReference; explicitFileType = wrapper.cfbundle; includeInIndex = 0; path = "MUSAP-demo-app-iosUITests.xctest"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4DBFFC32AF2504300253DE4 /* MUSAP_demo_app_iosUITests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MUSAP_demo_app_iosUITests.swift; sourceTree = "<group>"; };
 		C4DBFFC52AF2504300253DE4 /* MUSAP_demo_app_iosUITestsLaunchTests.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MUSAP_demo_app_iosUITestsLaunchTests.swift; sourceTree = "<group>"; };
+		C4DBFFD22AF2513400253DE4 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist; path = Info.plist; sourceTree = "<group>"; };
+		C4DBFFD72AF25EA500253DE4 /* NavigationTabView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NavigationTabView.swift; sourceTree = "<group>"; };
+		C4DBFFD92AF26CD800253DE4 /* KeystoreListView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeystoreListView.swift; sourceTree = "<group>"; };
+		C4DBFFDB2AF26CF900253DE4 /* KeyGenerationView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyGenerationView.swift; sourceTree = "<group>"; };
+		C4DBFFDD2AF26D0800253DE4 /* SigningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigningView.swift; sourceTree = "<group>"; };
+		C4DBFFDF2AF274DC00253DE4 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
+		C4DBFFE12AF28F9A00253DE4 /* KeystoreDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeystoreDetailView.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -71,6 +96,24 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		C44CB1332AF4DD1E00C15143 /* sdk */ = {
+			isa = PBXGroup;
+			children = (
+				C44CB1342AF4DF4400C15143 /* api */,
+			);
+			path = sdk;
+			sourceTree = "<group>";
+		};
+		C44CB1342AF4DF4400C15143 /* api */ = {
+			isa = PBXGroup;
+			children = (
+				C44CB1352AF4DF6300C15143 /* MusapClient.swift */,
+				C44CB1372AF4E01900C15143 /* MusapError.swift */,
+				C44CB1392AF4E7A100C15143 /* MusapConstants.swift */,
+			);
+			path = api;
+			sourceTree = "<group>";
+		};
 		C4DBFF9C2AF2504100253DE4 = {
 			isa = PBXGroup;
 			children = (
@@ -94,10 +137,16 @@
 		C4DBFFA72AF2504100253DE4 /* MUSAP-demo-app-ios */ = {
 			isa = PBXGroup;
 			children = (
-				C4DBFFA82AF2504100253DE4 /* MUSAP_demo_app_iosApp.swift */,
-				C4DBFFAA2AF2504100253DE4 /* ContentView.swift */,
+				C44CB1332AF4DD1E00C15143 /* sdk */,
+				C4DBFFD62AF25AD100253DE4 /* Extensions */,
+				C4DBFFD52AF25AC800253DE4 /* Services */,
+				C4DBFFD42AF25ABE00253DE4 /* Models */,
+				C4DBFFD32AF25A6600253DE4 /* Views */,
+				C4DBFFD22AF2513400253DE4 /* Info.plist */,
+				C4DBFFA82AF2504100253DE4 /* MUSAP_demo_app_ios.swift */,
 				C4DBFFAC2AF2504200253DE4 /* Assets.xcassets */,
 				C4DBFFAE2AF2504200253DE4 /* Preview Content */,
+				C4DBFFDF2AF274DC00253DE4 /* Localizable.xcstrings */,
 			);
 			path = "MUSAP-demo-app-ios";
 			sourceTree = "<group>";
@@ -125,6 +174,43 @@
 				C4DBFFC52AF2504300253DE4 /* MUSAP_demo_app_iosUITestsLaunchTests.swift */,
 			);
 			path = "MUSAP-demo-app-iosUITests";
+			sourceTree = "<group>";
+		};
+		C4DBFFD32AF25A6600253DE4 /* Views */ = {
+			isa = PBXGroup;
+			children = (
+				C4DBFFAA2AF2504100253DE4 /* HomeView.swift */,
+				C4DBFFD72AF25EA500253DE4 /* NavigationTabView.swift */,
+				C4DBFFD92AF26CD800253DE4 /* KeystoreListView.swift */,
+				C4DBFFDB2AF26CF900253DE4 /* KeyGenerationView.swift */,
+				C4DBFFDD2AF26D0800253DE4 /* SigningView.swift */,
+				C4DBFFE12AF28F9A00253DE4 /* KeystoreDetailView.swift */,
+				C44494E52AF3985200D8096C /* EnterPinView.swift */,
+				C44494E72AF3B1F300D8096C /* ChooseKeyForSigningView.swift */,
+				C44494E92AF3B89C00D8096C /* ConfirmSignView.swift */,
+			);
+			path = Views;
+			sourceTree = "<group>";
+		};
+		C4DBFFD42AF25ABE00253DE4 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
+		C4DBFFD52AF25AC800253DE4 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		C4DBFFD62AF25AD100253DE4 /* Extensions */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = Extensions;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -233,6 +319,7 @@
 			files = (
 				C4DBFFB02AF2504200253DE4 /* Preview Assets.xcassets in Resources */,
 				C4DBFFAD2AF2504200253DE4 /* Assets.xcassets in Resources */,
+				C4DBFFE02AF274DC00253DE4 /* Localizable.xcstrings in Resources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -257,8 +344,19 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
-				C4DBFFAB2AF2504100253DE4 /* ContentView.swift in Sources */,
-				C4DBFFA92AF2504100253DE4 /* MUSAP_demo_app_iosApp.swift in Sources */,
+				C4DBFFDC2AF26CF900253DE4 /* KeyGenerationView.swift in Sources */,
+				C4DBFFD82AF25EA500253DE4 /* NavigationTabView.swift in Sources */,
+				C4DBFFDE2AF26D0800253DE4 /* SigningView.swift in Sources */,
+				C4DBFFAB2AF2504100253DE4 /* HomeView.swift in Sources */,
+				C44CB13A2AF4E7A100C15143 /* MusapConstants.swift in Sources */,
+				C44494EA2AF3B89C00D8096C /* ConfirmSignView.swift in Sources */,
+				C44CB1362AF4DF6300C15143 /* MusapClient.swift in Sources */,
+				C4DBFFDA2AF26CD800253DE4 /* KeystoreListView.swift in Sources */,
+				C44494E82AF3B1F300D8096C /* ChooseKeyForSigningView.swift in Sources */,
+				C44494E62AF3985200D8096C /* EnterPinView.swift in Sources */,
+				C4DBFFA92AF2504100253DE4 /* MUSAP_demo_app_ios.swift in Sources */,
+				C4DBFFE22AF28F9A00253DE4 /* KeystoreDetailView.swift in Sources */,
+				C44CB1382AF4E01900C15143 /* MusapError.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -425,18 +523,25 @@
 				DEVELOPMENT_TEAM = 8P3Z9UUPD3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "MUSAP-demo-app-ios/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = MUSAP;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "fi.methics.MUSAP-demo-app-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -454,18 +559,25 @@
 				DEVELOPMENT_TEAM = 8P3Z9UUPD3;
 				ENABLE_PREVIEWS = YES;
 				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_FILE = "MUSAP-demo-app-ios/Info.plist";
+				INFOPLIST_KEY_CFBundleDisplayName = MUSAP;
+				INFOPLIST_KEY_LSApplicationCategoryType = "public.app-category.business";
 				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
 				);
-				MARKETING_VERSION = 1.0;
+				MARKETING_VERSION = 1.0.0;
 				PRODUCT_BUNDLE_IDENTIFIER = "fi.methics.MUSAP-demo-app-ios";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SUPPORTED_PLATFORMS = "iphoneos iphonesimulator";
+				SUPPORTS_MACCATALYST = NO;
+				SUPPORTS_MAC_DESIGNED_FOR_IPHONE_IPAD = NO;
 				SWIFT_EMIT_LOC_STRINGS = YES;
 				SWIFT_VERSION = 5.0;
 				TARGETED_DEVICE_FAMILY = "1,2";
@@ -591,3 +703,4 @@
 	};
 	rootObject = C4DBFF9D2AF2504100253DE4 /* Project object */;
 }
+
