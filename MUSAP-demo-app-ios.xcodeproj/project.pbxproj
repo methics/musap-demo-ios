@@ -13,6 +13,7 @@
 		C44CB1362AF4DF6300C15143 /* MusapClient.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44CB1352AF4DF6300C15143 /* MusapClient.swift */; };
 		C44CB1382AF4E01900C15143 /* MusapError.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44CB1372AF4E01900C15143 /* MusapError.swift */; };
 		C44CB13A2AF4E7A100C15143 /* MusapConstants.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44CB1392AF4E7A100C15143 /* MusapConstants.swift */; };
+		C44CB1422AF4F00D00C15143 /* SscdSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44CB1412AF4F00D00C15143 /* SscdSettings.swift */; };
 		C4DBFFA92AF2504100253DE4 /* MUSAP_demo_app_ios.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DBFFA82AF2504100253DE4 /* MUSAP_demo_app_ios.swift */; };
 		C4DBFFAB2AF2504100253DE4 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DBFFAA2AF2504100253DE4 /* HomeView.swift */; };
 		C4DBFFAD2AF2504200253DE4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4DBFFAC2AF2504200253DE4 /* Assets.xcassets */; };
@@ -52,6 +53,7 @@
 		C44CB1352AF4DF6300C15143 /* MusapClient.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusapClient.swift; sourceTree = "<group>"; };
 		C44CB1372AF4E01900C15143 /* MusapError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusapError.swift; sourceTree = "<group>"; };
 		C44CB1392AF4E7A100C15143 /* MusapConstants.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusapConstants.swift; sourceTree = "<group>"; };
+		C44CB1412AF4F00D00C15143 /* SscdSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SscdSettings.swift; sourceTree = "<group>"; };
 		C4DBFFA52AF2504100253DE4 /* MUSAP-demo-app-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MUSAP-demo-app-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4DBFFA82AF2504100253DE4 /* MUSAP_demo_app_ios.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MUSAP_demo_app_ios.swift; sourceTree = "<group>"; };
 		C4DBFFAA2AF2504100253DE4 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -99,6 +101,7 @@
 		C44CB1332AF4DD1E00C15143 /* sdk */ = {
 			isa = PBXGroup;
 			children = (
+				C44CB1402AF4EFEE00C15143 /* extension */,
 				C44CB1342AF4DF4400C15143 /* api */,
 			);
 			path = sdk;
@@ -112,6 +115,14 @@
 				C44CB1392AF4E7A100C15143 /* MusapConstants.swift */,
 			);
 			path = api;
+			sourceTree = "<group>";
+		};
+		C44CB1402AF4EFEE00C15143 /* extension */ = {
+			isa = PBXGroup;
+			children = (
+				C44CB1412AF4F00D00C15143 /* SscdSettings.swift */,
+			);
+			path = extension;
 			sourceTree = "<group>";
 		};
 		C4DBFF9C2AF2504100253DE4 = {
@@ -351,6 +362,7 @@
 				C44CB13A2AF4E7A100C15143 /* MusapConstants.swift in Sources */,
 				C44494EA2AF3B89C00D8096C /* ConfirmSignView.swift in Sources */,
 				C44CB1362AF4DF6300C15143 /* MusapClient.swift in Sources */,
+				C44CB1422AF4F00D00C15143 /* SscdSettings.swift in Sources */,
 				C4DBFFDA2AF26CD800253DE4 /* KeystoreListView.swift in Sources */,
 				C44494E82AF3B1F300D8096C /* ChooseKeyForSigningView.swift in Sources */,
 				C44494E62AF3985200D8096C /* EnterPinView.swift in Sources */,
@@ -703,4 +715,3 @@
 	};
 	rootObject = C4DBFF9D2AF2504100253DE4 /* Project object */;
 }
-
