@@ -9,9 +9,14 @@ import Foundation
 
 public class MusapClient {
     
-    //TODO: MusapSscdInterface sscd, KeyGenReq req, MusapCallback
-    static func generateKey(sscd: any MusapSscdProtocol, req: KeyGenReq) {
-        
+    static func generateKey(sscd: any MusapSscdProtocol, req: KeyGenReq, completion: @escaping (Result<MusapKey, MusapError>) -> Void) async {
+        do {
+            let generateKeyTask = GenerateKeyTask()
+            try await generateKeyTask.generateKeyAsync(sscd: sscd, req: req, completion: completion)
+        } catch {
+            // Handle errors if needed
+            completion(.failure(MusapError.internalError))
+        }
     }
     
     //TODO: MusapSscdInterface sscd, KeyBindReq req, MusapCallback callback

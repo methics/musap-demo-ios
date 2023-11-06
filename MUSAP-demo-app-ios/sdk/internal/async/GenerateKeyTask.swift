@@ -7,8 +7,6 @@
 
 import Foundation
 
-import Foundation
-
 class GenerateKeyTask {
 
     typealias CompletionHandler = (Result<MusapKey, MusapError>) -> Void

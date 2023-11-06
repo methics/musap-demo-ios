@@ -71,10 +71,6 @@ struct MusapLoa: Codable {
     
 }
 
-struct KeyAlgorithm: Codable {
-    
-}
-
 struct KeyAttestation: Codable {
     
 }

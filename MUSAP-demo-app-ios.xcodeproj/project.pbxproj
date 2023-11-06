@@ -19,6 +19,10 @@
 		C40AEEA02AF51000006445EB /* MusapSscd.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40AEE9F2AF51000006445EB /* MusapSscd.swift */; };
 		C42FFEDA2AF8F388004CEB5E /* GenerateKeyTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42FFED92AF8F388004CEB5E /* GenerateKeyTask.swift */; };
 		C42FFEDC2AF8F4FC004CEB5E /* MetadataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42FFEDB2AF8F4FC004CEB5E /* MetadataStorage.swift */; };
+		C4409ABF2AF9119E0068B793 /* KeychainSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4409ABE2AF9119E0068B793 /* KeychainSettings.swift */; };
+		C4409AC12AF912EA0068B793 /* KeychainSscd.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4409AC02AF912EA0068B793 /* KeychainSscd.swift */; };
+		C4409AC32AF9164F0068B793 /* KeyAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4409AC22AF9164F0068B793 /* KeyAlgorithm.swift */; };
+		C4409AC52AF924AD0068B793 /* KeyURI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4409AC42AF924AD0068B793 /* KeyURI.swift */; };
 		C44494E62AF3985200D8096C /* EnterPinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44494E52AF3985200D8096C /* EnterPinView.swift */; };
 		C44494E82AF3B1F300D8096C /* ChooseKeyForSigningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44494E72AF3B1F300D8096C /* ChooseKeyForSigningView.swift */; };
 		C44494EA2AF3B89C00D8096C /* ConfirmSignView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44494E92AF3B89C00D8096C /* ConfirmSignView.swift */; };
@@ -72,6 +76,10 @@
 		C40AEE9F2AF51000006445EB /* MusapSscd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusapSscd.swift; sourceTree = "<group>"; };
 		C42FFED92AF8F388004CEB5E /* GenerateKeyTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateKeyTask.swift; sourceTree = "<group>"; };
 		C42FFEDB2AF8F4FC004CEB5E /* MetadataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetadataStorage.swift; sourceTree = "<group>"; };
+		C4409ABE2AF9119E0068B793 /* KeychainSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainSettings.swift; sourceTree = "<group>"; };
+		C4409AC02AF912EA0068B793 /* KeychainSscd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainSscd.swift; sourceTree = "<group>"; };
+		C4409AC22AF9164F0068B793 /* KeyAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyAlgorithm.swift; sourceTree = "<group>"; };
+		C4409AC42AF924AD0068B793 /* KeyURI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyURI.swift; sourceTree = "<group>"; };
 		C44494E52AF3985200D8096C /* EnterPinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterPinView.swift; sourceTree = "<group>"; };
 		C44494E72AF3B1F300D8096C /* ChooseKeyForSigningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseKeyForSigningView.swift; sourceTree = "<group>"; };
 		C44494E92AF3B89C00D8096C /* ConfirmSignView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConfirmSignView.swift; sourceTree = "<group>"; };
@@ -134,6 +142,8 @@
 				C40AEE9B2AF50F26006445EB /* SignatureAlgorithm.swift */,
 				C40AEE9D2AF50F4C006445EB /* SignatureFormat.swift */,
 				C40AEE9F2AF51000006445EB /* MusapSscd.swift */,
+				C4409AC22AF9164F0068B793 /* KeyAlgorithm.swift */,
+				C4409AC42AF924AD0068B793 /* KeyURI.swift */,
 			);
 			path = datatype;
 			sourceTree = "<group>";
@@ -162,9 +172,27 @@
 			path = async;
 			sourceTree = "<group>";
 		};
+		C42FFEDD2AF91141004CEB5E /* sscd */ = {
+			isa = PBXGroup;
+			children = (
+				C42FFEDE2AF9116B004CEB5E /* keychain */,
+			);
+			path = sscd;
+			sourceTree = "<group>";
+		};
+		C42FFEDE2AF9116B004CEB5E /* keychain */ = {
+			isa = PBXGroup;
+			children = (
+				C4409ABE2AF9119E0068B793 /* KeychainSettings.swift */,
+				C4409AC02AF912EA0068B793 /* KeychainSscd.swift */,
+			);
+			path = keychain;
+			sourceTree = "<group>";
+		};
 		C44CB1332AF4DD1E00C15143 /* sdk */ = {
 			isa = PBXGroup;
 			children = (
+				C42FFEDD2AF91141004CEB5E /* sscd */,
 				C44CB1452AF4F37F00C15143 /* internal */,
 				C44CB1402AF4EFEE00C15143 /* extension */,
 				C44CB1342AF4DF4400C15143 /* api */,
@@ -445,12 +473,15 @@
 				C40AEE8D2AF4FD30006445EB /* StepUpPolicy.swift in Sources */,
 				C42FFEDC2AF8F4FC004CEB5E /* MetadataStorage.swift in Sources */,
 				C4DBFFDC2AF26CF900253DE4 /* KeyGenerationView.swift in Sources */,
+				C4409AC12AF912EA0068B793 /* KeychainSscd.swift in Sources */,
 				C4DBFFD82AF25EA500253DE4 /* NavigationTabView.swift in Sources */,
 				C4DBFFDE2AF26D0800253DE4 /* SigningView.swift in Sources */,
 				C4DBFFAB2AF2504100253DE4 /* HomeView.swift in Sources */,
+				C4409ABF2AF9119E0068B793 /* KeychainSettings.swift in Sources */,
 				C44CB13A2AF4E7A100C15143 /* MusapConstants.swift in Sources */,
 				C44494EA2AF3B89C00D8096C /* ConfirmSignView.swift in Sources */,
 				C40AEEA02AF51000006445EB /* MusapSscd.swift in Sources */,
+				C4409AC52AF924AD0068B793 /* KeyURI.swift in Sources */,
 				C44CB1362AF4DF6300C15143 /* MusapClient.swift in Sources */,
 				C44CB1422AF4F00D00C15143 /* SscdSettings.swift in Sources */,
 				C4DBFFDA2AF26CD800253DE4 /* KeystoreListView.swift in Sources */,
@@ -463,6 +494,7 @@
 				C42FFEDA2AF8F388004CEB5E /* GenerateKeyTask.swift in Sources */,
 				C40AEE962AF50D22006445EB /* KeyGenReq.swift in Sources */,
 				C4DBFFA92AF2504100253DE4 /* MUSAP_demo_app_ios.swift in Sources */,
+				C4409AC32AF9164F0068B793 /* KeyAlgorithm.swift in Sources */,
 				C40AEE9C2AF50F26006445EB /* SignatureAlgorithm.swift in Sources */,
 				C40AEE9E2AF50F4C006445EB /* SignatureFormat.swift in Sources */,
 				C4DBFFE22AF28F9A00253DE4 /* KeystoreDetailView.swift in Sources */,
