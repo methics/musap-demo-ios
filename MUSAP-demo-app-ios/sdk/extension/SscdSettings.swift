@@ -10,6 +10,7 @@ import Foundation
 protocol SscdSettings {
     
     func getSettings() -> [String:String]?
+    
     func getSetting(forKey key: String) -> String?
     
 }

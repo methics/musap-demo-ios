@@ -10,12 +10,12 @@ import Foundation
 public class MusapClient {
     
     //TODO: MusapSscdInterface sscd, KeyGenReq req, MusapCallback
-    public static func generateKey() {
+    static func generateKey(sscd: any MusapSscdProtocol, req: KeyGenReq) {
         
     }
     
     //TODO: MusapSscdInterface sscd, KeyBindReq req, MusapCallback callback
-    public static func bindKey() {
+    static func bindKey(sscd: any MusapSscdProtocol, req: KeyGenReq) {
         
     }
     
@@ -108,3 +108,4 @@ public class MusapClient {
     
     
 }
+

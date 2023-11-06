@@ -24,9 +24,6 @@
     "Choose what to sign" : {
 
     },
-    "Confirm PIN" : {
-
-    },
     "Confirm Sign" : {
 
     },
@@ -130,7 +127,7 @@
     "PIN" : {
 
     },
-    "PIN codes" : {
+    "PIN code" : {
 
     },
     "PIN confirm" : {
@@ -167,6 +164,12 @@
 
     },
     "SSCD Type" : {
+
+    },
+    "Success!" : {
+
+    },
+    "Successfully created a key" : {
 
     },
     "Version: %@" : {

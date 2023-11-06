@@ -12,15 +12,16 @@ struct KeyGenerationView: View {
     @State private var keyName: String = ""
     @State private var selectedKeystoreIndex = 0
     @State private var isPopupVisible = false
+    @State private var isKeyGenerationSuccess = false
     
     @State private var isErrorPopupVisible = false
     @State private var errorMessage = ""
     
     @State private var pin1 = ""
-    @State private var pin2 = ""
-    
     
     let availableKeystores = ["Methics demo", "Yubikey", "iOS keychain"]
+    var keystoreIndex: KeyValuePairs = [0: "Methics demo", 1: "Yubikey", 2: "iOS keychain"]
+
     
     var body: some View {
         
@@ -32,6 +33,7 @@ struct KeyGenerationView: View {
                     TextField("Enter key name", text: $keyName)
                         .foregroundColor(.blue)
                         .autocorrectionDisabled()
+                        
                         
                 }
                 
@@ -46,28 +48,26 @@ struct KeyGenerationView: View {
                 }
             }
             
-            Section("PIN codes") {
-                HStack {
-                    Text("Enter PIN")
-                        .font(.system(size: 16, weight: .semibold))
-                    SecureField("Enter PIN", text: $pin1)
-                        .keyboardType(.numberPad)
-                }
-                
-                HStack {
-                    Text("Confirm PIN")
-                        .font(.system(size: 16, weight: .semibold))
-                    SecureField("Confirm PIN", text: $pin2)
-                        .keyboardType(.numberPad)
+            //TODO: Display only if required
+            if (selectedKeystoreIndex == 0 || selectedKeystoreIndex == 1) {
+                Section("PIN code") {
+                    HStack {
+                        Text("Enter PIN")
+                            .font(.system(size: 16, weight: .semibold))
+                        SecureField("Enter PIN", text: $pin1)
+                            .keyboardType(.numberPad)
+                    }
+
                 }
             }
+
             
             Section {
                 Button("Generate the key", action: self.generatedButtonTapped)
                     .frame(alignment: .center)
                 
-                Button("Reset form", action: self.reset)
-                    .foregroundColor(.red)
+                Button("Reset form", role: .destructive, action: self.reset)
+                    //.foregroundColor(.red)
 
             }
              
@@ -80,6 +80,15 @@ struct KeyGenerationView: View {
                     self.isErrorPopupVisible = false
                     self.errorMessage = ""
                 })
+            )
+        }
+        .alert(isPresented: $isKeyGenerationSuccess) {
+            Alert(title: Text("Success!"),
+                  message: Text("Successfully created a key"),
+                  dismissButton: .default(Text("OK"), action: {
+                self.isKeyGenerationSuccess = false
+            })
+                  
             )
         }
         
@@ -102,10 +111,7 @@ struct KeyGenerationView: View {
             self.isErrorPopupVisible = true
         }
         
-        if !self.arePinsEqual() {
-            self.errorMessage = "PINs need to be equal"
-            self.isErrorPopupVisible = true
-        }
+        self.isKeyGenerationSuccess = true
         
     }
     
@@ -113,16 +119,11 @@ struct KeyGenerationView: View {
         self.keyName = ""
         self.selectedKeystoreIndex = 0
         self.pin1 = ""
-        self.pin2 = ""
     }
     
     //TODO: Do we have some requirements for this?
     func isKeyNameOk() -> Bool {
         return self.keyName.count >= 3
-    }
-    
-    func arePinsEqual() -> Bool {
-        return self.pin1 == self.pin2
     }
     
     func isPinLengthOk() -> Bool {

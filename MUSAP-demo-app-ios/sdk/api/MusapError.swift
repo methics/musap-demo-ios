@@ -20,6 +20,7 @@ enum MusapError: Error {
     case keyBlocked
     case sscdBlocked
     case internalError
+    case illegalArgument
     
     var errorCode: Int {
         switch self {
@@ -35,6 +36,7 @@ enum MusapError: Error {
         case .keyBlocked:        return 402
         case .sscdBlocked:       return 403
         case .internalError:     return 900
+        case .illegalArgument:   return 900
         }
     }
     
