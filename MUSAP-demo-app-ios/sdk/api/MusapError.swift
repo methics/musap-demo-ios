@@ -45,27 +45,28 @@ enum MusapError: Error {
 public class MusapException: Error {
     let error: MusapError
     let errorName: String
-
+    
     init(_ error: MusapError, _ msg: String = "") {
         self.error = error
         self.errorName = MusapException.getErrorName(error)
         print("MusapException: \(errorName) - \(msg)")
     }
-
+    
     private static func getErrorName(_ error: MusapError) -> String {
         switch error {
-            case .wrongParam:        return "wrong_param"
-            case .missingParam:      return "missing_param"
-            case .invalidAlgorithm:  return "invalid_algorithm"
-            case .unknownKey:        return "unknown_key"
-            case .unsupportedData:   return "unsupported_data"
-            case .keygenUnsupported: return "keygen_unsupported"
-            case .bindUnsupported:   return "bind_unsupported"
-            case .timedOut:          return "timed_out"
-            case .userCancel:        return "user_cancel"
-            case .keyBlocked:        return "key_blocked"
-            case .sscdBlocked:       return "sscd_blocked"
-            case .internalError:     return "internal_error"
+        case .wrongParam:        return "wrong_param"
+        case .missingParam:      return "missing_param"
+        case .invalidAlgorithm:  return "invalid_algorithm"
+        case .unknownKey:        return "unknown_key"
+        case .unsupportedData:   return "unsupported_data"
+        case .keygenUnsupported: return "keygen_unsupported"
+        case .bindUnsupported:   return "bind_unsupported"
+        case .timedOut:          return "timed_out"
+        case .userCancel:        return "user_cancel"
+        case .keyBlocked:        return "key_blocked"
+        case .sscdBlocked:       return "sscd_blocked"
+        case .internalError:     return "internal_error"
+        case .illegalArgument:   return "illegal_argument"
         }
     }
 }
