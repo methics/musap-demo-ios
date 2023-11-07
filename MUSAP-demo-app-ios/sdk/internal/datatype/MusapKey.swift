@@ -14,34 +14,34 @@ public class MusapKey: Codable {
     var keyId:            String?
     var sscdId:           String?
     var sscdType:         String?
-    let createdDate:      Date
+    let createdDate:      Date?
     var publicKey:        PublicKey?
     var certificate:      MusapCertificate?
     var certificateChain: [MusapCertificate]?
     var attributes:       [KeyAttribute]?
-    let keyUsages:        [String]
-    let loa:              [MusapLoa]
-    let algorithm:        KeyAlgorithm
-    let keyUri:           String
-    let attestation:      KeyAttestation
+    var keyUsages:        [String]?
+    var loa:              [MusapLoa]?
+    var algorithm:        KeyAlgorithm?
+    var keyUri:           KeyURI?
+    var attestation:      KeyAttestation?
     
     
     init(
         keyname:          String,
-        keyType:          String,
-        keyId:            String,
-        sscdId:           String,
+        keyType:          String? = nil,
+        keyId:            String? = nil,
+        sscdId:           String? = nil,
         sscdType:         String,
-        createdDate:      Date,
+        createdDate:      Date?   = nil,
         publicKey:        PublicKey,
         certificate:      MusapCertificate,
-        certificateChain: [MusapCertificate],
+        certificateChain: [MusapCertificate]? = nil,
         attributes:       [KeyAttribute],
-        keyUsages:        [String],
+        keyUsages:        [String]? = nil,
         loa:              [MusapLoa],
-        algorithm:        KeyAlgorithm,
-        keyUri:           String,
-        attestation:      KeyAttestation
+        algorithm:        KeyAlgorithm? = nil,
+        keyUri:           KeyURI,
+        attestation:      KeyAttestation? = nil
     )
     {
         self.keyName          = keyname
@@ -63,14 +63,3 @@ public class MusapKey: Codable {
     
 }
 
-struct MusapCertificate: Codable {
-    
-}
-
-struct MusapLoa: Codable {
-    
-}
-
-struct KeyAttestation: Codable {
-    
-}

@@ -28,43 +28,53 @@ public class KeychainSscd: MusapSscdProtocol {
         let algorithm = self.resolveAlgorithm(req: req)
         let algSpec   = self.resolveAlgorithmParameterSpec(req: req)
         
-        //TODO: How to do this in swift
         
-        /*
-         KeyGenParameterSpec.Builder builder = new KeyGenParameterSpec.Builder(req.getKeyAlias(),
-                 KeyProperties.PURPOSE_SIGN | KeyProperties.PURPOSE_VERIFY)
-                 .setDigests(KeyProperties.DIGEST_SHA256, KeyProperties.DIGEST_SHA512);
-
-         if (algSspec != null) builder.setAlgorithmParameterSpec(algSspec);
-         KeyGenParameterSpec spec = builder.build();
-
-         KeyPairGenerator kpg = KeyPairGenerator.getInstance(algorithm, "AndroidKeyStore");
-         kpg.initialize(spec);
-
-         KeyPair keyPair = kpg.generateKeyPair();
-         */
+        var keyParams: [String: Any] = [
+            kSecAttrKeyType        as String: algorithm,
+            kSecAttrKeySizeInBits  as String: 2048,
+            kSecAttrIsPermanent    as String: true,
+            kSecAttrApplicationTag as String: req.keyAlias.data(using: .utf8)!,
+            kSecAttrKeyClass       as String: kSecAttrKeyClassPrivate
+        ]
         
+        if let algSpec = algSpec {
+            keyParams[kSecAttrKeyType as String] = algSpec
+        }
         
-        let generatedKey = MusapKey(keyname: req.keyAlias,
-                                    keyType: "type",
-                                    keyId: "keyid",
-                                    sscdId: "",
-                                    sscdType: "type",
-                                    createdDate: Date(),
-                                    publicKey: PublicKey(publicKey: Data()),
+        // Create the key pair
+        var error: Unmanaged<CFError>?
+        guard let privateKey = SecKeyCreateRandomKey(keyParams as CFDictionary, &error) else {
+            throw MusapError.internalError
+        }
+        
+        guard let publicKey = SecKeyCopyPublicKey(privateKey) else {
+            throw MusapError.internalError
+        }
+
+        guard let publicKeyData = SecKeyCopyExternalRepresentation(publicKey, &error) as Data?,
+              let publicKeyBytes = publicKeyData.withUnsafeBytes({ (ptr: UnsafeRawBufferPointer) in ptr.baseAddress }) 
+        else {
+            throw MusapError.internalError
+        }
+        
+        let publicKeyObj = PublicKey(publicKey: Data(bytes: publicKeyBytes, count: publicKeyData.count))
+        
+        let generatedKey = MusapKey(keyname:    req.keyAlias,
+                                    sscdId:     sscd.sscdId,
+                                    sscdType:   "type",
+                                    publicKey:   publicKeyObj,
                                     certificate: MusapCertificate(),
-                                    certificateChain: <#T##[MusapCertificate]#>,
-                                    attributes: <#T##[KeyAttribute]#>,
-                                    keyUsages: <#T##[String]#>,
-                                    loa: <#T##[MusapLoa]#>,
-                                    algorithm: <#T##KeyAlgorithm#>,
-                                    keyUri: <#T##String#>,
-                                    attestation: <#T##KeyAttestation#>)
+                                    attributes:  req.attributes,
+                                    loa:         [MusapLoa.EIDAS_SUBSTANTIAL, MusapLoa.ISO_LOA3],
+                                    keyUri:      KeyURI(name: req.keyAlias, sscd: sscd.sscdType, loa: "loa3")
+        )
+        
+        return generatedKey
         
     }
     
-    //TODO: -> MusapSignature
-    func sign(req: SignatureReq) throws -> MusapKey {
+    func sign(req: SignatureReq) throws -> MusapSignature {
+        return MusapSignature()
     }
     
     func getSscdInfo() -> MusapSscd {

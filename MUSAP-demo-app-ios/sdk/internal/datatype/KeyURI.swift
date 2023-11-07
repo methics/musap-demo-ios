@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class KeyURI {
+public class KeyURI: Codable {
     
     public static let NAME    = "name"
     public static let LOA     = "loa"

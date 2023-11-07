@@ -15,7 +15,7 @@ protocol MusapSscdProtocol: SscdSettings {
     
     func generateKey(req: KeyGenReq) throws -> MusapKey
     
-    func sign(req: SignatureReq) throws -> MusapKey
+    func sign(req: SignatureReq) throws -> MusapSignature
     
     func getSscdInfo() -> MusapSscd
     
