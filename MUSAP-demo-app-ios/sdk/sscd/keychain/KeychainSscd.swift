@@ -28,20 +28,30 @@ public class KeychainSscd: MusapSscdProtocol {
         let algorithm = self.resolveAlgorithm(req: req)
         let algSpec   = self.resolveAlgorithmParameterSpec(req: req)
         
+        guard req.keyAlgorithm != nil else {
+            throw MusapException(MusapError.invalidAlgorithm)
+        }
+        
+        let algo      = req.keyAlgorithm.primitive
+        let bits      = req.keyAlgorithm.bits
+        let curve     = req.keyAlgorithm.curve
         
         var keyParams: [String: Any] = [
             kSecAttrKeyType        as String: algorithm,
-            kSecAttrKeySizeInBits  as String: 2048,
+            kSecAttrKeySizeInBits  as String: bits,
             kSecAttrIsPermanent    as String: true,
             kSecAttrApplicationTag as String: req.keyAlias.data(using: .utf8)!,
-            kSecAttrKeyClass       as String: kSecAttrKeyClassPrivate
+            kSecAttrKeyClass       as String: kSecAttrKeyClassPrivate,
         ]
+        
+        if let curve = curve {
+            keyParams[kSecAttrKeyTypeECSECPrimeRandom as String] = curve
+        }
         
         if let algSpec = algSpec {
             keyParams[kSecAttrKeyType as String] = algSpec
         }
         
-        // Create the key pair
         var error: Unmanaged<CFError>?
         guard let privateKey = SecKeyCreateRandomKey(keyParams as CFDictionary, &error) else {
             throw MusapError.internalError
@@ -58,10 +68,9 @@ public class KeychainSscd: MusapSscdProtocol {
         }
         
         let publicKeyObj = PublicKey(publicKey: Data(bytes: publicKeyBytes, count: publicKeyData.count))
-        
-        let generatedKey = MusapKey(keyname:    req.keyAlias,
-                                    sscdId:     sscd.sscdId,
-                                    sscdType:   "type",
+        let generatedKey = MusapKey(keyname:     req.keyAlias,
+                                    sscdId:      sscd.sscdId,
+                                    sscdType:    MusapConstants.IOS_KS_TYPE,
                                     publicKey:   publicKeyObj,
                                     certificate: MusapCertificate(),
                                     attributes:  req.attributes,
@@ -74,7 +83,42 @@ public class KeychainSscd: MusapSscdProtocol {
     }
     
     func sign(req: SignatureReq) throws -> MusapSignature {
-        return MusapSignature()
+        guard let alias = req.key.keyName else {
+            throw MusapException.init(MusapError.unknownKey)
+        }
+        
+        guard let keyAlias = req.key.keyName else {
+            throw MusapError.internalError
+        }
+        
+        let query: [String: Any] = [
+            kSecClass              as String: kSecClassKey,
+            kSecAttrApplicationTag as String: keyAlias.data(using: .utf8)!,
+            kSecAttrKeyClass       as String: kSecAttrKeyClassPrivate,
+            kSecReturnRef          as String: true
+        ]
+        
+
+        var item: CFTypeRef?
+        let status = SecItemCopyMatching(query as CFDictionary, &item)
+        guard status == errSecSuccess else {
+            throw MusapError.internalError
+        }
+        
+        let privateKey = item as! SecKey
+        let dataToSign = req.data
+        let signAlgo: SecKeyAlgorithm =  req.algorithm.getAlgorithm() ?? SignatureAlgorithm.SHA256withECDSA
+
+        var error: Unmanaged<CFError>?
+        
+        guard let signature = SecKeyCreateSignature(privateKey, signAlgo, dataToSign as CFData, &error) else {
+            // Signing failed
+            throw MusapError.internalError
+        }
+        
+        let signatureData = signature as Data
+        
+        return MusapSignature(rawSignature: signatureData)
     }
     
     func getSscdInfo() -> MusapSscd {
@@ -111,10 +155,7 @@ public class KeychainSscd: MusapSscdProtocol {
     }
     
     func resolveAlgorithmParameterSpec(req: KeyGenReq) -> SecKeyAlgorithm? {
-        guard let algorithm = req.keyAlgorithm else {
-            return nil
-        }
-
+        let algorithm = req.keyAlgorithm
         if algorithm.isRsa() {
             return SecKeyAlgorithm.rsaSignatureMessagePKCS1v15SHA256
         } else {
@@ -123,12 +164,10 @@ public class KeychainSscd: MusapSscdProtocol {
     }
     
     private func resolveAlgorithm(req: KeyGenReq) -> String {
-        if let algorithm = req.keyAlgorithm {
-            if algorithm.isRsa() { return KeyAlgorithm.PRIMITIVE_RSA }
-            if algorithm.isEc()  { return KeyAlgorithm.PRIMITIVE_EC  }
-        }
+        let algorithm = req.keyAlgorithm
+        if algorithm.isRsa() { return KeyAlgorithm.PRIMITIVE_RSA }
+        if algorithm.isEc()  { return KeyAlgorithm.PRIMITIVE_EC  }
         return KeyAlgorithm.PRIMITIVE_EC
     }
-    
     
 }

@@ -9,8 +9,8 @@ import Foundation
 
 public class KeyAlgorithm: Equatable, Hashable, Codable {
     
-    public static let PRIMITIVE_RSA   = "RSA"
-    public static let PRIMITIVE_EC    = "EC"
+    public static let PRIMITIVE_RSA   = "kSecAttrKeyTypeRSA"
+    public static let PRIMITIVE_EC    = "kSecAttrKeyTypeEC"
     
     public static let CURVE_SECP256K1 = "secp256k1"
     public static let CURVE_SECP384K1 = "secp384k1"

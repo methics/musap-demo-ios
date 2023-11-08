@@ -14,8 +14,7 @@ public class KeyGenReq {
     let role: String
     let stepUpPolicy: StepUpPolicy
     let attributes: [KeyAttribute]
-    let keyAlgorithm: KeyAlgorithm?
-    
+    let keyAlgorithm: KeyAlgorithm
     
     init(
         keyAlias: String,

@@ -41,8 +41,7 @@ public class MetadataStorage {
         } else {
             //TODO: Throw something if encode fails?
         }
-        
-    }
+    }    
     
     /**
      List available MUSAP keys
