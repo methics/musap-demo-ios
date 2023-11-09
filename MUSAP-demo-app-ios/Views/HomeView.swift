@@ -19,6 +19,9 @@ struct HomeView: View {
         }
         .padding(.top, 50)
         .padding()
+        .onAppear {
+            self.checkKeys()
+        }
     }
     
     func getAppVersion() -> String {
@@ -29,6 +32,22 @@ struct HomeView: View {
         
         return "1.0.0"
         
+    }
+    
+    func checkKeys() {
+        let keyAlias = "Teemukey"
+        let tag = keyAlias.data(using: .utf8)!
+        let getQuery: [String: Any] = [
+            kSecClass as String: kSecClassKey,
+            kSecAttrApplicationTag as String: tag,
+            kSecAttrKeyClass as String: kSecAttrKeyClassPrivate,
+            kSecReturnRef as String: true
+        ]
+
+        var item: CFTypeRef?
+        let status = SecItemCopyMatching(getQuery as CFDictionary, &item)
+        print("The status:")
+        print( status == errSecSuccess)
     }
 }
 

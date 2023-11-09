@@ -8,11 +8,13 @@
 import Foundation
 
 public class MusapClient {
-    
+        
     static func generateKey(sscd: any MusapSscdProtocol, req: KeyGenReq, completion: @escaping (Result<MusapKey, MusapError>) -> Void) async {
         do {
             let generateKeyTask = GenerateKeyTask()
             try await generateKeyTask.generateKeyAsync(sscd: sscd, req: req, completion: completion)
+            
+            
         } catch {
             // Handle errors if needed
             completion(.failure(MusapError.internalError))
@@ -25,54 +27,94 @@ public class MusapClient {
     }
     
     //TODO: SignatureReq, MusapCallback
-    public static func sign() {
-        
+    static func sign(req: SignatureReq, completion: @escaping (Result<MusapSignature, MusapError>) -> Void) async {
+        do {
+            let signTask = SignTask()
+            
+            try await signTask.sign(req: req, completion: completion)
+            
+        } catch {
+            completion(.failure(MusapError.internalError))
+        }
     }
     
     
     // Return from keydiscovery
-    public static func listEnabledSscds() {
+    static func listEnabledSscds() -> [any MusapSscdProtocol]? {
+        let keyDiscovery = KeyDiscoveryAPI(storage: MetadataStorage())
+        
+        let enabledSscds = keyDiscovery.listEnabledSscds()
+        return enabledSscds
+    }
+    
+    
+    static func listEnabledSscds(req: SscdSearchReq) -> any MusapSscdProtocol {
+        let keyDiscovery = KeyDiscoveryAPI(storage: MetadataStorage())
+        
+        //TODO: Will this work? What is the issue?
+        return keyDiscovery.listMatchingSscds(req: req) as! (any MusapSscdProtocol)
         
     }
     
-    //TODO: req: String -> SScdSearchReq req
-    public static func listEnabledSscds(req: String) {
-        
-    }
-    
-    //TODO: Return from storage
-    public static func listActiveSscds() {
-        
+    static func listActiveSscds() -> [any MusapSscdProtocol] {
+        return KeyDiscoveryAPI(storage: MetadataStorage()).listEnabledSscds()
+
     }
     
     //TODO: SscdSearchReq replace String
-    public static func listActiveSscds(req: String) {
-        
+    public static func listActiveSscds(req: SscdSearchReq) -> [MusapSscd] {
+        let keyDiscovery = KeyDiscoveryAPI(storage: MetadataStorage())
+        return keyDiscovery.listActiveSscds()
     }
     
-    //TODO: List all avaialbkle keys from storage
-    public static func listKeys() {
-        
+    public static func listKeys() -> [MusapKey] {
+        let keys = MetadataStorage().listKeys()
+        print("Found: \(keys.count) keys from storage")
+        return keys
     }
     
     //TODO: Replace string
-    public static func listKeys(keySearchReq: String) {
-        
+    public static func listKeys(req: KeySearchReq) -> [MusapKey] {
+        let keys = MetadataStorage().listKeys(req: req)
+        print("Found: \(keys.count) keys from storage")
+        return keys
     }
     
     //TODO: MusapSscdInterface
-    public static func enableSscd() {
-        
+    static func enableSscd(sscd: any MusapSscdProtocol) {
+        let keyDiscovery = KeyDiscoveryAPI(storage: MetadataStorage())
+        keyDiscovery.enableSscd(sscd)
     }
     
     
-    public static func getKeyByUri(keyUri: String) {
-        // get from metadatastorage
+    public static func getKeyByUri(keyUri: String) -> MusapKey? {
+        let keyList = MetadataStorage().listKeys()
+        let keyUri = KeyURI(keyUri: keyUri)
+        
+        for key in keyList {
+            if let loopKeyUri = key.keyUri {
+                if loopKeyUri.keyUriMatches(keyUri: keyUri) {
+                    return key
+                }
+            }
+        }
+        
+        return nil
     }
     
     //TODO: Create KeyURI object
-    public static func getKeyByUri(keyUriObject: String) {
+    public static func getKeyByUri(keyUriObject: KeyURI) -> MusapKey? {
+        let keyList = MetadataStorage().listKeys()
         
+        for key in keyList {
+            if let loopKeyUri = key.keyUri {
+                if loopKeyUri.keyUriMatches(keyUri: keyUriObject) {
+                    return key
+                }
+            }
+        }
+        
+        return nil
     }
     
     //TODO: MusapImportData()
@@ -85,9 +127,8 @@ public class MusapClient {
         
     }
     
-    //TODO: Implement MusapKey
-    public static func removeKey(musapKey: String) {
-        
+    public static func removeKey(musapKey: MusapKey) -> Bool {
+        return KeyDiscoveryAPI(storage: MetadataStorage()).removeKey(key: musapKey)
     }
     
     //TODO: Implement MusapSscd
@@ -108,9 +149,6 @@ public class MusapClient {
     public static func pollLink() {
         
     }
-    
-    
-    
     
 }
 

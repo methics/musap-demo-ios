@@ -32,16 +32,22 @@ public class MetadataStorage {
             throw MusapException.init(MusapError.missingParam)
         }
         print("Storing Key")
-        
+
         var newKeyNames = getKeyNames()
         newKeyNames.insert(keyName)
-        
+
+        // Convert set to array because UserDefaults cannot store Set directly
+        let keyNamesArray = Array(newKeyNames)
+
         if let keyJson = try? JSONEncoder().encode(key) {
-            userDefaults.set(newKeyNames, forKey: MetadataStorage.KEY_NAME_SET)
+            userDefaults.set(keyJson, forKey: keyName)
+            userDefaults.set(keyNamesArray, forKey: MetadataStorage.KEY_NAME_SET)
+            userDefaults.synchronize() // Saves immediately, might not be needed
         } else {
-            //TODO: Throw something if encode fails?
+            print("Could not encode key to JSON")
+            throw MusapException(MusapError.internalError)
         }
-    }    
+    }
     
     /**
      List available MUSAP keys
@@ -62,13 +68,36 @@ public class MetadataStorage {
         return keyList
     }
     
+    func listKeys(req: KeySearchReq) -> [MusapKey] {
+        let keyNames = self.getKeyNames()
+        var keyList = [MusapKey]()
+        
+        for keyName in keyNames {
+            let keyJson = self.getKeyJson(keyName: keyName)
+            if let jsonData = keyJson.data(using: .utf8) {
+                let decoder = JSONDecoder()
+
+                do {
+                    let key = try decoder.decode(MusapKey.self, from: jsonData)
+                    if (req.keyMatches(key: key)) {
+                        keyList.append(key)
+                    }
+                } catch {
+                    print("Error decoding JSON for keyName: \(keyName), error: \(error)")
+                }
+            }
+        }
+        return keyList
+        
+    }
+    
     /**
      Remove key metadata from storage
      */
-    func removeKey(key: MusapKey) {
+    func removeKey(key: MusapKey) -> Bool {
         guard let keyName = key.keyName else {
             print("Can't remove key. Keyname was nil")
-            return
+            return false
         }
         
         var newKeyNames = getKeyNames()
@@ -78,7 +107,9 @@ public class MetadataStorage {
             userDefaults.set(newKeyNames, forKey: MetadataStorage.KEY_NAME_SET)
             userDefaults.set(keyJson, forKey: makeStoreName(key: key))
             userDefaults.removeObject(forKey: makeStoreName(keyName: keyName))
+            return true
         }
+        return false
     }
     
     
@@ -122,12 +153,11 @@ public class MetadataStorage {
         return sscdList
     }
 
+    
     private func getKeyNames() -> Set<String> {
-        if let keyNamesArray = userDefaults.stringArray(forKey: MetadataStorage.KEY_NAME_SET) {
-            return Set(keyNamesArray)
-        } else {
-            return Set()
-        }
+        // Retrieve the array from UserDefaults and convert it back to a set
+        let keyNamesArray = userDefaults.array(forKey: MetadataStorage.KEY_NAME_SET) as? [String] ?? []
+        return Set(keyNamesArray)
     }
 
     private func getSscdIds() -> Set<String> {
@@ -154,6 +184,10 @@ public class MetadataStorage {
 
     private func makeStoreName(keyName: String) -> String {
         return MetadataStorage.KEY_JSON_PREFIX + keyName
+    }
+    
+    private func getKeyJson(keyName: String) -> String {
+        return self.makeStoreName(keyName: keyName)
     }
     
 }

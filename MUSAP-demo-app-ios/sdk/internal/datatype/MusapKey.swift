@@ -36,7 +36,7 @@ public class MusapKey: Codable {
         publicKey:        PublicKey,
         certificate:      MusapCertificate,
         certificateChain: [MusapCertificate]? = nil,
-        attributes:       [KeyAttribute],
+        attributes:       [KeyAttribute]? = nil,
         keyUsages:        [String]? = nil,
         loa:              [MusapLoa],
         algorithm:        KeyAlgorithm? = nil,
@@ -59,6 +59,30 @@ public class MusapKey: Codable {
         self.algorithm        = algorithm
         self.keyUri           = keyUri
         self.attestation      = attestation
+    }
+    
+    func getSscdImplementation() -> (any MusapSscdProtocol)? {
+        let sscdType = self.sscdType
+        print("Looking for SSCD with type: \(String(describing: sscdType))")
+        
+        let enabledSscds = MusapClient.listEnabledSscds()
+        
+        for sscd in enabledSscds! {
+            
+            //TODO: SSCD Type should never be nil
+            guard let sscdType = sscd.getSscdInfo().sscdId else {
+                print("SSCD type not set!")
+                return nil
+            }
+            
+            if (self.sscdType == sscdType) {
+                return sscd
+            } else {
+                print("SSCD " + sscdType + "does not match " + self.sscdType! )
+            }
+        }
+        
+        return nil
     }
     
 }

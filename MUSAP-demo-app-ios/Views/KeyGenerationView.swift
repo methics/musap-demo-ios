@@ -9,7 +9,7 @@ import SwiftUI
 
 struct KeyGenerationView: View {
     
-    @State private var keyName: String = ""
+    @State private var keyAlias: String = ""
     @State private var selectedKeystoreIndex = 0
     @State private var isPopupVisible = false
     @State private var isKeyGenerationSuccess = false
@@ -21,7 +21,6 @@ struct KeyGenerationView: View {
     
     let availableKeystores = ["Methics demo", "Yubikey", "iOS keychain"]
     var keystoreIndex: KeyValuePairs = [0: "Methics demo", 1: "Yubikey", 2: "iOS keychain"]
-
     
     var body: some View {
         
@@ -30,7 +29,7 @@ struct KeyGenerationView: View {
                 HStack {
                     Text("Key name")
                         .font(.system(size: 16, weight: .semibold))
-                    TextField("Enter key name", text: $keyName)
+                    TextField("Enter key name", text: $keyAlias)
                         .foregroundColor(.blue)
                         .autocorrectionDisabled()
                         
@@ -106,32 +105,52 @@ struct KeyGenerationView: View {
             self.isErrorPopupVisible = true
         }
         
-        if !self.isPinLengthOk() {
-            self.errorMessage = "PIN needs to be at least 4 digits"
-            self.isErrorPopupVisible = true
-        }
+        self.generateKeyWithMusap()
         
-        self.isKeyGenerationSuccess = true
+        
+
         
     }
     
+    
+    func generateKeyWithMusap() {
+        print("GENERATING KEY WITH MUSAP (keygenerationview)")
+        let selectedKeystore = availableKeystores[selectedKeystoreIndex] // use later
+        
+        let keyAlgo            = KeyAlgorithm(primitive: KeyAlgorithm.PRIMITIVE_RSA, bits: 2048)
+        let keyGenReq          = KeyGenReq(keyAlias: self.keyAlias, role: "personal", keyAlgorithm: keyAlgo)
+        let sscdImplementation = KeychainSscd()
+        
+        Task {
+            await MusapClient.generateKey(sscd: sscdImplementation, req: keyGenReq) {
+                result in
+                
+                switch result {
+                case .success(let musapKey):
+                    print("Success! Keyname: \(String(describing: musapKey.keyName))")
+                    print("Musap Key:        \(String(describing: musapKey.publicKey?.getPEM()))")
+                    self.isKeyGenerationSuccess = true
+                case .failure(let error):
+                    print("ERROR: \(error.errorCode)")
+                    print(error.localizedDescription)
+                    self.errorMessage = "Error creating musap key"
+                    self.isErrorPopupVisible = true
+                }
+            }
+        }
+        
+    }
+    
+    
     func reset() {
-        self.keyName = ""
+        self.keyAlias = ""
         self.selectedKeystoreIndex = 0
         self.pin1 = ""
     }
     
     //TODO: Do we have some requirements for this?
     func isKeyNameOk() -> Bool {
-        return self.keyName.count >= 3
-    }
-    
-    func isPinLengthOk() -> Bool {
-        return self.pin1.count >= 4
-    }
-    
-    func displayErrorPopup() {
-        self.isErrorPopupVisible = true
+        return self.keyAlias.count >= 3
     }
     
 }

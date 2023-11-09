@@ -21,4 +21,8 @@ public class SignatureReq {
         self.format    = format
     }
     
+    public func getKey() -> MusapKey {
+        return self.key
+    }
+    
 }

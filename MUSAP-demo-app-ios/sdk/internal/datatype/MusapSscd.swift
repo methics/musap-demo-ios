@@ -39,6 +39,4 @@ public class MusapSscd: Codable {
         self.formats         = formats
     }
     
-    
-    
 }

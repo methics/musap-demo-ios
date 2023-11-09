@@ -24,46 +24,74 @@ public class KeychainSscd: MusapSscdProtocol {
     }
     
     func generateKey(req: KeyGenReq) throws -> MusapKey {
+        print("Starting MusapKey generation")
         let sscd      = self.getSscdInfo()
         let algorithm = self.resolveAlgorithm(req: req)
         let algSpec   = self.resolveAlgorithmParameterSpec(req: req)
-        
+         
         guard req.keyAlgorithm != nil else {
+            print("No keyAlgorithm was set")
             throw MusapException(MusapError.invalidAlgorithm)
         }
         
-        let algo      = req.keyAlgorithm.primitive
-        let bits      = req.keyAlgorithm.bits
-        let curve     = req.keyAlgorithm.curve
+        guard let algo = req.keyAlgorithm?.primitive,
+              let bits = req.keyAlgorithm?.bits
+        else {
+            print("Algo or bits was bad")
+            throw MusapException(MusapError.invalidAlgorithm)
+        }
+        
+        let curve = req.keyAlgorithm?.curve
+        
+        print("Algo: \(algo)")
+        print("bits: \(bits)")
+        print("keyalias: " + req.keyAlias)
+        
         
         var keyParams: [String: Any] = [
-            kSecAttrKeyType        as String: algorithm,
+            kSecAttrKeyType        as String: algo,
             kSecAttrKeySizeInBits  as String: bits,
             kSecAttrIsPermanent    as String: true,
-            kSecAttrApplicationTag as String: req.keyAlias.data(using: .utf8)!,
+            kSecAttrApplicationTag as String: req.keyAlias,
             kSecAttrKeyClass       as String: kSecAttrKeyClassPrivate,
         ]
         
         if let curve = curve {
+            print("curve was set: \(curve)")
             keyParams[kSecAttrKeyTypeECSECPrimeRandom as String] = curve
         }
         
         if let algSpec = algSpec {
-            keyParams[kSecAttrKeyType as String] = algSpec
+            print("algSpec found: \(algSpec)")
+            //keyParams[kSecAttrKeyType as String] = algSpec
         }
         
+
         var error: Unmanaged<CFError>?
+
         guard let privateKey = SecKeyCreateRandomKey(keyParams as CFDictionary, &error) else {
+            print("Could not create private key")
+            
+            if let errorRef = error {
+                let error = errorRef.takeRetainedValue()
+                let errorString = CFErrorCopyDescription(error)
+                print("Error creating private key: \(errorString as String?)")
+            } else {
+                print("No error? ")
+            }
+            
             throw MusapError.internalError
         }
         
         guard let publicKey = SecKeyCopyPublicKey(privateKey) else {
+            print("Could not get public key from private key")
             throw MusapError.internalError
         }
 
-        guard let publicKeyData = SecKeyCopyExternalRepresentation(publicKey, &error) as Data?,
-              let publicKeyBytes = publicKeyData.withUnsafeBytes({ (ptr: UnsafeRawBufferPointer) in ptr.baseAddress }) 
+        guard let publicKeyData  = SecKeyCopyExternalRepresentation(publicKey, &error) as Data?,
+              let publicKeyBytes = publicKeyData.withUnsafeBytes({ (ptr: UnsafeRawBufferPointer) in ptr.baseAddress })
         else {
+            print("Could not form public key data")
             throw MusapError.internalError
         }
         
@@ -77,23 +105,19 @@ public class KeychainSscd: MusapSscdProtocol {
                                     loa:         [MusapLoa.EIDAS_SUBSTANTIAL, MusapLoa.ISO_LOA3],
                                     keyUri:      KeyURI(name: req.keyAlias, sscd: sscd.sscdType, loa: "loa3")
         )
-        
+        print("MusapKey generated!")
         return generatedKey
         
     }
     
     func sign(req: SignatureReq) throws -> MusapSignature {
-        guard let alias = req.key.keyName else {
-            throw MusapException.init(MusapError.unknownKey)
-        }
-        
         guard let keyAlias = req.key.keyName else {
             throw MusapError.internalError
         }
         
         let query: [String: Any] = [
             kSecClass              as String: kSecClassKey,
-            kSecAttrApplicationTag as String: keyAlias.data(using: .utf8)!,
+            kSecAttrApplicationTag as String: keyAlias,
             kSecAttrKeyClass       as String: kSecAttrKeyClassPrivate,
             kSecReturnRef          as String: true
         ]
@@ -155,7 +179,10 @@ public class KeychainSscd: MusapSscdProtocol {
     }
     
     func resolveAlgorithmParameterSpec(req: KeyGenReq) -> SecKeyAlgorithm? {
-        let algorithm = req.keyAlgorithm
+        guard let algorithm = req.keyAlgorithm else {
+            return SecKeyAlgorithm.ecdsaSignatureMessageX962SHA256
+        }
+        
         if algorithm.isRsa() {
             return SecKeyAlgorithm.rsaSignatureMessagePKCS1v15SHA256
         } else {
@@ -165,6 +192,10 @@ public class KeychainSscd: MusapSscdProtocol {
     
     private func resolveAlgorithm(req: KeyGenReq) -> String {
         let algorithm = req.keyAlgorithm
+        
+        guard let algorithm = req.keyAlgorithm else {
+            return KeyAlgorithm.PRIMITIVE_EC
+        }
         if algorithm.isRsa() { return KeyAlgorithm.PRIMITIVE_RSA }
         if algorithm.isEc()  { return KeyAlgorithm.PRIMITIVE_EC  }
         return KeyAlgorithm.PRIMITIVE_EC

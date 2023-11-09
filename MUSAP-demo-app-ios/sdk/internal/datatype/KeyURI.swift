@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class KeyURI: Codable {
+public class KeyURI: Codable, Equatable {
     
     public static let NAME    = "name"
     public static let LOA     = "loa"
@@ -53,6 +53,22 @@ public class KeyURI: Codable {
         print("parsed KeyURI to: \(keyUriMap)")
     
         return keyUriMap
+    }
+    
+    public func getUri() -> String {
+        var components = [String]()
+        for (key, value) in self.keyUriMap {
+            components.append("\(key)=\(value)")
+        }
+        return "mss:" + components.joined(separator: ",")
+    }
+    
+    public static func == (lhs: KeyURI, rhs: KeyURI) -> Bool {
+        return lhs.keyUriMap == rhs.keyUriMap
+    }
+    
+    public func keyUriMatches(keyUri: KeyURI) -> Bool {
+        return self == keyUri
     }
     
 }

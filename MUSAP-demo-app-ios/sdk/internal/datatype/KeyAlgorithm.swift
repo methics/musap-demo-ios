@@ -2,78 +2,64 @@
 //  KeyAlgorithm.swift
 //  MUSAP-demo-app-ios
 //
-//  Created by Teemu Mänttäri on 6.11.2023.
+//  Created by Teemu Mänttäri on 8.11.2023.
 //
 
+
 import Foundation
+import Security
 
-public class KeyAlgorithm: Equatable, Hashable, Codable {
+public struct KeyAlgorithm: Codable, Equatable {
     
-    public static let PRIMITIVE_RSA   = "kSecAttrKeyTypeRSA"
-    public static let PRIMITIVE_EC    = "kSecAttrKeyTypeEC"
+    static let PRIMITIVE_RSA = kSecAttrKeyTypeRSA as String
+    static let PRIMITIVE_EC = kSecAttrKeyTypeECSECPrimeRandom as String
+
+    static let CURVE_SECP256K1 = "secp256k1"
+    static let CURVE_SECP384K1 = "secp384k1"
+    static let CURVE_SECP256R1 = "secp256r1"
+    static let CURVE_SECP384R1 = "secp384r1"
     
-    public static let CURVE_SECP256K1 = "secp256k1"
-    public static let CURVE_SECP384K1 = "secp384k1"
-    
-    public static let CURVE_SECP256R1 = "secp256r1"
-    public static let CURVE_SECP384R1 = "secp384r1"
-    
-    public static let RSA_2K = KeyAlgorithm(PRIMITIVE_RSA, 2048)
-    public static let RSA_4K = KeyAlgorithm(PRIMITIVE_RSA, 4096)
-    
-    public static let ECC_P256_K1 = KeyAlgorithm(PRIMITIVE_EC, CURVE_SECP256K1, 256)
-    public static let ECC_P384_K1 = KeyAlgorithm(PRIMITIVE_EC, CURVE_SECP384K1, 384)
-    public static let ECC_P256_R1 = KeyAlgorithm(PRIMITIVE_EC, CURVE_SECP256R1, 256)
-    public static let ECC_P384_R1 = KeyAlgorithm(PRIMITIVE_EC, CURVE_SECP384R1, 384)
-    
-    
-    public let primitive: String
-    public let curve: String?
-    public let bits: Int
-    
-    init(_ primitive: String, _ bits: Int) {
+    static let RSA_2K = KeyAlgorithm(primitive: PRIMITIVE_RSA, bits: 2048)
+    static let RSA_4K = KeyAlgorithm(primitive: PRIMITIVE_RSA, bits: 4096)
+    static let ECC_P256_K1 = KeyAlgorithm(primitive: PRIMITIVE_EC, curve: CURVE_SECP256K1, bits: 256)
+    static let ECC_P384_K1 = KeyAlgorithm(primitive: PRIMITIVE_EC, curve: CURVE_SECP384K1, bits: 384)
+    static let ECC_P256_R1 = KeyAlgorithm(primitive: PRIMITIVE_EC, curve: CURVE_SECP256R1, bits: 256)
+    static let ECC_P384_R1 = KeyAlgorithm(primitive: PRIMITIVE_EC, curve: CURVE_SECP384R1, bits: 384)
+
+    let primitive: String
+    let curve: String?
+    let bits: Int
+
+    /// Initialize for RSA with bit size
+    init(primitive: String, bits: Int) {
         self.primitive = primitive
-        self.bits      = bits
-        self.curve     = nil
-    }
-    
-    init(_ primitive: String, _ curve: String, _ bits: Int) {
-        self.primitive = primitive
-        self.curve     = curve
-        self.bits      = bits
-    }
-    
-    public func isRsa() -> Bool {
-        return KeyAlgorithm.PRIMITIVE_RSA == self.primitive
-    }
-    
-    public func isEc() -> Bool {
-        return KeyAlgorithm.PRIMITIVE_EC == self.primitive
-    }
-    
-    public func toString() -> String {
-        if self.curve != nil {
-            return "[\(self.primitive)/\(String(describing: self.curve))/\(self.bits)]"
-        }
-        return "[\(self.primitive)/\(self.bits)]"
-    }
-    
-    public static func ==(lhs: KeyAlgorithm, rhs: KeyAlgorithm) -> Bool {
-        if lhs === rhs {
-            return true
-        }
-        guard type(of: lhs) == type(of: rhs) else {
-            return false
-        }
-        return lhs.bits == rhs.bits && lhs.primitive == rhs.primitive && lhs.curve == rhs.curve
+        self.bits = bits
+        self.curve = nil
     }
 
-    // Implementing the Hashable protocol
-    public func hash(into hasher: inout Hasher) {
-        hasher.combine(primitive)
-        hasher.combine(curve)
-        hasher.combine(bits)
+    /// Initialize for EC with a curve and bit size
+    init(primitive: String, curve: String, bits: Int) {
+        self.primitive = primitive
+        self.curve = curve
+        self.bits = bits
     }
-    
-    
+
+    /// Check if it is RSA key
+    func isRsa() -> Bool {
+        return primitive == KeyAlgorithm.PRIMITIVE_RSA
+    }
+
+    /// Check if it is EC key
+    func isEc() -> Bool {
+        return primitive == KeyAlgorithm.PRIMITIVE_EC
+    }
+
+    /// Description of key algorithm
+    func description() -> String {
+        if let curve = curve {
+            return "[\(primitive)/\(curve)/\(bits)]"
+        } else {
+            return "[\(primitive)/\(bits)]"
+        }
+    }
 }

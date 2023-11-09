@@ -9,27 +9,27 @@ import Foundation
 
 public class KeyGenReq {
     
-    let keyAlias: String
-    let did: String
-    let role: String
-    let stepUpPolicy: StepUpPolicy
-    let attributes: [KeyAttribute]
-    let keyAlgorithm: KeyAlgorithm
+    let keyAlias:     String
+    let did:          String?
+    let role:         String
+    let stepUpPolicy: StepUpPolicy?
+    let attributes:   [KeyAttribute]?
+    let keyAlgorithm: KeyAlgorithm?
     
     init(
-        keyAlias: String,
-        did: String,
-        role: String,
-        stepUpPolicy: StepUpPolicy,
-        attributes: [KeyAttribute],
-        keyAlgorithm: KeyAlgorithm
+        keyAlias:     String,
+        did:          String? = nil,
+        role:         String,
+        stepUpPolicy: StepUpPolicy? = nil,
+        attributes:   [KeyAttribute]? = nil,
+        keyAlgorithm: KeyAlgorithm? = nil
     )
     {
-        self.keyAlias = keyAlias
-        self.did = did
-        self.role = role
+        self.keyAlias     = keyAlias
+        self.did          = did
+        self.role         = role
         self.stepUpPolicy = stepUpPolicy
-        self.attributes = attributes
+        self.attributes   = attributes
         self.keyAlgorithm = keyAlgorithm
     }
     

@@ -45,12 +45,14 @@ struct SigningView: View {
         }
     }
     
-    private func nextButtonTapped() {
+    private func nextButtonTapped() async {
         print("selected key: \(selectedKey)")
         print("selected value: \(String(describing: dtbsList[selectedKey]))")
         
         // Send data to be signed forward
         self.dataToBeSigned = dtbsList[selectedKey]
+        
+        
     }}
 
 #Preview {
