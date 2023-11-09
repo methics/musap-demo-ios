@@ -8,7 +8,7 @@
 import Foundation
 
 //TODO: Better naming?
-public class KeychainSettings: SscdSettings {
+public class SecureEnclaveSettings: SscdSettings {
     
     func getSettings() -> [String : String]? {
         //TODO: ?

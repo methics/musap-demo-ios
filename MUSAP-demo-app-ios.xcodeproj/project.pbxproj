@@ -19,8 +19,8 @@
 		C40AEEA02AF51000006445EB /* MusapSscd.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40AEE9F2AF51000006445EB /* MusapSscd.swift */; };
 		C42FFEDA2AF8F388004CEB5E /* GenerateKeyTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42FFED92AF8F388004CEB5E /* GenerateKeyTask.swift */; };
 		C42FFEDC2AF8F4FC004CEB5E /* MetadataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42FFEDB2AF8F4FC004CEB5E /* MetadataStorage.swift */; };
-		C4409ABF2AF9119E0068B793 /* KeychainSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4409ABE2AF9119E0068B793 /* KeychainSettings.swift */; };
-		C4409AC12AF912EA0068B793 /* KeychainSscd.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4409AC02AF912EA0068B793 /* KeychainSscd.swift */; };
+		C4409ABF2AF9119E0068B793 /* SecureEnclaveSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4409ABE2AF9119E0068B793 /* SecureEnclaveSettings.swift */; };
+		C4409AC12AF912EA0068B793 /* SecureEnclaveSscd.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4409AC02AF912EA0068B793 /* SecureEnclaveSscd.swift */; };
 		C4409AC52AF924AD0068B793 /* KeyURI.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4409AC42AF924AD0068B793 /* KeyURI.swift */; };
 		C44494E62AF3985200D8096C /* EnterPinView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44494E52AF3985200D8096C /* EnterPinView.swift */; };
 		C44494E82AF3B1F300D8096C /* ChooseKeyForSigningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44494E72AF3B1F300D8096C /* ChooseKeyForSigningView.swift */; };
@@ -84,8 +84,8 @@
 		C40AEE9F2AF51000006445EB /* MusapSscd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusapSscd.swift; sourceTree = "<group>"; };
 		C42FFED92AF8F388004CEB5E /* GenerateKeyTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateKeyTask.swift; sourceTree = "<group>"; };
 		C42FFEDB2AF8F4FC004CEB5E /* MetadataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetadataStorage.swift; sourceTree = "<group>"; };
-		C4409ABE2AF9119E0068B793 /* KeychainSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainSettings.swift; sourceTree = "<group>"; };
-		C4409AC02AF912EA0068B793 /* KeychainSscd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainSscd.swift; sourceTree = "<group>"; };
+		C4409ABE2AF9119E0068B793 /* SecureEnclaveSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureEnclaveSettings.swift; sourceTree = "<group>"; };
+		C4409AC02AF912EA0068B793 /* SecureEnclaveSscd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureEnclaveSscd.swift; sourceTree = "<group>"; wrapsLines = 1; };
 		C4409AC42AF924AD0068B793 /* KeyURI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyURI.swift; sourceTree = "<group>"; };
 		C44494E52AF3985200D8096C /* EnterPinView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnterPinView.swift; sourceTree = "<group>"; };
 		C44494E72AF3B1F300D8096C /* ChooseKeyForSigningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ChooseKeyForSigningView.swift; sourceTree = "<group>"; };
@@ -205,8 +205,8 @@
 		C42FFEDE2AF9116B004CEB5E /* keychain */ = {
 			isa = PBXGroup;
 			children = (
-				C4409ABE2AF9119E0068B793 /* KeychainSettings.swift */,
-				C4409AC02AF912EA0068B793 /* KeychainSscd.swift */,
+				C4409ABE2AF9119E0068B793 /* SecureEnclaveSettings.swift */,
+				C4409AC02AF912EA0068B793 /* SecureEnclaveSscd.swift */,
 			);
 			path = keychain;
 			sourceTree = "<group>";
@@ -499,14 +499,14 @@
 				C40AEE8D2AF4FD30006445EB /* StepUpPolicy.swift in Sources */,
 				C42FFEDC2AF8F4FC004CEB5E /* MetadataStorage.swift in Sources */,
 				C4DBFFDC2AF26CF900253DE4 /* KeyGenerationView.swift in Sources */,
-				C4409AC12AF912EA0068B793 /* KeychainSscd.swift in Sources */,
+				C4409AC12AF912EA0068B793 /* SecureEnclaveSscd.swift in Sources */,
 				C4DBFFD82AF25EA500253DE4 /* NavigationTabView.swift in Sources */,
 				C4DBFFDE2AF26D0800253DE4 /* SigningView.swift in Sources */,
 				C4578BE62AFA1D1B00C0EABB /* MusapLoa.swift in Sources */,
 				C4DBFFAB2AF2504100253DE4 /* HomeView.swift in Sources */,
 				C44B3B032AFBB963002240EE /* KeyDiscoveryAPI.swift in Sources */,
 				C4578BEA2AFA223800C0EABB /* MusapSignature.swift in Sources */,
-				C4409ABF2AF9119E0068B793 /* KeychainSettings.swift in Sources */,
+				C4409ABF2AF9119E0068B793 /* SecureEnclaveSettings.swift in Sources */,
 				C44CB13A2AF4E7A100C15143 /* MusapConstants.swift in Sources */,
 				C44494EA2AF3B89C00D8096C /* ConfirmSignView.swift in Sources */,
 				C44B3B072AFBBADE002240EE /* KeySearchReq.swift in Sources */,

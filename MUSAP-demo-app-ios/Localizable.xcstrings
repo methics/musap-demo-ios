@@ -30,6 +30,9 @@
     "Country" : {
 
     },
+    "DELETE KEYCHAIN ITEMS" : {
+
+    },
     "ENABLED_SSCD_LIST" : {
       "extractionState" : "manual",
       "localizations" : {

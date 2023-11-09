@@ -26,27 +26,34 @@ public class MetadataStorage {
     
     private let userDefaults = UserDefaults.standard
     
+    /// Store a MusapKey
     public func storeKey(key: MusapKey, sscd: MusapSscd) throws {
         guard let keyName = key.keyName else {
             print("key name was nil")
             throw MusapException.init(MusapError.missingParam)
         }
-        print("Storing Key")
-
-        var newKeyNames = getKeyNames()
-        newKeyNames.insert(keyName)
-
-        // Convert set to array because UserDefaults cannot store Set directly
-        let keyNamesArray = Array(newKeyNames)
-
-        if let keyJson = try? JSONEncoder().encode(key) {
-            userDefaults.set(keyJson, forKey: keyName)
-            userDefaults.set(keyNamesArray, forKey: MetadataStorage.KEY_NAME_SET)
-            userDefaults.synchronize() // Saves immediately, might not be needed
-        } else {
-            print("Could not encode key to JSON")
+        
+        // Create the key-specific store name using the prefix and the key name
+        let storeName = makeStoreName(keyName: keyName)
+        
+        // Encode the key to JSON and store it using the store name
+        do {
+            let keyJson = try JSONEncoder().encode(key)
+            userDefaults.set(keyJson, forKey: storeName) // Use storeName to save the key JSON
+            print("Key stored with name: \(storeName)")
+        } catch {
+            print("Could not encode key to JSON: \(error)")
             throw MusapException(MusapError.internalError)
         }
+        
+        // Insert the key name into the set of known key names and save it
+        var newKeyNames = getKeyNames()
+        newKeyNames.insert(keyName)
+        userDefaults.set(Array(newKeyNames), forKey: MetadataStorage.KEY_NAME_SET)
+        
+        // It's recommended to save or synchronize changes immediately after making updates
+        userDefaults.synchronize() // As of iOS 12, this is no longer needed but can be kept if desired
+        print("Updated key names: \(newKeyNames)")
     }
     
     /**
@@ -188,6 +195,30 @@ public class MetadataStorage {
     
     private func getKeyJson(keyName: String) -> String {
         return self.makeStoreName(keyName: keyName)
+    }
+    
+    func printAllData() {
+        // Print all key names
+        let keyNames = getKeyNames()
+        print("All Key Names: \(keyNames)")
+
+        // Print all SSCD IDs
+        let sscdIds = getSscdIds()
+        print("All SSCD IDs: \(sscdIds)")
+
+        // Iterate through each key name and print its JSON
+        for keyName in keyNames {
+            if let keyData = userDefaults.data(forKey: makeStoreName(keyName: keyName)) {
+                print("Data for key '\(keyName)': \(keyData)")
+            }
+        }
+
+        // Iterate through each SSCD ID and print its JSON
+        for sscdId in sscdIds {
+            if let sscdData = userDefaults.data(forKey: makeStoreName(keyName: sscdId)) {
+                print("Data for SSCD ID '\(sscdId)': \(sscdData)")
+            }
+        }
     }
     
 }
