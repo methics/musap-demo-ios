@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class MusapSscd: Codable {
+public class MusapSscd: Codable, Identifiable {
     
     var sscdName:        String?
     var sscdType:        String?

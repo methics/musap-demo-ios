@@ -13,6 +13,8 @@ struct KeystoreDetailView: View {
     @State private var sscdProvider = "Yubico"
     @State private var country = "FI"
     @State private var algorithms = ""
+    
+    let targetSscd: MusapSscd
 
     var body: some View {
         NavigationView {
@@ -26,32 +28,32 @@ struct KeystoreDetailView: View {
                     HStack {
                         Text("SSCD Name")
                         Spacer()
-                        Text($sscdName.wrappedValue)
+                        Text(targetSscd.sscdName ?? "")
                     }
 
                     HStack {
                         Text("SSCD Type")
                         Spacer()
-                        Text($sscdType.wrappedValue)
+                        Text(targetSscd.sscdType ?? "")
                     }
                     
                     HStack {
                         Text("SSCD Provider")
                         Spacer()
-                        Text($sscdProvider.wrappedValue)
+                        Text(targetSscd.provider ?? "")
                         
                     }
                     
                     HStack {
                         Text("Country")
                         Spacer()
-                        Text($country.wrappedValue)
+                        Text(targetSscd.country ?? "")
                     }
                     
                     HStack {
                         Text("Algorithms")
                         Spacer()
-                        Text($algorithms.wrappedValue)
+                        Text("TODO")
                     }
                 }
             }
@@ -62,6 +64,9 @@ struct KeystoreDetailView: View {
     
 }
 
+/*
 #Preview {
     KeystoreDetailView()
 }
+
+*/

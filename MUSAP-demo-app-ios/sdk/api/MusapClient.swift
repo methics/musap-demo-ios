@@ -29,8 +29,11 @@ public class MusapClient {
         
         Task {
             do {
+                print("Starting signing")
                 let signTask = SignTask()
+                print("SignTask object created")
                 let signature = try await signTask.sign(req: req)
+                print("Signature gotten")
                 completion(.success(signature))
             } catch {
                 if let musapError = error as? MusapError {
@@ -107,6 +110,7 @@ public class MusapClient {
         return nil
     }
     
+    //TODO: Create KeyURI object
     public static func getKeyByUri(keyUriObject: KeyURI) -> MusapKey? {
         let keyList = MetadataStorage().listKeys()
         

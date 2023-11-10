@@ -80,6 +80,9 @@
     "Keystore List" : {
 
     },
+    "KeyURI:" : {
+
+    },
     "MENU_HOME" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -176,6 +179,9 @@
 
     },
     "Successfully created a key" : {
+
+    },
+    "TODO" : {
 
     },
     "Version: %@" : {

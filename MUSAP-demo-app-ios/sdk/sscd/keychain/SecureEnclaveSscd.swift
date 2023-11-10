@@ -146,6 +146,8 @@ public class SecureEnclaveSscd: MusapSscdProtocol {
                 https://developer.apple.com/documentation/security/1644057-seckeyisalgorithmsupported
          */
         
+        //TODO: Optionally support requiring biometric authentication to allow using the keys
+        
         guard let signature = SecKeyCreateSignature(privateKey, .ecdsaSignatureMessageX962SHA256, dataToSign as CFData, &error) else {
             print("Signing failed while SecKeyCreateSignature")
             throw MusapError.internalError

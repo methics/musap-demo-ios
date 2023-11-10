@@ -56,6 +56,10 @@ struct ChooseKeyForSigningView: View {
             
             print("publicKey: " + (key.publicKey?.getPEM())!)
             
+            guard let keyUri = key.keyUri else {
+                return
+            }
+            print("keyUri: \(keyUri.getUri())")
         }
         
         

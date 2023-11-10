@@ -14,6 +14,7 @@ public class KeyDiscoveryAPI {
     
     public init(storage: MetadataStorage) {
         self.storage = storage
+        KeyDiscoveryAPI.enabledSscds = KeyDiscoveryAPI.enabledSscds
     }
     
     func listEnabledSscds() -> [any MusapSscdProtocol] {
