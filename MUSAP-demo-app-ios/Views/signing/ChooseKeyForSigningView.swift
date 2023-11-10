@@ -9,18 +9,20 @@ import SwiftUI
 
 struct ChooseKeyForSigningView: View {
     
-    let availableKeys = ["Key 1", "Key 2"]
     @State private var musapKeyNames = [String]()
+    @State private var musapKeys: [MusapKey] = [MusapKey]()
+    var dataToBeSigned: String?
     
     var body: some View {
         VStack(alignment: .center, spacing: 8) {
             List {
                 Section(header: Text("Available Keys").font(.system(size: 18, weight: .bold))) {
-                    ForEach(musapKeyNames, id: \.self) { key in
+                    
+                    ForEach(musapKeys) { key in
                         
-                        NavigationLink(destination: ConfirmSignView()
+                        NavigationLink(destination: ConfirmSignView(dataToBeSigned: dataToBeSigned!, musapKey: key)
                         ) {
-                            Text(key)
+                            Text(key.keyName!)
                         }
                         
                     }
@@ -32,6 +34,13 @@ struct ChooseKeyForSigningView: View {
             if self.musapKeyNames.isEmpty {
                 getKeyNames()
             }
+            
+            guard dataToBeSigned != nil else {
+                print("data to be signed is nil")
+                return
+            }
+            
+            print("dataToBeSigned: \(String(describing: dataToBeSigned))")
         }
 
     }
@@ -39,11 +48,11 @@ struct ChooseKeyForSigningView: View {
     private func getKeyNames() {
         let availableMusapKeys = MusapClient.listKeys()
         for key in availableMusapKeys {
-            guard let keyName = key.keyName else {
-                continue
-            }
             
-            self.musapKeyNames.append(keyName)
+            let keyName = key.keyName
+            
+            self.musapKeyNames.append(keyName!)
+            musapKeys.append(key)
             
             print("publicKey: " + (key.publicKey?.getPEM())!)
             
@@ -53,15 +62,13 @@ struct ChooseKeyForSigningView: View {
         print("Get everything from metadatastorage:")
         MetadataStorage().printAllData()
         
-        let teemuKey = UserDefaults.standard.string(forKey: "Teemukey")
-    
-        print("teemuKey: \(String(describing: teemuKey))")
-        
     }
     
     
 }
 
-#Preview {
-    ChooseKeyForSigningView()
-}
+/*
+ #Preview {
+ ChooseKeyForSigningView()
+ }
+ */

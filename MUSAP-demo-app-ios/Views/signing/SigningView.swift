@@ -14,7 +14,7 @@ struct SigningView: View {
     @State private var isNextButtonDisabled = true
         
     let dtbsList = [
-        "Sample string": "THE STRING",
+        "Sample string": "Sample text to sign",
         "Sample JWT": "THE JWT"
     ]
 
@@ -34,18 +34,26 @@ struct SigningView: View {
             }
             .pickerStyle(DefaultPickerStyle())
             .padding()
+            .onReceive([self.selectedKey].publisher.first(), perform: { (key) in
+                self.dataToBeSigned = self.dtbsList[key]
+                self.isNextButtonDisabled = (self.dataToBeSigned == nil)
+            })
             
             
-            NavigationLink(destination: ChooseKeyForSigningView()) {
+            
+            NavigationLink(destination: ChooseKeyForSigningView(dataToBeSigned: self.dataToBeSigned)) {
                 Text("Next")
             }
             
             
              
         }
+        .onAppear {
+            self.dataToBeSigned = dtbsList["Sample String"]
+        }
     }
     
-    private func nextButtonTapped() async {
+    private func nextButtonTapped() {
         print("selected key: \(selectedKey)")
         print("selected value: \(String(describing: dtbsList[selectedKey]))")
         

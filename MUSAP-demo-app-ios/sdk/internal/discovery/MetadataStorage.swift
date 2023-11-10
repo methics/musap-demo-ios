@@ -159,7 +159,6 @@ public class MetadataStorage {
 
         return sscdList
     }
-
     
     private func getKeyNames() -> Set<String> {
         // Retrieve the array from UserDefaults and convert it back to a set

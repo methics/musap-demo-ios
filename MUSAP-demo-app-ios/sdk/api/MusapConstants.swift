@@ -11,5 +11,5 @@ struct MusapConstants {
     static let LoA = "LoA"
     static let SSCD_ID = "SSCD_ID"
     static let SSCD_NAME = "SSCD_NAME"
-    static let IOS_KS_TYPE = "iOS Keychain"
+    static let IOS_KS_TYPE = "SE"
 }

@@ -9,21 +9,20 @@ import Foundation
 
 public class KeyDiscoveryAPI {
         
+    private static var enabledSscds: [any MusapSscdProtocol] = [any MusapSscdProtocol]()
     private var storage: MetadataStorage
-    private var enabledSscds: [any MusapSscdProtocol]
     
     public init(storage: MetadataStorage) {
         self.storage = storage
-        self.enabledSscds = []
     }
     
     func listEnabledSscds() -> [any MusapSscdProtocol] {
-        return self.enabledSscds
+        return KeyDiscoveryAPI.enabledSscds
     }
     
     //TODO: Match from SscdSearchReq
     func listMatchingSscds(req: SscdSearchReq) -> [any MusapSscdProtocol] {
-        return self.enabledSscds
+        return KeyDiscoveryAPI.enabledSscds
     }
     
     public func listActiveSscds() -> [MusapSscd] {
@@ -31,7 +30,7 @@ public class KeyDiscoveryAPI {
     }
     
     func enableSscd(_ sscd: any MusapSscdProtocol) -> Void {
-        self.enabledSscds.append(sscd)
+        KeyDiscoveryAPI.enabledSscds.append(sscd)
     }
     
     public func findKey(req: KeySearchReq) -> [MusapKey] {

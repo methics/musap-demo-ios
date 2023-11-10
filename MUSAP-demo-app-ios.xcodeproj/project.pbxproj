@@ -185,6 +185,16 @@
 			path = sign;
 			sourceTree = "<group>";
 		};
+		C41FA6022AFE0F2E0060A0FD /* signing */ = {
+			isa = PBXGroup;
+			children = (
+				C4DBFFDD2AF26D0800253DE4 /* SigningView.swift */,
+				C44494E92AF3B89C00D8096C /* ConfirmSignView.swift */,
+				C44494E72AF3B1F300D8096C /* ChooseKeyForSigningView.swift */,
+			);
+			path = signing;
+			sourceTree = "<group>";
+		};
 		C42FFED82AF8F2D5004CEB5E /* async */ = {
 			isa = PBXGroup;
 			children = (
@@ -331,15 +341,13 @@
 		C4DBFFD32AF25A6600253DE4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C41FA6022AFE0F2E0060A0FD /* signing */,
 				C4DBFFAA2AF2504100253DE4 /* HomeView.swift */,
 				C4DBFFD72AF25EA500253DE4 /* NavigationTabView.swift */,
 				C4DBFFD92AF26CD800253DE4 /* KeystoreListView.swift */,
 				C4DBFFDB2AF26CF900253DE4 /* KeyGenerationView.swift */,
-				C4DBFFDD2AF26D0800253DE4 /* SigningView.swift */,
 				C4DBFFE12AF28F9A00253DE4 /* KeystoreDetailView.swift */,
 				C44494E52AF3985200D8096C /* EnterPinView.swift */,
-				C44494E72AF3B1F300D8096C /* ChooseKeyForSigningView.swift */,
-				C44494E92AF3B89C00D8096C /* ConfirmSignView.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";

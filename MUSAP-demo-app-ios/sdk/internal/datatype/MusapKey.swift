@@ -7,8 +7,9 @@
 
 import Foundation
 
-public class MusapKey: Codable {
+public class MusapKey: Codable, Identifiable {
     
+    public var id = UUID()
     var keyName:          String?
     var keyType:          String?
     var keyId:            String?
@@ -67,8 +68,10 @@ public class MusapKey: Codable {
         
         let enabledSscds = MusapClient.listEnabledSscds()
         
+        print("enabledSscds count: \(String(describing: enabledSscds?.count))")
+        
         for sscd in enabledSscds! {
-            
+            print("sscd found: \(sscd.getSscdInfo().sscdType ?? "sscdType = nil")")
             //TODO: SSCD Type should never be nil
             guard let sscdType = sscd.getSscdInfo().sscdId else {
                 print("SSCD type not set!")

@@ -19,8 +19,8 @@ struct KeyGenerationView: View {
     
     @State private var pin1 = ""
     
-    let availableKeystores = ["Methics demo", "Yubikey", "iOS keychain"]
-    var keystoreIndex: KeyValuePairs = [0: "Methics demo", 1: "Yubikey", 2: "iOS keychain"]
+    let availableKeystores = ["Methics demo", "Yubikey", "SE"]
+    var keystoreIndex: KeyValuePairs = [0: "Methics demo", 1: "Yubikey", 2: "SE"]
     
     var body: some View {
         

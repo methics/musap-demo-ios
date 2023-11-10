@@ -108,152 +108,68 @@ public class SecureEnclaveSscd: MusapSscdProtocol {
         return generatedKey
     }
     
-    /*
-    func generateKey(req: KeyGenReq) throws -> MusapKey {
-        print("Starting MusapKey generation")
-        let sscd      = self.getSscdInfo()
-        let algSpec   = self.resolveAlgorithmParameterSpec(req: req)
-         
-        guard req.keyAlgorithm != nil else {
-            print("No keyAlgorithm was set")
-            throw MusapException(MusapError.invalidAlgorithm)
-        }
-        
-        guard let algo = req.keyAlgorithm?.primitive,
-              let bits = req.keyAlgorithm?.bits
-        else {
-            print("Algo or bits was bad")
-            throw MusapException(MusapError.invalidAlgorithm)
-        }
-        
-        let curve = req.keyAlgorithm?.curve
-        
-        print("Algo: \(algo)")
-        print("bits: \(bits)")
-        print("keyalias: " + req.keyAlias)
-        
-        // TODO: Check that a key with keyAlias does not already exist
-        if self.doesKeyExistAlready(keyAlias: req.keyAlias) {
-            print("Key exists somehow :(")
-            throw MusapException(MusapError.internalError)
-        }
-        
-        let tag = req.keyAlias.data(using: .utf8)
-        let keyParams: [String: Any] =
-            [kSecAttrKeyType as String:            algo,
-             kSecAttrKeySizeInBits as String:      bits,
-             kSecPrivateKeyAttrs as String:
-                [
-                    kSecAttrIsPermanent as String:    true,
-                    kSecAttrApplicationTag as String: tag,
-                    kSecAttrKeyClass as String: kSecAttrKeyClassPrivate
-                ]
-        ]
-        
-        if let curve = curve {
-            print("curve was set: \(curve)")
-            //keyParams[kSecAttrKeyTypeECSECPrimeRandom as String] = curve
-        }
-        
-        if let algSpec = algSpec {
-            print("algSpec found: \(algSpec)")
-            //keyParams[kSecAttrKeyType as String] = algSpec
-        }
-        
-
-        var error: Unmanaged<CFError>?
-        
-        guard let privateKey = SecKeyCreateRandomKey(keyParams as CFDictionary, &error) else {
-            print("Could not create private key")
-            
-            if let errorRef = error {
-                let error = errorRef.takeRetainedValue()
-                let errorString = CFErrorCopyDescription(error)
-                print("Error creating private key: \(errorString as String?)")
-            } else {
-                print("No error? ")
-            }
-            
-            throw MusapError.internalError
-        }
-         
-        
-        guard let publicKey = SecKeyCopyPublicKey(privateKey) else {
-            print("Could not get public key from private key")
-            throw MusapError.internalError
-        }
-
-        guard let publicKeyData  = SecKeyCopyExternalRepresentation(publicKey, &error) as Data?,
-              let publicKeyBytes = publicKeyData.withUnsafeBytes({ (ptr: UnsafeRawBufferPointer) in ptr.baseAddress })
-        else {
-            print("Could not form public key data")
-            throw MusapError.internalError
-        }
-        
-        let publicKeyObj = PublicKey(publicKey: Data(bytes: publicKeyBytes, count: publicKeyData.count))
-        let generatedKey = MusapKey(keyname:     req.keyAlias,
-                                    sscdId:      sscd.sscdId,
-                                    sscdType:    MusapConstants.IOS_KS_TYPE,
-                                    publicKey:   publicKeyObj,
-                                    certificate: MusapCertificate(),
-                                    attributes:  req.attributes,
-                                    loa:         [MusapLoa.EIDAS_SUBSTANTIAL, MusapLoa.ISO_LOA3],
-                                    keyUri:      KeyURI(name: req.keyAlias, sscd: sscd.sscdType, loa: "loa3")
-        )
-        print("MusapKey generated!")
-        return generatedKey
-        
-    }
-     */
-    
     func sign(req: SignatureReq) throws -> MusapSignature {
         guard let keyAlias = req.key.keyName else {
+            print("Signing failed: keyName was empty")
             throw MusapError.internalError
         }
         
         let query: [String: Any] = [
-            kSecClass              as String: kSecClassKey,
-            kSecAttrApplicationTag as String: keyAlias,
-            kSecAttrKeyClass       as String: kSecAttrKeyClassPrivate,
-            kSecReturnRef          as String: true
+            kSecClass as String: kSecClassKey,
+            kSecAttrApplicationTag as String: keyAlias.data(using: .utf8)!,
+            kSecAttrKeyClass as String: kSecAttrKeyClassPrivate,
+            kSecReturnRef as String: true,
+            kSecAttrTokenID as String: kSecAttrTokenIDSecureEnclave
         ]
         
 
         var item: CFTypeRef?
         let status = SecItemCopyMatching(query as CFDictionary, &item)
         guard status == errSecSuccess else {
+            print("Could not find key")
             throw MusapError.internalError
         }
         
         let privateKey = item as! SecKey
         let dataToSign = req.data
-        let signAlgo: SecKeyAlgorithm =  req.algorithm.getAlgorithm() ?? SignatureAlgorithm.SHA256withECDSA
-
+        
         var error: Unmanaged<CFError>?
         
-        guard let signature = SecKeyCreateSignature(privateKey, signAlgo, dataToSign as CFData, &error) else {
-            // Signing failed
+        /*
+         Allowed signature algos:
+            - ecdsaSignatureDigestX962
+            - ecdsaSignatureDigestX962SHA256
+            - ecdsaSignatureDigestX962SHA384
+            - ecdsaSignatureDigestX962SHA512
+            - ecdsaSignatureMessageX962SHA256
+            Can check with SecKeyIsAlgorithmSupported():
+                https://developer.apple.com/documentation/security/1644057-seckeyisalgorithmsupported
+         */
+        
+        guard let signature = SecKeyCreateSignature(privateKey, .ecdsaSignatureMessageX962SHA256, dataToSign as CFData, &error) else {
+            print("Signing failed while SecKeyCreateSignature")
             throw MusapError.internalError
         }
-        
+                
         let signatureData = signature as Data
         
-        return MusapSignature(rawSignature: signatureData)
+        return MusapSignature(rawSignature: signatureData, key: req.getKey(), algorithm: SignatureAlgorithm.init(algorithm: .ecdsaSignatureMessageX962SHA256), format: SignatureFormat.RAW)
     }
     
     func getSscdInfo() -> MusapSscd {
         
         let musapSscd = MusapSscd(
-            sscdName:        "iOS Keychain",
+            sscdName:        "SE",
             sscdType:        SecureEnclaveSscd.SSCD_TYPE,
-            sscdId:          "123",//TODO: How is this done?
+            sscdId:          "SE",//TODO: How is this done?
             country:         "FI",
             provider:        "Apple",
             keyGenSupported: true,
             algorithms:      [KeyAlgorithm.RSA_2K,
                              KeyAlgorithm.ECC_P256_K1,
                              KeyAlgorithm.ECC_P256_R1,
-                             KeyAlgorithm.ECC_P384_K1],
+                             KeyAlgorithm.ECC_P384_K1,
+                             KeyAlgorithm.ECC_P256_R1],
             formats:         [SignatureFormat.RAW])
         return musapSscd
     }

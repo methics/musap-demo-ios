@@ -23,6 +23,7 @@ struct HomeView: View {
         .onAppear {
             self.checkKeys()
             self.printAllKeysInfo()
+            self.enableSscds()
         }
     }
     
@@ -101,6 +102,10 @@ struct HomeView: View {
         } else {
             print("Error retrieving keys from the keychain: \(status)")
         }
+    }
+    
+    func enableSscds() {
+        MusapClient.enableSscd(sscd: SecureEnclaveSscd())
     }
 }
 
