@@ -11,39 +11,87 @@ struct KeystoreListView: View {
     @State private var isPopupVisible = false
     @State private var selectedSscd: String? = ""
     
-    let enabledSSCDs = ["Yubikey", "Methics Demo"]
-    let activatedSSCDs = ["Yubikey"]
+    var enabledSSCDs = ["Yubikey", "Methics Demo"]
+    var activatedSSCDs = ["Yubikey"]
+    
+    @State private var enabledSscdList: [MusapSscd] = [MusapSscd]()
+    @State private var activatedSscdList: [MusapSscd] = [MusapSscd]()
+    
     
     var body: some View {
         List {
             Section(header: Text(LocalizedStringKey("ENABLED_SSCDS")).font(.system(size: 12, weight: .bold))) {
-                ForEach(enabledSSCDs, id: \.self) { sscd in
+                ForEach(enabledSscdList) { sscd in
                      NavigationLink(
-                         destination: KeystoreDetailView(),
-                         tag: sscd,
+                         destination: KeystoreDetailView(targetSscd: sscd),
+                         tag: sscd.sscdName!,
                          selection: $selectedSscd,
                          label: {
-                             Text(sscd)
+                             Text(sscd.sscdName!)
                          }
                      )
                  }
             }
             
             Section(header: Text(LocalizedStringKey("ACTIVE_SSCD_LIST")).font(.system(size: 12, weight: .bold)).padding(.top, 25)) {
-                ForEach(activatedSSCDs, id: \.self) { sscd in
-                    Text(sscd)
+                ForEach(activatedSscdList) { sscd in
+                    NavigationLink(
+                        destination: KeystoreDetailView(targetSscd: sscd),
+                        tag: sscd.sscdName!,
+                        selection: $selectedSscd,
+                        label: {
+                            Text(sscd.sscdName!)
+                        }
+                    )
                 }
             }
         }
-        .sheet(isPresented: $isPopupVisible, content: {
-            KeystoreDetailView()
-        })
+        .onAppear {
+            if enabledSscdList.isEmpty && activatedSscdList.isEmpty{
+                getEnabledSscds()
+                getActivatedSscds()
+            }
+
+        }
+
+    
+    }
+
+    private func getEnabledSscds() {
+        guard let enabledSscds = MusapClient.listEnabledSscds() else {
+            print("No enabled SSCDs")
+            return
+        }
+
+        for sscd in enabledSscds {
+            guard let sscdName = sscd.getSscdInfo().sscdName else {
+                print("No name for sscd ")
+                continue
+            }
+            print("SSCD: \(sscdName)")
+            enabledSscdList.append(sscd.getSscdInfo())
+            
+            
+        }
         
         
     }
     
-    
-
+    private func getActivatedSscds() {
+        let activatedSscds = MusapClient.listActiveSscds()
+        
+        for sscd in activatedSscds {
+            guard let sscdName = sscd.getSscdInfo().sscdName else {
+                print("No name for sscd")
+                continue
+            }
+            
+            print("SSCD: \(sscdName)")
+            activatedSscdList.append(sscd.getSscdInfo())
+            
+        }
+        
+    }
 
     
 }

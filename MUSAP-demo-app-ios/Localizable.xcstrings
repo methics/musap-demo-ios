@@ -18,19 +18,22 @@
     "Available Keys" : {
 
     },
+    "base64 signature: " : {
+
+    },
     "Cancel" : {
 
     },
     "Choose what to sign" : {
 
     },
-    "Confirm PIN" : {
-
-    },
     "Confirm Sign" : {
 
     },
     "Country" : {
+
+    },
+    "DELETE KEYCHAIN ITEMS" : {
 
     },
     "ENABLED_SSCD_LIST" : {
@@ -75,6 +78,9 @@
 
     },
     "Keystore List" : {
+
+    },
+    "KeyURI:" : {
 
     },
     "MENU_HOME" : {
@@ -130,7 +136,7 @@
     "PIN" : {
 
     },
-    "PIN codes" : {
+    "PIN code" : {
 
     },
     "PIN confirm" : {
@@ -167,6 +173,15 @@
 
     },
     "SSCD Type" : {
+
+    },
+    "Success!" : {
+
+    },
+    "Successfully created a key" : {
+
+    },
+    "TODO" : {
 
     },
     "Version: %@" : {
