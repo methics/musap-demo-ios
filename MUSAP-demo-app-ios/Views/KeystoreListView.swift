@@ -35,7 +35,14 @@ struct KeystoreListView: View {
             
             Section(header: Text(LocalizedStringKey("ACTIVE_SSCD_LIST")).font(.system(size: 12, weight: .bold)).padding(.top, 25)) {
                 ForEach(activatedSscdList) { sscd in
-                    Text(sscd.sscdName!)
+                    NavigationLink(
+                        destination: KeystoreDetailView(targetSscd: sscd),
+                        tag: sscd.sscdName!,
+                        selection: $selectedSscd,
+                        label: {
+                            Text(sscd.sscdName!)
+                        }
+                    )
                 }
             }
         }
@@ -46,11 +53,6 @@ struct KeystoreListView: View {
             }
 
         }
-        /*
-        .sheet(isPresented: $isPopupVisible, content: {
-            //KeystoreDetailView(targetSscd: sscd)
-        })
-         */
 
     
     }
