@@ -21,6 +21,7 @@ public class SignatureAlgorithm {
     static let SHA384withRSAPSS = SecKeyAlgorithm.rsaSignatureMessagePSSSHA384
     static let SHA512withRSAPSS = SecKeyAlgorithm.rsaSignatureMessagePSSSHA512
     
+    //TODO: Support for NONEwithECDSA, NONEwithRSA, NONEwithRSASSA-PSS somehow
     
     private var algorithm: SecKeyAlgorithm?
 

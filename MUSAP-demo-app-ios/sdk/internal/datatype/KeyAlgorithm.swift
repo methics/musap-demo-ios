@@ -63,3 +63,44 @@ public struct KeyAlgorithm: Codable, Equatable {
         }
     }
 }
+
+enum KeyAlgorithmEnum {
+    case rsa(Int)   // Bits
+    case ec(ECType) // EC Curve Type
+
+    enum ECType {
+        case secp256k1
+        case secp384k1
+        case secp256r1 // This is Secure enclave supported
+        case secp384r1
+        case ed25519
+
+        var bits: Int {
+            switch self {
+            case .secp256k1, .secp256r1, .ed25519:
+                return 256
+            case .secp384k1, .secp384r1:
+                return 384
+            }
+        }
+
+        var curveName: String {
+            switch self {
+            case .secp256k1: return "secp256k1"
+            case .secp384k1: return "secp384k1"
+            case .secp256r1: return "secp256r1"
+            case .secp384r1: return "secp384r1"
+            case .ed25519:   return "Ed25519"
+            }
+        }
+    }
+
+    var description: String {
+        switch self {
+        case .rsa(let bits):
+            return "[RSA/\(bits)]"
+        case .ec(let type):
+            return "[EC/\(type.curveName)/\(type.bits)]"
+        }
+    }
+}

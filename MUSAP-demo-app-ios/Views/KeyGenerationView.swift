@@ -19,8 +19,9 @@ struct KeyGenerationView: View {
     
     @State private var pin1 = ""
     
-    let availableKeystores = ["Methics demo", "Yubikey", "SE"]
-    var keystoreIndex: KeyValuePairs = [0: "Methics demo", 1: "Yubikey", 2: "SE"]
+    let availableKeystores = ["Methics demo", "Yubikey", "SE", "Keychain"]
+    var keystoreIndex: KeyValuePairs = [0: "Methics demo", 1: "Yubikey", 2: "SE", 3: "Keychain"]
+    
     
     var body: some View {
         
@@ -115,27 +116,37 @@ struct KeyGenerationView: View {
     
     func generateKeyWithMusap() {
         print("GENERATING KEY WITH MUSAP (keygenerationview)")
-        let selectedKeystore = availableKeystores[selectedKeystoreIndex] // use later
+        let selectedKeystore = availableKeystores[selectedKeystoreIndex]
+        
+        var sscdImplementation: any MusapSscdProtocol = SecureEnclaveSscd()
+        
+        if selectedKeystore == "Keychain" {
+            print("Selected keystore was: \(selectedKeystore)")
+            sscdImplementation = KeychainSscd()
+        }
+        
+        
         
         let keyAlgo            = KeyAlgorithm(primitive: KeyAlgorithm.PRIMITIVE_EC, bits: 256)
         print("Keyalgo: \(keyAlgo.primitive)")
         let keyGenReq          = KeyGenReq(keyAlias: self.keyAlias, role: "personal", keyAlgorithm: keyAlgo)
         print("Keygrenreq: Alias \(keyGenReq.keyAlias)")
-        let sscdImplementation = SecureEnclaveSscd()
+        //let sscdImplementation = SecureEnclaveSscd()
         
         print("after sscd implementation")
         
         print("starting task")
         
-        Task {
+        Task { [sscdImplementation] in
             await MusapClient.generateKey(sscd: sscdImplementation, req: keyGenReq) {
                 result in
                 
                 switch result {
                 case .success(let musapKey):
-                    print("Success! Keyname: \(String(describing: musapKey.keyName))")
+                    print("Success! Keyname: \(String(describing: musapKey.keyAlias))")
                     print("Musap Key:        \(String(describing: musapKey.publicKey?.getPEM()))")
                     self.isKeyGenerationSuccess = true
+                    print("sscd type: \(String(describing: musapKey.sscdType))")
                 case .failure(let error):
                     print("ERROR: \(error.errorCode)")
                     print(error.localizedDescription)

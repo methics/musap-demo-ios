@@ -1,5 +1,5 @@
 //
-//  KeychainSscd.swift
+//  SecureEnclaveSscd.swift
 //  MUSAP-demo-app-ios
 //
 //  Created by Teemu Mänttäri on 6.11.2023.
@@ -54,7 +54,7 @@ public class SecureEnclaveSscd: MusapSscdProtocol {
         let accessControl = SecAccessControlCreateWithFlags(
             kCFAllocatorDefault,
             kSecAttrAccessibleWhenUnlockedThisDeviceOnly,
-            [.privateKeyUsage],
+            [.privateKeyUsage, /*.biometryCurrentSet TODO: Make this value come from Settings*/],
             nil)
         
         let keyAttributes: [String: Any] = [
@@ -109,7 +109,7 @@ public class SecureEnclaveSscd: MusapSscdProtocol {
     }
     
     func sign(req: SignatureReq) throws -> MusapSignature {
-        guard let keyAlias = req.key.keyName else {
+        guard let keyAlias = req.key.keyAlias else {
             print("Signing failed: keyName was empty")
             throw MusapError.internalError
         }
@@ -159,7 +159,6 @@ public class SecureEnclaveSscd: MusapSscdProtocol {
     }
     
     func getSscdInfo() -> MusapSscd {
-        
         let musapSscd = MusapSscd(
             sscdName:        "SE",
             sscdType:        SecureEnclaveSscd.SSCD_TYPE,
@@ -177,7 +176,7 @@ public class SecureEnclaveSscd: MusapSscdProtocol {
     }
     
     func generateSscdId(key: MusapKey) -> String {
-        return "keychain"
+        return "SE" //TODO: How do we generate sscd id? UUID?
     }
     
     func isKeygenSupported() -> Bool {

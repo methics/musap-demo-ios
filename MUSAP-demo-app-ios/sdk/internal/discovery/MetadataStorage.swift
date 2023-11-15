@@ -28,7 +28,7 @@ public class MetadataStorage {
     
     /// Store a MusapKey
     public func storeKey(key: MusapKey, sscd: MusapSscd) throws {
-        guard let keyName = key.keyName else {
+        guard let keyName = key.keyAlias else {
             print("key name was nil")
             throw MusapException.init(MusapError.missingParam)
         }
@@ -102,7 +102,7 @@ public class MetadataStorage {
      Remove key metadata from storage
      */
     func removeKey(key: MusapKey) -> Bool {
-        guard let keyName = key.keyName else {
+        guard let keyName = key.keyAlias else {
             print("Can't remove key. Keyname was nil")
             return false
         }
@@ -175,7 +175,7 @@ public class MetadataStorage {
     }
 
     private func makeStoreName(key: MusapKey) -> String {
-        guard let keyName = key.keyName else {
+        guard let keyName = key.keyAlias else {
             fatalError("Cannot create store name for unnamed MUSAP key")
         }
         return MetadataStorage.KEY_JSON_PREFIX + keyName
