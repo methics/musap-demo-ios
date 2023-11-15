@@ -10,7 +10,7 @@ import Foundation
 public class MusapKey: Codable, Identifiable {
     
     public var id = UUID()
-    var keyName:          String?
+    var keyAlias:         String?
     var keyType:          String?
     var keyId:            String?
     var sscdId:           String?
@@ -25,7 +25,7 @@ public class MusapKey: Codable, Identifiable {
     var algorithm:        KeyAlgorithm?
     var keyUri:           KeyURI?
     var attestation:      KeyAttestation?
-    
+    var isBiometricRequired: Bool
     
     init(
         keyname:          String,
@@ -33,7 +33,7 @@ public class MusapKey: Codable, Identifiable {
         keyId:            String? = nil,
         sscdId:           String? = nil,
         sscdType:         String,
-        createdDate:      Date?   = nil,
+        createdDate:      Date = Date(),
         publicKey:        PublicKey,
         certificate:      MusapCertificate,
         certificateChain: [MusapCertificate]? = nil,
@@ -42,10 +42,11 @@ public class MusapKey: Codable, Identifiable {
         loa:              [MusapLoa],
         algorithm:        KeyAlgorithm? = nil,
         keyUri:           KeyURI,
-        attestation:      KeyAttestation? = nil
+        attestation:      KeyAttestation? = nil,
+        isBiometricRequired: Bool = false
     )
     {
-        self.keyName          = keyname
+        self.keyAlias          = keyname
         self.keyType          = keyType
         self.keyId            = keyId
         self.sscdId           = sscdId
@@ -60,6 +61,7 @@ public class MusapKey: Codable, Identifiable {
         self.algorithm        = algorithm
         self.keyUri           = keyUri
         self.attestation      = attestation
+        self.isBiometricRequired = isBiometricRequired
     }
     
     func getSscdImplementation() -> (any MusapSscdProtocol)? {
@@ -81,7 +83,7 @@ public class MusapKey: Codable, Identifiable {
             if (self.sscdType == sscdType) {
                 return sscd
             } else {
-                print("SSCD " + sscdType + "does not match " + self.sscdType! )
+                print("SSCD " + sscdType + " does not match " + self.sscdType! + ". Continue loop..." )
             }
         }
         

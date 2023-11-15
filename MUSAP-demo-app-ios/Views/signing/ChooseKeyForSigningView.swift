@@ -22,7 +22,7 @@ struct ChooseKeyForSigningView: View {
                         
                         NavigationLink(destination: ConfirmSignView(dataToBeSigned: dataToBeSigned!, musapKey: key)
                         ) {
-                            Text(key.keyName!)
+                            Text(key.keyAlias!)
                         }
                         
                     }
@@ -49,7 +49,7 @@ struct ChooseKeyForSigningView: View {
         let availableMusapKeys = MusapClient.listKeys()
         for key in availableMusapKeys {
             
-            let keyName = key.keyName
+            let keyName = key.keyAlias
             
             self.musapKeyNames.append(keyName!)
             musapKeys.append(key)

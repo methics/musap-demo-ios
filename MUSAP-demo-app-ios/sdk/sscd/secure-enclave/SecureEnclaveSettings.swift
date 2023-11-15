@@ -1,5 +1,5 @@
 //
-//  KeychainSettings.swift
+//  SecureEnclaveSettings.swift
 //  MUSAP-demo-app-ios
 //
 //  Created by Teemu Mänttäri on 6.11.2023.
