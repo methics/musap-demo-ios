@@ -51,8 +51,7 @@ public class MetadataStorage {
         newKeyNames.insert(keyName)
         userDefaults.set(Array(newKeyNames), forKey: MetadataStorage.KEY_NAME_SET)
         
-        // It's recommended to save or synchronize changes immediately after making updates
-        userDefaults.synchronize() // As of iOS 12, this is no longer needed but can be kept if desired
+        userDefaults.synchronize()
         print("Updated key names: \(newKeyNames)")
     }
     
@@ -220,23 +219,46 @@ public class MetadataStorage {
         }
     }
     
-    public func addKey(key: MusapKey, sscd: MusapSscd) -> Void {
-        print("Storing key")
-        
-        
-        // TODO: Update key name list with new keyname
-        
-        var newKeyIds = self.getAllKeyIds()
-        // add new key id
-        
-        
-        //TODO: Convert key to json
-        
-        // put it in userdefaults
+    public func getImportData() -> MusapImportData {
+        let sscds = self.listActiveSscds()
+        let keys  = self.listKeys()
+        return MusapImportData(sscds: sscds, keys: keys)
     }
     
-    public func getAllKeyIds() {
-        
+    public func addImportData(data: MusapImportData) throws {
+        let activeSscds = self.listActiveSscds()
+        let enabledSscds = MusapClient.listEnabledSscds() ?? []
+        let activeKeys = self.listKeys()
+
+        for sscd in data.sscds ?? [] {
+            let alreadyExists = activeSscds.contains { $0.sscdId == sscd.sscdId }
+            let isSscdTypeEnabled = enabledSscds.contains { $0.getSscdInfo().sscdType == sscd.sscdType }
+
+            if alreadyExists || !isSscdTypeEnabled {
+                continue
+            }
+            self.addSscd(sscd: sscd)
+        }
+
+        let uniqueKeys = Set(activeKeys.map { $0.keyUri })
+        for key in data.keys ?? [] {
+            if uniqueKeys.contains(key.keyUri) {
+                continue
+            }
+
+            guard let sscd = key.getSscdImplementation()?.getSscdInfo() else {
+                throw MusapError.unknownKey
+            }
+
+            do {
+                print("Storing key to \(sscd.sscdName ?? "Unknown")")
+                try self.storeKey(key: key, sscd: sscd)
+            } catch {
+                print("Could not store key to \(sscd.sscdName ?? "Unknown")")
+                throw MusapError.internalError
+            }
+        }
     }
+
     
 }

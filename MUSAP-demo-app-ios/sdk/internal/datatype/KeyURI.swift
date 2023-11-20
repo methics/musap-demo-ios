@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class KeyURI: Codable, Equatable {
+public class KeyURI: Codable, Equatable, Hashable {
     
     public static let NAME    = "name"
     public static let LOA     = "loa"
@@ -69,6 +69,10 @@ public class KeyURI: Codable, Equatable {
     
     public func keyUriMatches(keyUri: KeyURI) -> Bool {
         return self == keyUri
+    }
+    
+    public func hash(into hasher: inout Hasher) {
+        hasher.combine(keyUriMap)
     }
     
 }

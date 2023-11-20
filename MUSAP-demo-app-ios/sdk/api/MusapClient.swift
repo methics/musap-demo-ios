@@ -120,14 +120,25 @@ public class MusapClient {
         return nil
     }
     
-    //TODO: MusapImportData()
-    public static func importData(data: String) {
+    public static func importData(data: String) throws {
+        let storage = MetadataStorage()
+        guard let importData = MusapImportData.fromJson(jsonString: data) else {
+            throw MusapError.internalError
+        }
+        
+        try storage.addImportData(data: importData)
         
     }
     
-    //TODO: Export JSON data
-    public static func exportData() {
+    public static func exportData() -> String? {
+        let storage = MetadataStorage()
         
+        guard let exportData = storage.getImportData().toJson() else {
+            print("Could not export data")
+            return nil
+        }
+        
+        return exportData
     }
     
     public static func removeKey(musapKey: MusapKey) -> Bool {
