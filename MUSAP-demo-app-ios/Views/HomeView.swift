@@ -14,9 +14,14 @@ struct HomeView: View {
             Text(LocalizedStringKey("WELCOME_TEXT"))
                 .font(.system(size: 24, weight: .heavy))
             Spacer()
+            
             Button("DELETE KEYCHAIN ITEMS", action: self.deleteAllItems)
+            Button("EXPORT DATA", action: self.exportData)
             Text("Version: \(self.getAppVersion())")
                 .font(.system(size: 12, weight: .heavy))
+            
+            
+            
         }
         .padding(.top, 50)
         .padding()
@@ -107,6 +112,27 @@ struct HomeView: View {
     func enableSscds() {
         MusapClient.enableSscd(sscd: SecureEnclaveSscd())
         MusapClient.enableSscd(sscd: KeychainSscd())
+    }
+    
+    func exportData() {
+        
+        if let exportData = MusapClient.exportData() {
+            print("exported data:" + exportData)
+            printAllKeysInfo()
+            deleteAllItems()
+            printAllKeysInfo()
+            
+            do {
+                try MusapClient.importData(data: exportData)
+            } catch {
+                print("error importing musap data")
+            }
+            
+        } else {
+            print("Could not export data")
+        }
+
+ 
     }
 }
 
