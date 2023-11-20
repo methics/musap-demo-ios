@@ -12,38 +12,33 @@ public class MusapClient {
     static func generateKey(sscd: any MusapSscdProtocol, req: KeyGenReq, completion: @escaping (Result<MusapKey, MusapError>) -> Void) async {
         do {
             let generateKeyTask = GenerateKeyTask()
-            try await generateKeyTask.generateKeyAsync(sscd: sscd, req: req, completion: completion)
-            
-            
+            let key = try await generateKeyTask.generateKeyAsync(sscd: sscd, req: req, completion: completion)
+            completion(.success(key))
         } catch {
-            // Handle errors if needed
             completion(.failure(MusapError.internalError))
         }
     }
     
-    static func bindKey(sscd: any MusapSscdProtocol, req: KeyGenReq) {
-        
+    static func bindKey(sscd: any MusapSscdProtocol, req: KeyBindReq, completion: @escaping (Result<MusapKey, MusapError>) -> Void) async {
+        let bindKeyTask = BindKeyTask()
+        do {
+            let musapKey = try await bindKeyTask.bindKey(req: req, sscd: sscd)
+            completion(.success(musapKey))
+        } catch {
+            completion(.failure(MusapError.bindUnsupported))
+        }
     }
     
     static func sign(req: SignatureReq, completion: @escaping (Result<MusapSignature, MusapError>) -> Void) async {
-        
-        Task {
-            do {
-                print("Starting signing")
-                let signTask = SignTask()
-                print("SignTask object created")
-                let signature = try await signTask.sign(req: req)
-                print("Signature gotten")
-                completion(.success(signature))
-            } catch {
-                if let musapError = error as? MusapError {
-                    completion(.failure(musapError))
-                } else {
-                    completion(.failure(MusapError.internalError))
-                }
-            }
+        do {
+            let signTask = SignTask()
+            let signature = try await signTask.sign(req: req)
+            completion(.success(signature))
+        } catch let musapError as MusapError {
+            completion(.failure(musapError))
+        } catch {
+            completion(.failure(MusapError.internalError))
         }
-
     }
     
     

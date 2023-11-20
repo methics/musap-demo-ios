@@ -220,4 +220,23 @@ public class MetadataStorage {
         }
     }
     
+    public func addKey(key: MusapKey, sscd: MusapSscd) -> Void {
+        print("Storing key")
+        
+        
+        // TODO: Update key name list with new keyname
+        
+        var newKeyIds = self.getAllKeyIds()
+        // add new key id
+        
+        
+        //TODO: Convert key to json
+        
+        // put it in userdefaults
+    }
+    
+    public func getAllKeyIds() {
+        
+    }
+    
 }

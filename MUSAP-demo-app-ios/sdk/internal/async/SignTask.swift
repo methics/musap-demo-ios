@@ -8,9 +8,6 @@
 import Foundation
 
 class SignTask {
-    
-    typealias CompletionHandler = (Result<MusapSignature, MusapError>) -> Void
-
 
     func sign(req: SignatureReq) async throws -> MusapSignature {
         let sscd = req.getKey().getSscdImplementation()
