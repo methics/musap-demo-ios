@@ -14,22 +14,19 @@ class GenerateKeyTask {
     func generateKeyAsync(sscd: any MusapSscdProtocol, req: KeyGenReq, completion: @escaping CompletionHandler) async throws -> MusapKey {
         do {
             let key = try await withCheckedThrowingContinuation { continuation in
-                Task {
-                    
-                    do {
-                        let generatedKey = try sscd.generateKey(req: req)
-                        let activeSscd   = sscd.getSscdInfo()
-                        let sscdId       = sscd.generateSscdId(key: generatedKey)
+                do {
+                    let generatedKey = try sscd.generateKey(req: req)
+                    let activeSscd   = sscd.getSscdInfo()
+                    let sscdId       = sscd.generateSscdId(key: generatedKey)
 
-                        activeSscd.sscdId = sscdId
-                        generatedKey.sscdId = sscdId
-                        let storage = MetadataStorage()
-                        try storage.storeKey(key: generatedKey, sscd: activeSscd)
+                    activeSscd.sscdId = sscdId
+                    generatedKey.sscdId = sscdId
+                    let storage = MetadataStorage()
+                    try storage.storeKey(key: generatedKey, sscd: activeSscd)
 
-                        continuation.resume(returning: generatedKey)
-                    } catch {
-                        continuation.resume(throwing: error)
-                    }
+                    continuation.resume(returning: generatedKey)
+                } catch {
+                    continuation.resume(throwing: error)
                 }
             }
 
