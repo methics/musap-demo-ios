@@ -19,10 +19,7 @@ struct HomeView: View {
             Button("EXPORT DATA", action: self.exportData)
             Text("Version: \(self.getAppVersion())")
                 .font(.system(size: 12, weight: .heavy))
-            
-            
-            
-        }
+            }
         .padding(.top, 50)
         .padding()
         .onAppear {
@@ -106,6 +103,11 @@ struct HomeView: View {
             print("No keys were found in the keychain.")
         } else {
             print("Error retrieving keys from the keychain: \(status)")
+        }
+        
+        print("Usedefaults:")
+        for (key, value) in UserDefaults.standard.dictionaryRepresentation() {
+            print("\(key) = \(value) \n")
         }
     }
     

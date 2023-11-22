@@ -28,7 +28,7 @@ public class MusapKey: Codable, Identifiable {
     var isBiometricRequired: Bool
     
     init(
-        keyname:          String,
+        keyAlias:         String,
         keyType:          String? = nil,
         keyId:            String? = nil,
         sscdId:           String? = nil,
@@ -46,7 +46,7 @@ public class MusapKey: Codable, Identifiable {
         isBiometricRequired: Bool = false
     )
     {
-        self.keyAlias          = keyname
+        self.keyAlias         = keyAlias
         self.keyType          = keyType
         self.keyId            = keyId
         self.sscdId           = sscdId

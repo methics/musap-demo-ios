@@ -80,7 +80,8 @@ public class KeychainSscd: MusapSscdProtocol {
         let publicKeyObj = PublicKey(publicKey: Data(bytes: publicKeyBytes, count: publicKeyData.count))
         
         //TODO: Certificate, LoA, sscdType to be corrected
-        let generatedKey = MusapKey(keyname: req.keyAlias,
+        let generatedKey = MusapKey(keyAlias: req.keyAlias,
+                                    keyId: UUID().uuidString, 
                                     sscdType: "Keychain",
                                     publicKey: publicKeyObj,
                                     certificate: MusapCertificate(),

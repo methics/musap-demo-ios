@@ -95,7 +95,8 @@ public class SecureEnclaveSscd: MusapSscdProtocol {
         }
         
         let publicKeyObj = PublicKey(publicKey: Data(bytes: publicKeyBytes, count: publicKeyData.count))
-        let generatedKey = MusapKey(keyname:     req.keyAlias,
+        let generatedKey = MusapKey(keyAlias:     req.keyAlias,
+                                    keyId:       UUID().uuidString,
                                     sscdId:      sscd.sscdId,
                                     sscdType:    MusapConstants.IOS_KS_TYPE,
                                     publicKey:   publicKeyObj,

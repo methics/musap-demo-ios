@@ -16,8 +16,6 @@ public class KeyBindReq {
     var attributes: [KeyAttribute]
     var generateNewKey: Bool
     
-    
-    //TODO: Internal??? ("protected" in java)
     init(
         keyAlias:       String,
         did:            String,

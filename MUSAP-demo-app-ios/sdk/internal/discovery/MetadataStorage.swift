@@ -52,6 +52,7 @@ public class MetadataStorage {
         userDefaults.set(Array(newKeyNames), forKey: MetadataStorage.KEY_NAME_SET)
         
         userDefaults.synchronize()
+        self.addSscd(sscd: sscd)
         print("Updated key names: \(newKeyNames)")
     }
     
@@ -131,12 +132,15 @@ public class MetadataStorage {
         // Update SSCD id list with new SSCD ID
         var sscdIds = getSscdIds()
         if !sscdIds.contains(sscdId) {
+            print("adding sscdid \(sscdId) to set")
             sscdIds.insert(sscdId)
         }
 
         if let sscdJson = try? JSONEncoder().encode(sscd) {
-            userDefaults.set(sscdIds, forKey: MetadataStorage.SSCD_ID_SET)
+            userDefaults.set(Array(sscdIds), forKey: MetadataStorage.SSCD_ID_SET)
             userDefaults.set(sscdJson, forKey: makeStoreName(sscd: sscd))
+        } else {
+            print("Adding SSCD failed")
         }
     }
 
@@ -146,13 +150,18 @@ public class MetadataStorage {
     func listActiveSscds() -> [MusapSscd] {
         let sscdIds = getSscdIds()
         var sscdList: [MusapSscd] = []
-
+        
         for sscdId in sscdIds {
-            if let sscdData = userDefaults.data(forKey: makeStoreName(keyName: sscdId)),
-               let sscd = try? JSONDecoder().decode(MusapSscd.self, from: sscdData) {
-                sscdList.append(sscd)
+            print("Found sscdId: \(sscdId)")
+            if let sscdData = self.getSscdJson(sscdId: sscdId) {
+                do {
+                    let sscd = try JSONDecoder().decode(MusapSscd.self, from: sscdData)
+                    sscdList.append(sscd)
+                } catch {
+                    print("Error decoding sscd JSON: \(error)")
+                }
             } else {
-                print("Missing SSCD metadata JSON for SSCD ID \(sscdId)")
+                print("Missing SSCD metadata JSON for SSCD ID: \(sscdId)")
             }
         }
 
@@ -166,9 +175,12 @@ public class MetadataStorage {
     }
 
     private func getSscdIds() -> Set<String> {
+        print("Getting SSCD IDs")
         if let sscdIdsArray = userDefaults.stringArray(forKey: MetadataStorage.SSCD_ID_SET) {
+            print("Found \(sscdIdsArray.count) sscd ids")
             return Set(sscdIdsArray)
         } else {
+            print("found 0 sscd IDs, returning empty Set")
             return Set()
         }
     }
@@ -226,9 +238,9 @@ public class MetadataStorage {
     }
     
     public func addImportData(data: MusapImportData) throws {
-        let activeSscds = self.listActiveSscds()
+        let activeSscds  = self.listActiveSscds()
         let enabledSscds = MusapClient.listEnabledSscds() ?? []
-        let activeKeys = self.listKeys()
+        let activeKeys   = self.listKeys()
 
         for sscd in data.sscds ?? [] {
             let alreadyExists = activeSscds.contains { $0.sscdId == sscd.sscdId }
@@ -258,6 +270,14 @@ public class MetadataStorage {
                 throw MusapError.internalError
             }
         }
+    }
+    
+    private func getSscdJson(sscdId: String) -> Data? {
+        guard let sscdJson = UserDefaults.standard.data(forKey: MetadataStorage.SSCD_JSON_PREFIX + sscdId) else {
+            print("Could not find SSCD JSON for \(MetadataStorage.SSCD_JSON_PREFIX + sscdId)")
+            return nil
+        }
+        return sscdJson
     }
 
     

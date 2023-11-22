@@ -30,7 +30,7 @@ class GenerateKeyTask {
                 }
             }
 
-            completion(.success(key))
+            //completion(.success(key))
             return key
         } catch {
             completion(.failure(MusapError.internalError))

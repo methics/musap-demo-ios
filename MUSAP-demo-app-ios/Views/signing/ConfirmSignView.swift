@@ -40,9 +40,7 @@ struct ConfirmSignView: View {
                     .font(.system(size: 10, weight: .regular))
                     .padding()
             }
-            
-
-            
+        
             Button("Confirm Sign", action: self.confirmSignTapped)
                 .buttonStyle(.borderedProminent)
                 .padding()

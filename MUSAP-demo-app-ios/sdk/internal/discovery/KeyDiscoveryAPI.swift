@@ -21,12 +21,12 @@ public class KeyDiscoveryAPI {
         return KeyDiscoveryAPI.enabledSscds
     }
     
-    //TODO: Match from SscdSearchReq
     func listMatchingSscds(req: SscdSearchReq) -> [any MusapSscdProtocol] {
         return KeyDiscoveryAPI.enabledSscds
     }
     
     public func listActiveSscds() -> [MusapSscd] {
+        print("Listing active SSCDs")
         return storage.listActiveSscds()
     }
     

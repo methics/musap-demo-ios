@@ -79,21 +79,17 @@ struct KeystoreListView: View {
     
     private func getActivatedSscds() {
         let activatedSscds = MusapClient.listActiveSscds()
-        
         for sscd in activatedSscds {
-            guard let sscdName = sscd.getSscdInfo().sscdName else {
+            guard let sscdName = sscd.sscdName else {
                 print("No name for sscd")
                 continue
             }
             
             print("SSCD: \(sscdName)")
-            activatedSscdList.append(sscd.getSscdInfo())
-            
+            activatedSscdList.append(sscd)
         }
-        
     }
 
-    
 }
 
 #Preview {
