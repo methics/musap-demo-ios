@@ -79,22 +79,22 @@ public class KeychainSscd: MusapSscdProtocol {
         
         let publicKeyObj = PublicKey(publicKey: Data(bytes: publicKeyBytes, count: publicKeyData.count))
         
-        //TODO: Certificate, LoA, sscdType to be corrected
         let generatedKey = MusapKey(keyAlias: req.keyAlias,
-                                    keyId: UUID().uuidString, 
-                                    sscdType: "Keychain",
-                                    publicKey: publicKeyObj,
-                                    certificate: MusapCertificate(),
-                                    loa: [MusapLoa.EIDAS_HIGH, MusapLoa.ISO_LOA2],
-                                    keyUri: KeyURI(name: req.keyAlias, sscd: sscd.sscdType, loa: "loa2")
-        )
-        
-        print("MusapKey generated!")
+                                            keyId: UUID().uuidString,
+                                            sscdType: "Keychain",
+                                            publicKey: publicKeyObj,
+                                            certificate: MusapCertificate(),
+                                            loa: [MusapLoa.EIDAS_HIGH, MusapLoa.ISO_LOA2],
+                                            keyUri: KeyURI(name: req.keyAlias, sscd: sscd.sscdType, loa: "loa2")
+                )
+                
+                                    
+                                    
         return generatedKey
     }
     
     func sign(req: SignatureReq) throws -> MusapSignature {
-        guard let keyAlias = req.key.keyAlias else {
+        guard let keyAlias = req.key.getKeyAlias() else {
             print("Signing failed: keyName was empty")
             throw MusapError.internalError
         }
@@ -143,8 +143,8 @@ public class KeychainSscd: MusapSscdProtocol {
         let musapSscd = MusapSscd(
             sscdName: "Keychain",
             sscdType: KeychainSscd.SSCD_TYPE,
-            sscdId: "Keychain",
-            country: "FI",
+            sscdId:   "Keychain",
+            country:  "FI",
             provider: "Apple",
             keyGenSupported: true,
             algorithms: [KeyAlgorithm.RSA_2K,

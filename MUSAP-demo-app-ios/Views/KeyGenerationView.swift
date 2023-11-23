@@ -141,12 +141,13 @@ struct KeyGenerationView: View {
             await MusapClient.generateKey(sscd: sscdImplementation, req: keyGenReq) {
                 result in
                 
+                
                 switch result {
                 case .success(let musapKey):
-                    print("Success! Keyname: \(String(describing: musapKey.keyAlias))")
-                    print("Musap Key:        \(String(describing: musapKey.publicKey?.getPEM()))")
+                    print("Success! Keyname: \(String(describing: musapKey.getKeyAlias()))")
+                    print("Musap Key:        \(String(describing: musapKey.getPublicKey()?.getPEM()))")
                     self.isKeyGenerationSuccess = true
-                    print("sscd type: \(String(describing: musapKey.sscdType))")
+                    print("sscd type: \(String(describing: musapKey.getSscdType()))")
                 case .failure(let error):
                     print("ERROR: \(error.errorCode)")
                     print(error.localizedDescription)

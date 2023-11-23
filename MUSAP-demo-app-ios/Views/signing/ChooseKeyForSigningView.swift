@@ -22,7 +22,7 @@ struct ChooseKeyForSigningView: View {
                         
                         NavigationLink(destination: ConfirmSignView(dataToBeSigned: dataToBeSigned!, musapKey: key)
                         ) {
-                            Text(key.keyAlias!)
+                            Text(key.getKeyAlias()!)
                         }
                         
                     }
@@ -49,14 +49,17 @@ struct ChooseKeyForSigningView: View {
         let availableMusapKeys = MusapClient.listKeys()
         for key in availableMusapKeys {
             
-            let keyName = key.keyAlias
+            let keyName = key.getKeyAlias()
             
             self.musapKeyNames.append(keyName!)
             musapKeys.append(key)
+            guard let publicKey = key.getPublicKey() else {
+                print("Public key was nil, continue loop")
+                continue
+            }
+            print("publicKey: " + (publicKey.getPEM()))
             
-            print("publicKey: " + (key.publicKey?.getPEM())!)
-            
-            guard let keyUri = key.keyUri else {
+            guard let keyUri = key.getKeyUri() else {
                 return
             }
             print("keyUri: \(keyUri.getUri())")

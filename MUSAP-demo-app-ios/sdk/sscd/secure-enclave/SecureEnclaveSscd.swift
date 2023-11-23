@@ -110,7 +110,7 @@ public class SecureEnclaveSscd: MusapSscdProtocol {
     }
     
     func sign(req: SignatureReq) throws -> MusapSignature {
-        guard let keyAlias = req.key.keyAlias else {
+        guard let keyAlias = req.key.getKeyAlias() else {
             print("Signing failed: keyName was empty")
             throw MusapError.internalError
         }

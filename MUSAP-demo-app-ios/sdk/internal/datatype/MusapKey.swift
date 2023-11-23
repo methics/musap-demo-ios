@@ -9,24 +9,29 @@ import Foundation
 
 public class MusapKey: Codable, Identifiable {
     
-    public var id = UUID()
-    var keyAlias:         String?
-    var keyType:          String?
-    var keyId:            String?
-    var sscdId:           String?
-    var sscdType:         String?
-    let createdDate:      Date?
-    var publicKey:        PublicKey?
-    var certificate:      MusapCertificate?
-    var certificateChain: [MusapCertificate]?
-    var attributes:       [KeyAttribute]?
-    var keyUsages:        [String]?
-    var loa:              [MusapLoa]?
-    var algorithm:        KeyAlgorithm?
-    var keyUri:           KeyURI?
-    var attestation:      KeyAttestation?
-    var isBiometricRequired: Bool
+    public var id = UUID() // For identifiable
+    private var keyAlias: String?
+    private var keyType: String?
+    private var keyId: String?
+    private var sscdId: String?
+    private var sscdType: String?
+    private var createdDate: Date?
+    private var publicKey: PublicKey?
+    private var certificate: MusapCertificate?
+    private var certificateChain: [MusapCertificate]?
+    private var attributes: [KeyAttribute]?
+    private var keyUsages: [String]?
+    private var loa: [MusapLoa]?
+    private var algorithm: KeyAlgorithm?
+    private var keyUri: KeyURI?
+    private var attestation: KeyAttestation?
+    private var isBiometricRequired: Bool
+    private var did: String?
+    private var state: String?
     
+    private var _did: String?
+    private var _state: String?
+        
     init(
         keyAlias:         String,
         keyType:          String? = nil,
@@ -39,11 +44,14 @@ public class MusapKey: Codable, Identifiable {
         certificateChain: [MusapCertificate]? = nil,
         attributes:       [KeyAttribute]? = nil,
         keyUsages:        [String]? = nil,
-        loa:              [MusapLoa],
+        loa:              [MusapLoa]? = nil,
         algorithm:        KeyAlgorithm? = nil,
         keyUri:           KeyURI,
         attestation:      KeyAttestation? = nil,
-        isBiometricRequired: Bool = false
+        isBiometricRequired: Bool = false,
+        did:                 String? = nil,
+        state:               String? = nil
+        
     )
     {
         self.keyAlias         = keyAlias
@@ -62,7 +70,82 @@ public class MusapKey: Codable, Identifiable {
         self.keyUri           = keyUri
         self.attestation      = attestation
         self.isBiometricRequired = isBiometricRequired
+        self.did              = did
+        self.state            = state
     }
+    
+    
+    // KeyAlias
+    func getKeyAlias() -> String? { keyAlias }
+    func setKeyAlias(value: String?) { keyAlias = value }
+
+    // KeyType
+    func getKeyType() -> String? { keyType }
+    func setKeyType(value: String?) { keyType = value }
+
+    // KeyId
+    func getKeyId() -> String? { keyId }
+    func setKeyId(value: String?) { keyId = value }
+
+    // SscdId
+    func getSscdId() -> String? { sscdId }
+    func setSscdId(value: String?) { sscdId = value }
+
+    // SscdType
+    func getSscdType() -> String? { sscdType }
+    func setSscdType(value: String?) { sscdType = value }
+
+    // CreatedDate
+    func getCreatedDate() -> Date? { createdDate }
+    func setCreatedDate(value: Date?) { createdDate = value }
+
+    // PublicKey
+    func getPublicKey() -> PublicKey? { publicKey }
+    func setPublicKey(value: PublicKey?) { publicKey = value }
+
+    // Certificate
+    func getCertificate() -> MusapCertificate? { certificate }
+    func setCertificate(value: MusapCertificate?) { certificate = value }
+
+    // CertificateChain
+    func getCertificateChain() -> [MusapCertificate]? { certificateChain }
+    func setCertificateChain(value: [MusapCertificate]?) { certificateChain = value }
+
+    // Attributes
+    func getAttributes() -> [KeyAttribute]? { attributes }
+    func setAttributes(value: [KeyAttribute]?) { attributes = value }
+
+    // KeyUsages
+    func getKeyUsages() -> [String]? { keyUsages }
+    func setKeyUsages(value: [String]?) { keyUsages = value }
+
+    // Loa
+    func getLoa() -> [MusapLoa]? { loa }
+    func setLoa(value: [MusapLoa]?) { loa = value }
+
+    // Algorithm
+    func getAlgorithm() -> KeyAlgorithm? { algorithm }
+    func setAlgorithm(value: KeyAlgorithm?) { algorithm = value }
+
+    // KeyUri
+    func getKeyUri() -> KeyURI? { keyUri }
+    func setKeyUri(value: KeyURI?) { keyUri = value }
+
+    // Attestation
+    func getAttestation() -> KeyAttestation? { attestation }
+    func setAttestation(value: KeyAttestation?) { attestation = value }
+
+    // IsBiometricRequired
+    func getIsBiometricRequired() -> Bool { isBiometricRequired }
+    func setIsBiometricRequired(value: Bool) { isBiometricRequired = value }
+
+    // Did
+    func getDid() -> String? { did }
+    func setDid(value: String?) { did = value }
+
+    // State
+    func getState() -> String? { state }
+    func setState(value: String?) { state = value }
     
     func getSscdImplementation() -> (any MusapSscdProtocol)? {
         let sscdType = self.sscdType
@@ -88,6 +171,62 @@ public class MusapKey: Codable, Identifiable {
         }
         
         return nil
+    }
+    
+    public func getAttribute(attrName: String) -> KeyAttribute? {
+        return self.attributes?.first { $0.name == attrName } ?? nil
+    }
+    
+    public func getAttributeValue(attrName: String) -> String? {
+        guard let attribute = self.getAttribute(attrName: attrName) else {
+            print("No value for attribute name: \(attrName)")
+            return nil
+        }
+        return attribute.value
+    }
+    
+    public func removeAttribute(nameToRemove: String) {
+        guard var attributes = self.attributes else {
+            print("Attributes were nil")
+            return
+        }
+
+        if let index = attributes.firstIndex(where: { $0.name == nameToRemove }) {
+            attributes.remove(at: index)
+            self.attributes = attributes
+        }
+    }
+
+    /**
+    Add a new attribute to a key. If there is an existing attribute with same name,
+    this replaces the value with a new one
+     */
+    public func addAttribute(attr: KeyAttribute) {
+        if var oldAttributes = self.attributes {
+            
+            for var oldAttr in oldAttributes {
+                
+                if oldAttr.name.lowercased() == attr.name.lowercased() {
+                    oldAttr.value = attr.value
+                    self.attributes = oldAttributes
+                    return
+                }
+                
+            }
+            
+            self.attributes = oldAttributes
+        }
+        
+    }
+    
+    //TODO: finish
+    public func getDefaultKeyAlgorithm() -> SecKeyAlgorithm {
+        guard let algorithm = self.algorithm else {
+            print("Unable to determine algorithm for key: \(String(describing: self.keyAlias))")
+            return SignatureAlgorithm.SHA256withECDSA
+        }
+        return SignatureAlgorithm.SHA256withECDSA
+
     }
     
 }

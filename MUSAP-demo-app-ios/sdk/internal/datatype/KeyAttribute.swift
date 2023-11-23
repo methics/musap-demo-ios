@@ -9,10 +9,10 @@ import Foundation
 
 public struct KeyAttribute: Codable {
     
-    let name: String
-    let value: String
+    var name: String
+    var value: String?
     
-    init(name: String, value: String) {
+    init(name: String, value: String?) {
         self.name = name
         self.value = value
     }
