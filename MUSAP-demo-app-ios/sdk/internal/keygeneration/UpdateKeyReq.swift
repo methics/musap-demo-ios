@@ -9,22 +9,11 @@ import Foundation
 
 public class UpdateKeyReq {
     
-    /// Target MusapKey to update
     private let key:        MusapKey
-    
-    /// NewAlias of MusapKey
     private let keyAlias:   String?
-    
-    /// New key DID
     private let did:        String?
-    
-    /// New key-specific attributes
     private let attributes: [KeyAttribute]?
-    
-    /// New role for the key
     private let role:       String?
-    
-    /// New key state
     private let state:      String?
     
     init(key:        MusapKey,

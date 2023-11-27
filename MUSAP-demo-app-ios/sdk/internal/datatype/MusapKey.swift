@@ -28,10 +28,7 @@ public class MusapKey: Codable, Identifiable {
     private var isBiometricRequired: Bool
     private var did: String?
     private var state: String?
-    
-    private var _did: String?
-    private var _state: String?
-        
+            
     init(
         keyAlias:         String,
         keyType:          String? = nil,
@@ -40,7 +37,7 @@ public class MusapKey: Codable, Identifiable {
         sscdType:         String,
         createdDate:      Date = Date(),
         publicKey:        PublicKey,
-        certificate:      MusapCertificate,
+        certificate:      MusapCertificate? = nil,
         certificateChain: [MusapCertificate]? = nil,
         attributes:       [KeyAttribute]? = nil,
         keyUsages:        [String]? = nil,

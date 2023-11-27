@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ChooseKeyForSigningView: View {
     
-    @State private var musapKeyNames = [String]()
     @State private var musapKeys: [MusapKey] = [MusapKey]()
     var dataToBeSigned: String?
     
@@ -20,7 +19,7 @@ struct ChooseKeyForSigningView: View {
                     
                     ForEach(musapKeys) { key in
                         
-                        NavigationLink(destination: ConfirmSignView(dataToBeSigned: dataToBeSigned!, musapKey: key)
+                        NavigationLink(destination: ConfirmSignView(dataToBeSigned: dataToBeSigned ?? "Sample text to sign", musapKey: key)
                         ) {
                             Text(key.getKeyAlias()!)
                         }
@@ -31,9 +30,9 @@ struct ChooseKeyForSigningView: View {
 
         }
         .onAppear(){
-            if self.musapKeyNames.isEmpty {
-                getKeyNames()
-            }
+            musapKeys = [MusapKey]()
+            getKeyNames()
+
             
             guard dataToBeSigned != nil else {
                 print("data to be signed is nil")
@@ -50,9 +49,8 @@ struct ChooseKeyForSigningView: View {
         for key in availableMusapKeys {
             
             let keyName = key.getKeyAlias()
-            
-            self.musapKeyNames.append(keyName!)
             musapKeys.append(key)
+            
             guard let publicKey = key.getPublicKey() else {
                 print("Public key was nil, continue loop")
                 continue

@@ -33,9 +33,6 @@
     "Country" : {
 
     },
-    "DELETE KEYCHAIN ITEMS" : {
-
-    },
     "ENABLED_SSCD_LIST" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -143,6 +140,9 @@
 
     },
     "PIN confirm" : {
+
+    },
+    "RESET APP" : {
 
     },
     "Reset form" : {

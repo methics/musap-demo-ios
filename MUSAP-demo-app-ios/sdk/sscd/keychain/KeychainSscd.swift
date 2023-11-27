@@ -83,7 +83,7 @@ public class KeychainSscd: MusapSscdProtocol {
                                             keyId: UUID().uuidString,
                                             sscdType: "Keychain",
                                             publicKey: publicKeyObj,
-                                            certificate: MusapCertificate(),
+                                            //certificate: MusapCertificate(),
                                             loa: [MusapLoa.EIDAS_HIGH, MusapLoa.ISO_LOA2],
                                             keyUri: KeyURI(name: req.keyAlias, sscd: sscd.sscdType, loa: "loa2")
                 )
