@@ -47,11 +47,10 @@ struct KeystoreListView: View {
             }
         }
         .onAppear {
-            if enabledSscdList.isEmpty && activatedSscdList.isEmpty{
-                getEnabledSscds()
-                getActivatedSscds()
-            }
-
+            enabledSscdList = [MusapSscd]()
+            activatedSscdList = [MusapSscd]()
+            getEnabledSscds()
+            getActivatedSscds()
         }
 
     
@@ -69,6 +68,7 @@ struct KeystoreListView: View {
                 continue
             }
             print("SSCD: \(sscdName)")
+            
             enabledSscdList.append(sscd.getSscdInfo())
             
             

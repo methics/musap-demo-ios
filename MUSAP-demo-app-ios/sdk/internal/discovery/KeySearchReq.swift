@@ -46,7 +46,7 @@ public class KeySearchReq {
     }
     
     public func keyMatches(key: MusapKey) -> Bool {
-        if ((self.keyAlgorithm == nil) != (key.algorithm != nil)) { return false }
+        if ((self.keyAlgorithm == nil) != (key.getAlgorithm() != nil)) { return false }
         guard let currentKeyUri = self.keyUri else {
             print("Current key uri is nil")
             //Throw?
@@ -54,7 +54,7 @@ public class KeySearchReq {
         }
         let keyUriObj = KeyURI(keyUri: currentKeyUri)
         
-        if keyUriObj == key.keyUri {
+        if keyUriObj == key.getKeyUri() {
             
         }
         

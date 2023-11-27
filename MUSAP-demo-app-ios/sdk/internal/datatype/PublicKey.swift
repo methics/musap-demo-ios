@@ -7,7 +7,7 @@
 
 import Foundation
 
-class PublicKey: Codable {
+public class PublicKey: Codable {
     
     private var publickeyDer: Data
 

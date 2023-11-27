@@ -15,7 +15,7 @@ struct HomeView: View {
                 .font(.system(size: 24, weight: .heavy))
             Spacer()
             
-            Button("DELETE KEYCHAIN ITEMS", action: self.deleteAllItems)
+            Button("RESET APP", action: self.deleteAllItems)
             Button("EXPORT DATA", action: self.exportData)
             Text("Version: \(self.getAppVersion())")
                 .font(.system(size: 12, weight: .heavy))

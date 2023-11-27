@@ -20,7 +20,7 @@ class GenerateKeyTask {
                     let sscdId       = sscd.generateSscdId(key: generatedKey)
 
                     activeSscd.sscdId = sscdId
-                    generatedKey.sscdId = sscdId
+                    generatedKey.setSscdId(value: sscdId)
                     let storage = MetadataStorage()
                     try storage.storeKey(key: generatedKey, sscd: activeSscd)
 

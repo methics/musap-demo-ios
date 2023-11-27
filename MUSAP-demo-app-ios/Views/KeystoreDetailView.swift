@@ -7,13 +7,7 @@
 
 import SwiftUI
 
-struct KeystoreDetailView: View {
-    @State private var sscdName = "Yubikey"
-    @State private var sscdType = "Yubikey"
-    @State private var sscdProvider = "Yubico"
-    @State private var country = "FI"
-    @State private var algorithms = ""
-    
+struct KeystoreDetailView: View {   
     let targetSscd: MusapSscd
 
     var body: some View {

@@ -9,7 +9,6 @@ import SwiftUI
 
 struct ChooseKeyForSigningView: View {
     
-    @State private var musapKeyNames = [String]()
     @State private var musapKeys: [MusapKey] = [MusapKey]()
     var dataToBeSigned: String?
     
@@ -20,9 +19,9 @@ struct ChooseKeyForSigningView: View {
                     
                     ForEach(musapKeys) { key in
                         
-                        NavigationLink(destination: ConfirmSignView(dataToBeSigned: dataToBeSigned!, musapKey: key)
+                        NavigationLink(destination: ConfirmSignView(dataToBeSigned: dataToBeSigned ?? "Sample text to sign", musapKey: key)
                         ) {
-                            Text(key.keyAlias!)
+                            Text(key.getKeyAlias()!)
                         }
                         
                     }
@@ -31,9 +30,9 @@ struct ChooseKeyForSigningView: View {
 
         }
         .onAppear(){
-            if self.musapKeyNames.isEmpty {
-                getKeyNames()
-            }
+            musapKeys = [MusapKey]()
+            getKeyNames()
+
             
             guard dataToBeSigned != nil else {
                 print("data to be signed is nil")
@@ -49,14 +48,16 @@ struct ChooseKeyForSigningView: View {
         let availableMusapKeys = MusapClient.listKeys()
         for key in availableMusapKeys {
             
-            let keyName = key.keyAlias
-            
-            self.musapKeyNames.append(keyName!)
+            let keyName = key.getKeyAlias()
             musapKeys.append(key)
             
-            print("publicKey: " + (key.publicKey?.getPEM())!)
+            guard let publicKey = key.getPublicKey() else {
+                print("Public key was nil, continue loop")
+                continue
+            }
+            print("publicKey: " + (publicKey.getPEM()))
             
-            guard let keyUri = key.keyUri else {
+            guard let keyUri = key.getKeyUri() else {
                 return
             }
             print("keyUri: \(keyUri.getUri())")

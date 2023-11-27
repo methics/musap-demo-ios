@@ -31,6 +31,14 @@ public class KeyDiscoveryAPI {
     }
     
     func enableSscd(_ sscd: any MusapSscdProtocol) -> Void {
+        let isAlreadyEnabled = KeyDiscoveryAPI.enabledSscds.contains { existingSscd in
+            existingSscd.getSscdInfo().sscdName == sscd.getSscdInfo().sscdName
+        }
+        // Dont add duplicate
+        if isAlreadyEnabled {
+            return
+        }
+        
         KeyDiscoveryAPI.enabledSscds.append(sscd)
     }
     

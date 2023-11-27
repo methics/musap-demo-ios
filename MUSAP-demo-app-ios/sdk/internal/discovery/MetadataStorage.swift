@@ -28,7 +28,7 @@ public class MetadataStorage {
     
     /// Store a MusapKey
     public func storeKey(key: MusapKey, sscd: MusapSscd) throws {
-        guard let keyName = key.keyAlias else {
+        guard let keyName = key.getKeyAlias() else {
             print("key name was nil")
             throw MusapException.init(MusapError.missingParam)
         }
@@ -102,7 +102,7 @@ public class MetadataStorage {
      Remove key metadata from storage
      */
     func removeKey(key: MusapKey) -> Bool {
-        guard let keyName = key.keyAlias else {
+        guard let keyName = key.getKeyAlias() else {
             print("Can't remove key. Keyname was nil")
             return false
         }
@@ -186,7 +186,7 @@ public class MetadataStorage {
     }
 
     private func makeStoreName(key: MusapKey) -> String {
-        guard let keyName = key.keyAlias else {
+        guard let keyName = key.getKeyAlias() else {
             fatalError("Cannot create store name for unnamed MUSAP key")
         }
         return MetadataStorage.KEY_JSON_PREFIX + keyName
@@ -252,9 +252,9 @@ public class MetadataStorage {
             self.addSscd(sscd: sscd)
         }
 
-        let uniqueKeys = Set(activeKeys.map { $0.keyUri })
+        let uniqueKeys = Set(activeKeys.map { $0.getKeyUri() })
         for key in data.keys ?? [] {
-            if uniqueKeys.contains(key.keyUri) {
+            if uniqueKeys.contains(key.getKeyUri()) {
                 continue
             }
 
@@ -279,6 +279,67 @@ public class MetadataStorage {
         }
         return sscdJson
     }
-
+    
+    public func updateKeyMetaData(req: UpdateKeyReq) -> Bool {
+        let targetKey = req.getKey()
+        
+        guard let keyId = targetKey.getKeyId() else {
+            print("Can't update key metadata, keyid was nil")
+            return false
+        }
+        
+        let keyJson = self.getKeyJson(keyName: keyId)
+        guard let keyJsonData = keyJson.data(using: .utf8) else {
+            print("Error decoding JSON to MusapKey, can't update metadata")
+            return false
+        }
+        
+        // JSON to Musapkey
+        let decoder = JSONDecoder()
+        guard let oldKey = try? decoder.decode(MusapKey.self, from: keyJsonData) else {
+            print("Error: Decoding JSON to MusapKey failed")
+            return false
+        }
+        
+        if req.getAlias() != nil {
+            oldKey.setKeyAlias(value: req.getAlias())
+        }
+                
+        if req.getDid() != nil {
+            oldKey.setDid(value: req.getDid())
+        }
+         
+        if req.getState() != nil {
+            oldKey.setState(value: req.getState())
+        }
+        
+        if let attributes = req.getAttributes() {
+            if req.getAttributes() != nil {
+                for attr in attributes {
+    
+                    if attr.value == nil {
+                        oldKey.removeAttribute(nameToRemove: attr.name)
+                    } else {
+                        oldKey.addAttribute(attr: attr)
+                    }
+                    
+                }
+            }
+        }
+        
+        guard let sscd = oldKey.getSscdImplementation()?.getSscdInfo() else {
+            print("Can't update key, could nto find SSCD where it belongs")
+            return false
+        }
+        
+        do {
+            try self.storeKey(key: oldKey, sscd: sscd)
+        } catch {
+            return false
+        }
+        
+        return true
+        
+    }
     
 }

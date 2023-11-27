@@ -163,7 +163,7 @@ public class MusapClient {
         let keyUri = KeyURI(keyUri: keyUri)
         
         for key in keyList {
-            if let loopKeyUri = key.keyUri {
+            if let loopKeyUri = key.getKeyUri() {
                 if loopKeyUri.keyUriMatches(keyUri: keyUri) {
                     return key
                 }
@@ -184,7 +184,7 @@ public class MusapClient {
         let keyList = MetadataStorage().listKeys()
         
         for key in keyList {
-            if let loopKeyUri = key.keyUri {
+            if let loopKeyUri = key.getKeyUri() {
                 if loopKeyUri.keyUriMatches(keyUri: keyUriObject) {
                     return key
                 }
@@ -258,6 +258,11 @@ public class MusapClient {
     //TODO: returns signatureReq
     public static func pollLink() {
         
+    }
+    
+    public static func updateKey(req: UpdateKeyReq) -> Bool {
+        let storage = MetadataStorage()
+        return storage.updateKeyMetaData(req: req)
     }
     
 }

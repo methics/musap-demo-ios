@@ -49,7 +49,7 @@ struct ConfirmSignView: View {
         .padding()
         .frame(maxWidth: 300, alignment: .leading)
         .onAppear {
-            guard let keyUriString = musapKey?.keyUri?.getUri() else {
+            guard let keyUriString = musapKey?.getKeyUri()?.getUri() else {
                 return
             }
             

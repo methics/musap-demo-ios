@@ -21,7 +21,7 @@ public class BindKeyTask {
             let sscdId = sscd.generateSscdId(key: key)
             
             activeSscd.sscdId = sscdId
-            key.sscdId = sscdId
+            key.setSscdId(value: sscdId)
             
             try storage.storeKey(key: key, sscd: activeSscd)
             return key
