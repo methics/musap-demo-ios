@@ -44,12 +44,11 @@ public class KeychainSscd: MusapSscdProtocol {
         let keyAttributes: [String: Any] =
                [kSecAttrKeyType       as String: algo,
                 kSecAttrKeySizeInBits as String: bits,
-                kSecPrivateKeyAttrs   as String:
-                   [
+                kSecPrivateKeyAttrs   as String: [
                        kSecAttrIsPermanent    as String: true,
                        kSecAttrApplicationTag as String: req.keyAlias.data(using: .utf8),
                        kSecAttrKeyClass       as String: kSecAttrKeyClassPrivate
-                   ]
+                   ],
            ]
         
         var error: Unmanaged<CFError>?

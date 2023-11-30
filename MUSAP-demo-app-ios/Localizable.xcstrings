@@ -27,6 +27,9 @@
     "Choose what to sign" : {
 
     },
+    "Close" : {
+
+    },
     "Confirm Sign" : {
 
     },
@@ -62,6 +65,12 @@
     "Generate the key" : {
 
     },
+    "GO TO YUBIKEY" : {
+
+    },
+    "Hello, World!" : {
+
+    },
     "Home" : {
 
     },
@@ -69,6 +78,9 @@
 
     },
     "Key Generation" : {
+
+    },
+    "Key Generation Failed" : {
 
     },
     "Key name" : {
@@ -142,6 +154,12 @@
     "PIN confirm" : {
 
     },
+    "Please enter your PIN" : {
+
+    },
+    "Remove YubiKey" : {
+
+    },
     "RESET APP" : {
 
     },
@@ -157,10 +175,16 @@
     "Select value" : {
 
     },
+    "Show PIN Entry" : {
+
+    },
     "Sign" : {
 
     },
     "Sign input" : {
+
+    },
+    "Signature Failed" : {
 
     },
     "Signing" : {

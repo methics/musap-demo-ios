@@ -125,17 +125,12 @@ struct KeyGenerationView: View {
             sscdImplementation = KeychainSscd()
         }
         
-        
-        
         let keyAlgo            = KeyAlgorithm(primitive: KeyAlgorithm.PRIMITIVE_EC, bits: 256)
-        print("Keyalgo: \(keyAlgo.primitive)")
+        
         let keyGenReq          = KeyGenReq(keyAlias: self.keyAlias, role: "personal", keyAlgorithm: keyAlgo)
+        
+        //print("Keyalgo: \(keyAlgo.primitive)")
         print("Keygrenreq: Alias \(keyGenReq.keyAlias)")
-        //let sscdImplementation = SecureEnclaveSscd()
-        
-        print("after sscd implementation")
-        
-        print("starting task")
         
         Task { [sscdImplementation] in
             await MusapClient.generateKey(sscd: sscdImplementation, req: keyGenReq) {

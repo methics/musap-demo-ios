@@ -17,6 +17,8 @@
 		C40AEE9C2AF50F26006445EB /* SignatureAlgorithm.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40AEE9B2AF50F26006445EB /* SignatureAlgorithm.swift */; };
 		C40AEE9E2AF50F4C006445EB /* SignatureFormat.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40AEE9D2AF50F4C006445EB /* SignatureFormat.swift */; };
 		C40AEEA02AF51000006445EB /* MusapSscd.swift in Sources */ = {isa = PBXBuildFile; fileRef = C40AEE9F2AF51000006445EB /* MusapSscd.swift */; };
+		C41B421C2B1878D700C64AAD /* YubiKeyConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41B421B2B1878D700C64AAD /* YubiKeyConnection.swift */; };
+		C41B42212B18799700C64AAD /* YubiKeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41B42202B18799700C64AAD /* YubiKeyView.swift */; };
 		C42FFEDA2AF8F388004CEB5E /* GenerateKeyTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42FFED92AF8F388004CEB5E /* GenerateKeyTask.swift */; };
 		C42FFEDC2AF8F4FC004CEB5E /* MetadataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42FFEDB2AF8F4FC004CEB5E /* MetadataStorage.swift */; };
 		C4409ABF2AF9119E0068B793 /* SecureEnclaveSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4409ABE2AF9119E0068B793 /* SecureEnclaveSettings.swift */; };
@@ -40,6 +42,7 @@
 		C4578BE82AFA222400C0EABB /* KeyAttestation.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4578BE72AFA222400C0EABB /* KeyAttestation.swift */; };
 		C4578BEA2AFA223800C0EABB /* MusapSignature.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4578BE92AFA223800C0EABB /* MusapSignature.swift */; };
 		C457E3BF2B04F9A200B49570 /* BindKeyTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = C457E3BE2B04F9A200B49570 /* BindKeyTask.swift */; };
+		C45F2E4A2B147A200091203C /* YubiKit in Frameworks */ = {isa = PBXBuildFile; productRef = C45F2E492B147A200091203C /* YubiKit */; };
 		C479F0772B0F35310075C60A /* UpdateKeyReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = C479F0762B0F35310075C60A /* UpdateKeyReq.swift */; };
 		C47CE3282B0E2F50008A878D /* YubikeySscd.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47CE3272B0E2F50008A878D /* YubikeySscd.swift */; };
 		C47CE32A2B0E2F5D008A878D /* YubikeySscdSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47CE3292B0E2F5D008A878D /* YubikeySscdSettings.swift */; };
@@ -49,6 +52,10 @@
 		C4CD4FB32B10BCCE00E588B3 /* MusapMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CD4FB22B10BCCE00E588B3 /* MusapMessage.swift */; };
 		C4CD4FB52B10C36000E588B3 /* SignatureAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CD4FB42B10C36000E588B3 /* SignatureAttribute.swift */; };
 		C4CD4FB72B10C42900E588B3 /* CmsSignature.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CD4FB62B10C42900E588B3 /* CmsSignature.swift */; };
+		C4D693852B148835005E0142 /* PinEntryView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D693842B148835005E0142 /* PinEntryView.swift */; };
+		C4D693872B1489E2005E0142 /* RemoveYubiKeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D693862B1489E2005E0142 /* RemoveYubiKeyView.swift */; };
+		C4D693892B148A04005E0142 /* KeyGenFailedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D693882B148A04005E0142 /* KeyGenFailedView.swift */; };
+		C4D6938B2B148A1A005E0142 /* SignFailedView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4D6938A2B148A1A005E0142 /* SignFailedView.swift */; };
 		C4DBFFA92AF2504100253DE4 /* MUSAP_demo_app_ios.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DBFFA82AF2504100253DE4 /* MUSAP_demo_app_ios.swift */; };
 		C4DBFFAB2AF2504100253DE4 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DBFFAA2AF2504100253DE4 /* HomeView.swift */; };
 		C4DBFFAD2AF2504200253DE4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4DBFFAC2AF2504200253DE4 /* Assets.xcassets */; };
@@ -92,6 +99,8 @@
 		C40AEE9B2AF50F26006445EB /* SignatureAlgorithm.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignatureAlgorithm.swift; sourceTree = "<group>"; };
 		C40AEE9D2AF50F4C006445EB /* SignatureFormat.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignatureFormat.swift; sourceTree = "<group>"; };
 		C40AEE9F2AF51000006445EB /* MusapSscd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusapSscd.swift; sourceTree = "<group>"; };
+		C41B421B2B1878D700C64AAD /* YubiKeyConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YubiKeyConnection.swift; sourceTree = "<group>"; };
+		C41B42202B18799700C64AAD /* YubiKeyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YubiKeyView.swift; sourceTree = "<group>"; };
 		C42FFED92AF8F388004CEB5E /* GenerateKeyTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateKeyTask.swift; sourceTree = "<group>"; };
 		C42FFEDB2AF8F4FC004CEB5E /* MetadataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetadataStorage.swift; sourceTree = "<group>"; };
 		C4409ABE2AF9119E0068B793 /* SecureEnclaveSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureEnclaveSettings.swift; sourceTree = "<group>"; };
@@ -125,6 +134,10 @@
 		C4CD4FB22B10BCCE00E588B3 /* MusapMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusapMessage.swift; sourceTree = "<group>"; };
 		C4CD4FB42B10C36000E588B3 /* SignatureAttribute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignatureAttribute.swift; sourceTree = "<group>"; };
 		C4CD4FB62B10C42900E588B3 /* CmsSignature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CmsSignature.swift; sourceTree = "<group>"; };
+		C4D693842B148835005E0142 /* PinEntryView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PinEntryView.swift; sourceTree = "<group>"; };
+		C4D693862B1489E2005E0142 /* RemoveYubiKeyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoveYubiKeyView.swift; sourceTree = "<group>"; };
+		C4D693882B148A04005E0142 /* KeyGenFailedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyGenFailedView.swift; sourceTree = "<group>"; };
+		C4D6938A2B148A1A005E0142 /* SignFailedView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignFailedView.swift; sourceTree = "<group>"; };
 		C4DBFFA52AF2504100253DE4 /* MUSAP-demo-app-ios.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "MUSAP-demo-app-ios.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		C4DBFFA82AF2504100253DE4 /* MUSAP_demo_app_ios.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MUSAP_demo_app_ios.swift; sourceTree = "<group>"; };
 		C4DBFFAA2AF2504100253DE4 /* HomeView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = HomeView.swift; sourceTree = "<group>"; };
@@ -149,6 +162,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				C45F2E4A2B147A200091203C /* YubiKit in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -209,6 +223,14 @@
 			path = sign;
 			sourceTree = "<group>";
 		};
+		C41B421D2B18797B00C64AAD /* testing */ = {
+			isa = PBXGroup;
+			children = (
+				C41B42202B18799700C64AAD /* YubiKeyView.swift */,
+			);
+			path = testing;
+			sourceTree = "<group>";
+		};
 		C41FA6022AFE0F2E0060A0FD /* signing */ = {
 			isa = PBXGroup;
 			children = (
@@ -251,6 +273,7 @@
 		C44CB1332AF4DD1E00C15143 /* sdk */ = {
 			isa = PBXGroup;
 			children = (
+				C4D693832B148829005E0142 /* ui */,
 				C42FFEDD2AF91141004CEB5E /* sscd */,
 				C44CB1452AF4F37F00C15143 /* internal */,
 				C44CB1402AF4EFEE00C15143 /* extension */,
@@ -308,6 +331,7 @@
 			children = (
 				C47CE3272B0E2F50008A878D /* YubikeySscd.swift */,
 				C47CE3292B0E2F5D008A878D /* YubikeySscdSettings.swift */,
+				C41B421B2B1878D700C64AAD /* YubiKeyConnection.swift */,
 			);
 			path = yubikey;
 			sourceTree = "<group>";
@@ -319,6 +343,17 @@
 				C48293BB2B03863500FCEDD9 /* KeychainSscdSettings.swift */,
 			);
 			path = keychain;
+			sourceTree = "<group>";
+		};
+		C4D693832B148829005E0142 /* ui */ = {
+			isa = PBXGroup;
+			children = (
+				C4D693842B148835005E0142 /* PinEntryView.swift */,
+				C4D693862B1489E2005E0142 /* RemoveYubiKeyView.swift */,
+				C4D693882B148A04005E0142 /* KeyGenFailedView.swift */,
+				C4D6938A2B148A1A005E0142 /* SignFailedView.swift */,
+			);
+			path = ui;
 			sourceTree = "<group>";
 		};
 		C4DBFF9C2AF2504100253DE4 = {
@@ -387,6 +422,7 @@
 		C4DBFFD32AF25A6600253DE4 /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				C41B421D2B18797B00C64AAD /* testing */,
 				C41FA6022AFE0F2E0060A0FD /* signing */,
 				C4DBFFAA2AF2504100253DE4 /* HomeView.swift */,
 				C4DBFFD72AF25EA500253DE4 /* NavigationTabView.swift */,
@@ -435,6 +471,9 @@
 			dependencies = (
 			);
 			name = "MUSAP-demo-app-ios";
+			packageProductDependencies = (
+				C45F2E492B147A200091203C /* YubiKit */,
+			);
 			productName = "MUSAP-demo-app-ios";
 			productReference = C4DBFFA52AF2504100253DE4 /* MUSAP-demo-app-ios.app */;
 			productType = "com.apple.product-type.application";
@@ -507,6 +546,9 @@
 				Base,
 			);
 			mainGroup = C4DBFF9C2AF2504100253DE4;
+			packageReferences = (
+				C45F2E482B147A200091203C /* XCRemoteSwiftPackageReference "yubikit-ios" */,
+			);
 			productRefGroup = C4DBFFA62AF2504100253DE4 /* Products */;
 			projectDirPath = "";
 			projectRoot = "";
@@ -559,18 +601,21 @@
 				C47CE32A2B0E2F5D008A878D /* YubikeySscdSettings.swift in Sources */,
 				C4578BE62AFA1D1B00C0EABB /* MusapLoa.swift in Sources */,
 				C4DBFFAB2AF2504100253DE4 /* HomeView.swift in Sources */,
+				C4D6938B2B148A1A005E0142 /* SignFailedView.swift in Sources */,
 				C4CD4FB52B10C36000E588B3 /* SignatureAttribute.swift in Sources */,
 				C44B3B032AFBB963002240EE /* KeyDiscoveryAPI.swift in Sources */,
 				C4578BEA2AFA223800C0EABB /* MusapSignature.swift in Sources */,
 				C48293BC2B03863500FCEDD9 /* KeychainSscdSettings.swift in Sources */,
 				C47CE3282B0E2F50008A878D /* YubikeySscd.swift in Sources */,
 				C4409ABF2AF9119E0068B793 /* SecureEnclaveSettings.swift in Sources */,
+				C41B421C2B1878D700C64AAD /* YubiKeyConnection.swift in Sources */,
 				C44CB13A2AF4E7A100C15143 /* MusapConstants.swift in Sources */,
 				C44494EA2AF3B89C00D8096C /* ConfirmSignView.swift in Sources */,
 				C44B3B072AFBBADE002240EE /* KeySearchReq.swift in Sources */,
 				C44B3B052AFBBA2C002240EE /* SscdSearchReq.swift in Sources */,
 				C40AEEA02AF51000006445EB /* MusapSscd.swift in Sources */,
 				C4409AC52AF924AD0068B793 /* KeyURI.swift in Sources */,
+				C4D693892B148A04005E0142 /* KeyGenFailedView.swift in Sources */,
 				C44CB1362AF4DF6300C15143 /* MusapClient.swift in Sources */,
 				C44CB1422AF4F00D00C15143 /* SscdSettings.swift in Sources */,
 				C4DBFFDA2AF26CD800253DE4 /* KeystoreListView.swift in Sources */,
@@ -579,6 +624,7 @@
 				C40AEE882AF4F3E5006445EB /* KeyBindReq.swift in Sources */,
 				C44494E82AF3B1F300D8096C /* ChooseKeyForSigningView.swift in Sources */,
 				C4CD4FB72B10C42900E588B3 /* CmsSignature.swift in Sources */,
+				C4D693872B1489E2005E0142 /* RemoveYubiKeyView.swift in Sources */,
 				C479F0772B0F35310075C60A /* UpdateKeyReq.swift in Sources */,
 				C44B3B012AFBB7DA002240EE /* SignTask.swift in Sources */,
 				C4C52EC22B0B4C0F0052951F /* MusapImportData.swift in Sources */,
@@ -594,7 +640,9 @@
 				C457E3BF2B04F9A200B49570 /* BindKeyTask.swift in Sources */,
 				C4578BE42AFA19F100C0EABB /* MusapCertificate.swift in Sources */,
 				C40AEE9E2AF50F4C006445EB /* SignatureFormat.swift in Sources */,
+				C4D693852B148835005E0142 /* PinEntryView.swift in Sources */,
 				C4CD4FB32B10BCCE00E588B3 /* MusapMessage.swift in Sources */,
+				C41B42212B18799700C64AAD /* YubiKeyView.swift in Sources */,
 				C4DBFFE22AF28F9A00253DE4 /* KeystoreDetailView.swift in Sources */,
 				C40AEE9A2AF50EB7006445EB /* SignatureReq.swift in Sources */,
 				C44CB1382AF4E01900C15143 /* MusapError.swift in Sources */,
@@ -687,7 +735,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
 				MTL_FAST_MATH = YES;
@@ -744,7 +792,7 @@
 				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
 				GCC_WARN_UNUSED_FUNCTION = YES;
 				GCC_WARN_UNUSED_VARIABLE = YES;
-				IPHONEOS_DEPLOYMENT_TARGET = 17.0;
+				IPHONEOS_DEPLOYMENT_TARGET = 15.0;
 				LOCALIZATION_PREFERS_STRING_CATALOGS = YES;
 				MTL_ENABLE_DEBUG_INFO = NO;
 				MTL_FAST_MATH = YES;
@@ -944,6 +992,25 @@
 			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
+
+/* Begin XCRemoteSwiftPackageReference section */
+		C45F2E482B147A200091203C /* XCRemoteSwiftPackageReference "yubikit-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/Yubico/yubikit-ios";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 4.4.0;
+			};
+		};
+/* End XCRemoteSwiftPackageReference section */
+
+/* Begin XCSwiftPackageProductDependency section */
+		C45F2E492B147A200091203C /* YubiKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = C45F2E482B147A200091203C /* XCRemoteSwiftPackageReference "yubikit-ios" */;
+			productName = YubiKit;
+		};
+/* End XCSwiftPackageProductDependency section */
 	};
 	rootObject = C4DBFF9D2AF2504100253DE4 /* Project object */;
 }
