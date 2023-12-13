@@ -73,12 +73,11 @@ public class YubikeySscd: MusapSscdProtocol {
                 }
                 
                 let publicKeyObj = PublicKey(publicKey: Data(bytes: publicKeyBytes, count: publicKeyData.count))
-                var keyAlgorithm: KeyAlgorithm?
                 
-                if keyAlgorithm == req.keyAlgorithm {
-                    print("Keyalgorithm: \(String(describing: keyAlgorithm))")
-                } else {
-                    print("keyalgorithm was nil")
+                guard let keyAlgorithm = req.keyAlgorithm else {
+                    print("Key algorithm was not set in KeyGenReq, cant construct MusapKey")
+                    generationError = MusapError.invalidAlgorithm
+                    return
                 }
                 
                 musapKey = MusapKey(keyAlias:  req.keyAlias,
@@ -132,7 +131,6 @@ public class YubikeySscd: MusapSscdProtocol {
         
         let group = DispatchGroup()
         group.enter()
-        
         
         var musapSignature: MusapSignature?
         var signError: Error?
@@ -384,6 +382,7 @@ public class YubikeySscd: MusapSscdProtocol {
     }
     
     private func selectKeyType(req: SignatureReq) -> YKFPIVKeyType {
+        
         if let keyAlgorithm = req.getKey().getAlgorithm() {
             if keyAlgorithm.isEc() {
                 print("key algorithm is EC")
@@ -396,9 +395,10 @@ public class YubikeySscd: MusapSscdProtocol {
                 if keyAlgorithm.bits == 1024 { return YKFPIVKeyType.RSA1024 }
                 if keyAlgorithm.bits == 2048 { return YKFPIVKeyType.RSA2048 }
             }
+        } else {
+            print("select key type: key algorithm was nil")
         }
         print("Couldnt detect key algorithm")
-        
         return YKFPIVKeyType.unknown
     }
     

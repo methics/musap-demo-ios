@@ -66,6 +66,13 @@ struct ConfirmSignView: View {
             return
         }
         
+        guard let keyAlgo = musapKey.getAlgorithm() else {
+            print("MusapKey Algorithm was  nil")
+            return
+        }
+        
+        print("MusapKey Algo: \(keyAlgo)")
+        
         guard let data = self.dataToBeSigned.data(using: .utf8) else {
             print("Couldnt turn self.dataTobeSigned to Data()")
             return

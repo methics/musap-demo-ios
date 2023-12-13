@@ -18,9 +18,10 @@ class GenerateKeyTask {
                     let generatedKey = try sscd.generateKey(req: req)
                     let activeSscd   = sscd.getSscdInfo()
                     let sscdId       = sscd.generateSscdId(key: generatedKey)
-
+                    
                     activeSscd.sscdId = sscdId
                     generatedKey.setSscdId(value: sscdId)
+                    
                     let storage = MetadataStorage()
                     try storage.storeKey(key: generatedKey, sscd: activeSscd)
 
@@ -30,7 +31,6 @@ class GenerateKeyTask {
                 }
             }
 
-            //completion(.success(key))
             return key
         } catch {
             completion(.failure(MusapError.internalError))

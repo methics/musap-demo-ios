@@ -135,7 +135,7 @@ struct KeyGenerationView: View {
         
         let keyGenReq          = KeyGenReq(keyAlias: self.keyAlias, role: "personal", keyAlgorithm: keyAlgo)
         
-        //print("Keyalgo: \(keyAlgo.primitive)")
+        print("KeyGenerationView: Keyalgo: \(keyAlgo.primitive) \(keyAlgo.bits)")
         print("Keygrenreq: Alias \(keyGenReq.keyAlias)")
         
         Task { [sscdImplementation] in
