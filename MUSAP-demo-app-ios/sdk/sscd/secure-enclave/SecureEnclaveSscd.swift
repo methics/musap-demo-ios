@@ -55,7 +55,7 @@ public class SecureEnclaveSscd: MusapSscdProtocol {
         let accessControl = SecAccessControlCreateWithFlags(
             kCFAllocatorDefault,
             kSecAttrAccessibleWhenUnlockedThisDeviceOnly,
-            [.privateKeyUsage, /*.biometryCurrentSet TODO: Make this value come from Settings*/],
+            [.privateKeyUsage, /*.biometryCurrentSet TODO: Make this value come from Settings??*/],
             nil)
         
         let keyAttributes: [String: Any] = [

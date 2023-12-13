@@ -118,6 +118,7 @@ struct HomeView: View {
     func enableSscds() {
         MusapClient.enableSscd(sscd: SecureEnclaveSscd())
         MusapClient.enableSscd(sscd: KeychainSscd())
+        MusapClient.enableSscd(sscd: YubikeySscd())
     }
     
     func exportData() {

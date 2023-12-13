@@ -125,6 +125,12 @@ struct KeyGenerationView: View {
             sscdImplementation = KeychainSscd()
         }
         
+        if selectedKeystore == "Yubikey" {
+            print("selected keystore was: \(selectedKeystore)")
+            sscdImplementation = YubikeySscd()
+        }
+        
+        
         let keyAlgo            = KeyAlgorithm(primitive: KeyAlgorithm.PRIMITIVE_EC, bits: 256)
         
         let keyGenReq          = KeyGenReq(keyAlias: self.keyAlias, role: "personal", keyAlgorithm: keyAlgo)

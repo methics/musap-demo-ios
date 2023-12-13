@@ -43,6 +43,7 @@
 		C4578BEA2AFA223800C0EABB /* MusapSignature.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4578BE92AFA223800C0EABB /* MusapSignature.swift */; };
 		C457E3BF2B04F9A200B49570 /* BindKeyTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = C457E3BE2B04F9A200B49570 /* BindKeyTask.swift */; };
 		C45F2E4A2B147A200091203C /* YubiKit in Frameworks */ = {isa = PBXBuildFile; productRef = C45F2E492B147A200091203C /* YubiKit */; };
+		C47257882B28437400282693 /* PINInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47257872B28437400282693 /* PINInputView.swift */; };
 		C479F0772B0F35310075C60A /* UpdateKeyReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = C479F0762B0F35310075C60A /* UpdateKeyReq.swift */; };
 		C47CE3282B0E2F50008A878D /* YubikeySscd.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47CE3272B0E2F50008A878D /* YubikeySscd.swift */; };
 		C47CE32A2B0E2F5D008A878D /* YubikeySscdSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47CE3292B0E2F5D008A878D /* YubikeySscdSettings.swift */; };
@@ -125,6 +126,7 @@
 		C4578BE72AFA222400C0EABB /* KeyAttestation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyAttestation.swift; sourceTree = "<group>"; };
 		C4578BE92AFA223800C0EABB /* MusapSignature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusapSignature.swift; sourceTree = "<group>"; };
 		C457E3BE2B04F9A200B49570 /* BindKeyTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindKeyTask.swift; sourceTree = "<group>"; };
+		C47257872B28437400282693 /* PINInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PINInputView.swift; sourceTree = "<group>"; };
 		C479F0762B0F35310075C60A /* UpdateKeyReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateKeyReq.swift; sourceTree = "<group>"; };
 		C47CE3272B0E2F50008A878D /* YubikeySscd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YubikeySscd.swift; sourceTree = "<group>"; };
 		C47CE3292B0E2F5D008A878D /* YubikeySscdSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YubikeySscdSettings.swift; sourceTree = "<group>"; };
@@ -351,6 +353,7 @@
 				C4D693842B148835005E0142 /* PinEntryView.swift */,
 				C4D693862B1489E2005E0142 /* RemoveYubiKeyView.swift */,
 				C4D693882B148A04005E0142 /* KeyGenFailedView.swift */,
+				C47257872B28437400282693 /* PINInputView.swift */,
 				C4D6938A2B148A1A005E0142 /* SignFailedView.swift */,
 			);
 			path = ui;
@@ -623,6 +626,7 @@
 				C40AEE932AF50BED006445EB /* PublicKey.swift in Sources */,
 				C40AEE882AF4F3E5006445EB /* KeyBindReq.swift in Sources */,
 				C44494E82AF3B1F300D8096C /* ChooseKeyForSigningView.swift in Sources */,
+				C47257882B28437400282693 /* PINInputView.swift in Sources */,
 				C4CD4FB72B10C42900E588B3 /* CmsSignature.swift in Sources */,
 				C4D693872B1489E2005E0142 /* RemoveYubiKeyView.swift in Sources */,
 				C479F0772B0F35310075C60A /* UpdateKeyReq.swift in Sources */,
