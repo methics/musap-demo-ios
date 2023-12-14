@@ -128,7 +128,6 @@ public class YubikeySscd: MusapSscdProtocol {
             throw MusapError.internalError
         }
         
-        
         let group = DispatchGroup()
         group.enter()
         
@@ -140,18 +139,13 @@ public class YubikeySscd: MusapSscdProtocol {
             
             switch result {
             case .success(let data):
-                
-                print("Got some data from self.yubiSign()")
                 musapSignature = MusapSignature(rawSignature: data, key: req.getKey(), algorithm: req.algorithm, format: req.format)
-    
             case .failure(let error):
                 print("error: \(error.localizedDescription)")
                 signError = error
             }
             
             group.leave()
-        
-            
         }
         
         group.wait()
@@ -220,6 +214,7 @@ public class YubikeySscd: MusapSscdProtocol {
                         }
                         
                         // Authentication OK with management key
+                        //TODO: Will these come from user app in the future? (slot, pin & touch policy
                         let slot        = YKFPIVSlot.signature
                         let pinPolicy   = YKFPIVPinPolicy.default
                         let touchPolicy = YKFPIVTouchPolicy.default
@@ -227,80 +222,116 @@ public class YubikeySscd: MusapSscdProtocol {
                         
                         session.generateKey(in: slot, type: keyType, pinPolicy: pinPolicy, touchPolicy: touchPolicy) { publicKey, error in
                             
-                            session.verifyPin(pin, completion: { resp, error in
+                            // verify user PIN
+                            session.verifyPin(pin, completion: { retries, error in
                                 
-                                guard error == nil else {
-                                    print("Yubikey: Could not verify PIN")
-                                    YubiKitManager.shared.stopNFCConnection(withErrorMessage: "Wrong PIN")
-                                    completion(.failure(error!))
+                                if let error = error {
+                                    var errorMsg = error.localizedDescription
+                                    if retries > 0 {
+                                        errorMsg = error.localizedDescription + " Retries left: \(retries)"
+                                    }
+                                    
+                                    YubiKitManager.shared.stopNFCConnection(withErrorMessage: errorMsg)
+                                    completion(.failure(error))
                                     return
                                 }
                                 
                                 YubiKitManager.shared.stopNFCConnection(withMessage: "KeyPair generated")
                                                                 
-                                if let error = error {
-                                    completion(.failure(error))
-                                } else if let pubKey = publicKey {
+                                if let pubKey = publicKey {
                                     completion(.success(pubKey))
                                 } else {
                                     completion(.failure(MusapError.keygenUnsupported))
                                 }
                                 
-                                
                             })
                         
-                            guard error == nil else {
+                            // Generate Key error
+                            if let error = error {
                                 print("Key generation failed")
                                 completion(.failure(MusapError.internalError))
                                 return
                             }
-                            
-  
                         }
                     }
                 }
             }
-            
         }
-   
-        print("end of func")
-        
     }
     
     private func yubiSign(pin: String, req: SignatureReq, completion: @escaping (Result<Data, Error>) -> Void) {
         let yubiKeyConnection = YubiKeyConnection()
-        print("Trying to get piv Session and NFC connection")
         
         yubiKeyConnection.connection { connection in
             
             if let nfcConnection = yubiKeyConnection.nfcConnection {
                 connection.pivSession { session, error in
                     
-                    print("got piv session")
                     if let error = error {
-                        print("Failure: \(error)")
+                        print("pivSession error: \(error)")
                         completion(.failure(error))
                     }
-                    
+
                     guard let session = session else {
                         print("Could not get piv session")
                         YubiKitManager.shared.stopNFCConnection(withErrorMessage: "Could not get PIV session")
                         return
                     }
                     
+                    // Piv session OK
+                    
+                    // Now authenticate with management key so we can use sign function
                     session.authenticate(withManagementKey: YubikeySscd.MANAGEMENT_KEY, type: .tripleDES()) { error in
-                        session.verifyPin(pin) { resp, error in
                         
+                        // verify users PIN
+                        session.verifyPin(pin) { retries, error in
+                            
                             if let error = error {
-                                print("VerifyPin failed: \(String(describing: error))")
+                                var errorMsg = error.localizedDescription
+                                if retries > 0 {
+                                    errorMsg = error.localizedDescription + " Retries left: \(retries)"
+                                }
+                                print("VerifyPin failed: \(String(describing: error)) Retries left: \(retries)")
+                                YubiKitManager.shared.stopNFCConnection(withErrorMessage: errorMsg)
                                 completion(.failure(error))
-                                YubiKitManager.shared.stopNFCConnection(withErrorMessage: "Verify PIN failed")
                                 return
                             } else {
-                                print("PIN verified successfully")
+                                print("YubiKey PIN verified successfully")
                             }
                             
+                            guard let algorithm = req.algorithm.getAlgorithm() else {
+                                print("No algorithm in SignatureRequest")
+                                YubiKitManager.shared.stopNFCConnection(withErrorMessage: "Unknown signature algorithm")
+                                completion(.failure(MusapError.invalidAlgorithm))
+                                return
+                            }
                             
+                            let keyType = self.selectKeyType(req: req)
+                            
+                            // Sign with key in signature slot
+                            // Available slots:
+                            // - YKFPIVSlot.signature
+                            // - YKFPIVSlot.authentication
+                            // - YKFPIVSlot.cardAuth
+                            // - YKFPIVSlot.keyManagement
+                            // - YKFPIVSlot.attestation
+                            session.signWithKey(in: .signature, type: keyType, algorithm: algorithm, message: req.data) {
+                                signature, error in
+                                
+                                guard let signature = signature else {
+                                    if let error = error  {
+                                        print("Signing failed: \(error.localizedDescription)")
+                                        YubiKitManager.shared.stopNFCConnection(withErrorMessage: error.localizedDescription)
+                                        completion(.failure(error))
+                                        
+                                    }
+                                    return
+                                }
+                                
+                                YubiKitManager.shared.stopNFCConnection()
+                                completion(.success(signature))
+                                return
+                            }
                         }
                         
                         if let error = error {
@@ -308,50 +339,7 @@ public class YubikeySscd: MusapSscdProtocol {
                             completion(.failure(error))
                             return
                         }
-                        
-                        guard let algorithm = req.algorithm.getAlgorithm() else {
-                            // no algorithm, do we default to something?
-                            print("No algorithm in request")
-                            return
-                        }
-                        
-                        print("start session.signWithKey")
-                        
-                        let keyType = self.selectKeyType(req: req)
-                        
-                        print("keyType: \(keyType)")
-                        
-                        session.signWithKey(in: .signature, type: keyType, algorithm: algorithm, message: req.data) {
-                            signature, error in
-                            
-                            guard let signature = signature else {
-                                if let error = error  {
-                                    print("Signing failed: \(error.localizedDescription)")
-                                }
-                                return
-                            }
-                            
-                            print("Got signature!")
-                        
-                            //TODO: COmpletion here
-                            
-                            guard let publicKey = req.getKey().getPublicKey()?.toSecKey(keyType: keyType) else {
-                                print("Could not get public key")
-                                return
-                            }
-                            
-                            var secKeyVerifySignatureError: Unmanaged<CFError>?
-                            let result = SecKeyVerifySignature(publicKey,
-                                                               algorithm,
-                                                               req.data as CFData,
-                                                               signature as CFData,
-                                                               &secKeyVerifySignatureError)
-                            
-                            print("Is signature valid: \(result)")
-                            YubiKitManager.shared.stopNFCConnection()
-                            completion(.success(signature))
-                        }
-                        
+
                     }
                 }
             }
@@ -385,18 +373,15 @@ public class YubikeySscd: MusapSscdProtocol {
         
         if let keyAlgorithm = req.getKey().getAlgorithm() {
             if keyAlgorithm.isEc() {
-                print("key algorithm is EC")
                 if keyAlgorithm.bits == 256 { return YKFPIVKeyType.ECCP256 }
                 if keyAlgorithm.bits == 384 { return YKFPIVKeyType.ECCP384 }
             }
-            
+
             if keyAlgorithm.isRsa() {
-                print("keyalgo is RSA")
                 if keyAlgorithm.bits == 1024 { return YKFPIVKeyType.RSA1024 }
                 if keyAlgorithm.bits == 2048 { return YKFPIVKeyType.RSA2048 }
             }
         } else {
-            print("select key type: key algorithm was nil")
         }
         print("Couldnt detect key algorithm")
         return YKFPIVKeyType.unknown
@@ -404,6 +389,7 @@ public class YubikeySscd: MusapSscdProtocol {
     
     
     /**
+     Displays Enter PIN prompt for the user
      Usage:
      YubiKeySscd.displayEnterPin { pin in
          print("Received PIN: \(pin)")
@@ -411,7 +397,6 @@ public class YubikeySscd: MusapSscdProtocol {
      }
      */
     private static func displayEnterPin(completion: @escaping (String) -> Void) {
-        
         DispatchQueue.main.async {
             let scenes = UIApplication.shared.connectedScenes
             let windowScene = scenes.first as? UIWindowScene
@@ -428,13 +413,7 @@ public class YubikeySscd: MusapSscdProtocol {
                 rootViewController.present(hostingController, animated: true, completion: nil)
             }
         }
-        
-
     }
-    
-    
-
-    
     
 }
 

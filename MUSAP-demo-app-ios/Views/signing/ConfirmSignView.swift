@@ -77,7 +77,7 @@ struct ConfirmSignView: View {
             print("Couldnt turn self.dataTobeSigned to Data()")
             return
         }
-        let algo = SignatureAlgorithm(algorithm: .ecdsaSignatureMessageX962SHA256)
+        let algo = SignatureAlgorithm(algorithm: .ecdsaSignatureMessageX962SHA512)
         let signatureFormat = SignatureFormat("RAW")
         let sigReq = SignatureReq(key: musapKey, data: data, algorithm: algo, format: signatureFormat)
         
