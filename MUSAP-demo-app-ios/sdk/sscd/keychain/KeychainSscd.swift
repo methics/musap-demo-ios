@@ -78,13 +78,19 @@ public class KeychainSscd: MusapSscdProtocol {
         
         let publicKeyObj = PublicKey(publicKey: Data(bytes: publicKeyBytes, count: publicKeyData.count))
         
+        guard let keyAlgorithm = req.keyAlgorithm else {
+            print("Key algorithm was not set in KeyGenReq, cant construct MusapKey")
+            throw MusapError.internalError
+        }
+        
         let generatedKey = MusapKey(keyAlias: req.keyAlias,
-                                            keyId: UUID().uuidString,
-                                            sscdType: "Keychain",
-                                            publicKey: publicKeyObj,
-                                            //certificate: MusapCertificate(),
-                                            loa: [MusapLoa.EIDAS_HIGH, MusapLoa.ISO_LOA2],
-                                            keyUri: KeyURI(name: req.keyAlias, sscd: sscd.sscdType, loa: "loa2")
+                                    keyId: UUID().uuidString,
+                                    sscdType: "Keychain",
+                                    publicKey: publicKeyObj,
+                                    loa: [MusapLoa.EIDAS_HIGH, MusapLoa.ISO_LOA2],
+                                    algorithm: keyAlgorithm,
+                                    //certificate: MusapCertificate(),
+                                    keyUri: KeyURI(name: req.keyAlias, sscd: sscd.sscdType, loa: "loa2")
         )
                 
                                     

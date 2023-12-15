@@ -214,7 +214,7 @@ public class YubikeySscd: MusapSscdProtocol {
                         }
                         
                         // Authentication OK with management key
-                        //TODO: Will these come from user app in the future? (slot, pin & touch policy
+                        //TODO: Will these come from user app in the future? (slot, pin & touch policy)
                         let slot        = YKFPIVSlot.signature
                         let pinPolicy   = YKFPIVPinPolicy.default
                         let touchPolicy = YKFPIVTouchPolicy.default
@@ -224,7 +224,7 @@ public class YubikeySscd: MusapSscdProtocol {
                             
                             // verify user PIN
                             session.verifyPin(pin, completion: { retries, error in
-                                
+                
                                 if let error = error {
                                     var errorMsg = error.localizedDescription
                                     if retries > 0 {
@@ -307,6 +307,7 @@ public class YubikeySscd: MusapSscdProtocol {
                             }
                             
                             let keyType = self.selectKeyType(req: req)
+                            
                             
                             // Sign with key in signature slot
                             // Available slots:

@@ -13,7 +13,7 @@ struct PINInputView: View {
 
     var body: some View {
         VStack {
-            Text("YubiKey")
+            Text("Enter your YubiKey PIV PIN")
                 .fontWeight(.bold)
             SecureField("Enter PIN", text: $pin)
                 .multilineTextAlignment(.center)

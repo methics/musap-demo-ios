@@ -95,6 +95,11 @@ public class SecureEnclaveSscd: MusapSscdProtocol {
             throw MusapError.internalError
         }
         
+        guard let keyAlgorithm = req.keyAlgorithm else {
+            print("Key algorithm was not set in KeyGenReq, cant construct MusapKey")
+            throw MusapError.internalError
+        }
+        
         let publicKeyObj = PublicKey(publicKey: Data(bytes: publicKeyBytes, count: publicKeyData.count))
         let generatedKey = MusapKey(keyAlias:     req.keyAlias,
                                     keyId:       UUID().uuidString,
@@ -104,6 +109,7 @@ public class SecureEnclaveSscd: MusapSscdProtocol {
                                     //certificate: MusapCertificate(),
                                     attributes:  req.attributes,
                                     loa:         [MusapLoa.EIDAS_SUBSTANTIAL, MusapLoa.ISO_LOA3],
+                                    algorithm:   keyAlgorithm,
                                     keyUri:      KeyURI(name: req.keyAlias, sscd: sscd.sscdType, loa: "loa3")
         )
         print("MusapKey generated!")
@@ -153,7 +159,12 @@ public class SecureEnclaveSscd: MusapSscdProtocol {
         
         //TODO: Optionally support requiring biometric authentication to allow using the keys
         
-        guard let signature = SecKeyCreateSignature(privateKey, .ecdsaSignatureDigestX962SHA384, dataToSign as CFData, &error) else {
+        guard let signAlgorithm = req.algorithm.getAlgorithm() else {
+            print("No sign algorithm in SignatureReq")
+            throw MusapError.internalError
+        }
+        
+        guard let signature = SecKeyCreateSignature(privateKey, signAlgorithm, dataToSign as CFData, &error) else {
             print("Signing failed while SecKeyCreateSignature \(error)")
             throw MusapError.internalError
         }
