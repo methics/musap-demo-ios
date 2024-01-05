@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import Foundation
 
 struct HomeView: View {
     var body: some View {
@@ -15,6 +16,10 @@ struct HomeView: View {
                 .font(.system(size: 24, weight: .heavy))
             Spacer()
             
+            NavigationLink(destination: YubiKeyView()) {
+                Text("GO TO YUBIKEY")
+                    .background(Color.gray)
+            }
             Button("RESET APP", action: self.deleteAllItems)
             Button("EXPORT DATA", action: self.exportData)
             Text("Version: \(self.getAppVersion())")
@@ -114,6 +119,7 @@ struct HomeView: View {
     func enableSscds() {
         MusapClient.enableSscd(sscd: SecureEnclaveSscd())
         MusapClient.enableSscd(sscd: KeychainSscd())
+        MusapClient.enableSscd(sscd: YubikeySscd())
     }
     
     func exportData() {

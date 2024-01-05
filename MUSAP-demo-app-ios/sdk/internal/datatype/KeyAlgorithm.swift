@@ -19,6 +19,7 @@ public struct KeyAlgorithm: Codable, Equatable {
     static let CURVE_SECP256R1 = "secp256r1"
     static let CURVE_SECP384R1 = "secp384r1"
     
+    static let RSA_1K = KeyAlgorithm(primitive: PRIMITIVE_RSA, bits: 1024) // YubiKey supports 1024 and 2048 only
     static let RSA_2K = KeyAlgorithm(primitive: PRIMITIVE_RSA, bits: 2048)
     static let RSA_4K = KeyAlgorithm(primitive: PRIMITIVE_RSA, bits: 4096)
     static let ECC_P256_K1 = KeyAlgorithm(primitive: PRIMITIVE_EC, curve: CURVE_SECP256K1, bits: 256)

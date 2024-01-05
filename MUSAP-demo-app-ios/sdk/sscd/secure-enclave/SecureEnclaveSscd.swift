@@ -7,6 +7,7 @@
 
 import Foundation
 import Security
+import CommonCrypto
 
 public class SecureEnclaveSscd: MusapSscdProtocol {
     
@@ -40,7 +41,7 @@ public class SecureEnclaveSscd: MusapSscdProtocol {
         }
         
         guard algo as CFString == kSecAttrKeyTypeECSECPrimeRandom,
-              bits == 256
+              bits == 256 || bits == 384 || bits == 512
         else {
             print("Algorithm was not kSecAttrKeyTypeECSECPrimeRandom, or bits wasnt 256")
             throw MusapException(MusapError.invalidAlgorithm)
@@ -54,7 +55,7 @@ public class SecureEnclaveSscd: MusapSscdProtocol {
         let accessControl = SecAccessControlCreateWithFlags(
             kCFAllocatorDefault,
             kSecAttrAccessibleWhenUnlockedThisDeviceOnly,
-            [.privateKeyUsage, /*.biometryCurrentSet TODO: Make this value come from Settings*/],
+            [.privateKeyUsage, /*.biometryCurrentSet TODO: Make this value come from Settings??*/],
             nil)
         
         let keyAttributes: [String: Any] = [
@@ -94,6 +95,11 @@ public class SecureEnclaveSscd: MusapSscdProtocol {
             throw MusapError.internalError
         }
         
+        guard let keyAlgorithm = req.keyAlgorithm else {
+            print("Key algorithm was not set in KeyGenReq, cant construct MusapKey")
+            throw MusapError.internalError
+        }
+        
         let publicKeyObj = PublicKey(publicKey: Data(bytes: publicKeyBytes, count: publicKeyData.count))
         let generatedKey = MusapKey(keyAlias:     req.keyAlias,
                                     keyId:       UUID().uuidString,
@@ -103,6 +109,7 @@ public class SecureEnclaveSscd: MusapSscdProtocol {
                                     //certificate: MusapCertificate(),
                                     attributes:  req.attributes,
                                     loa:         [MusapLoa.EIDAS_SUBSTANTIAL, MusapLoa.ISO_LOA3],
+                                    algorithm:   keyAlgorithm,
                                     keyUri:      KeyURI(name: req.keyAlias, sscd: sscd.sscdType, loa: "loa3")
         )
         print("MusapKey generated!")
@@ -132,14 +139,15 @@ public class SecureEnclaveSscd: MusapSscdProtocol {
         }
         
         let privateKey = item as! SecKey
-        let dataToSign = req.data
+        //let dataToSign = req.data
+        let dataToSign = self.hashDataWithSHA512(data: req.data)
         
         var error: Unmanaged<CFError>?
         
         /*
          Allowed signature algos:
             - ecdsaSignatureDigestX962
-            - ecdsaSignatureDigestX962SHA256
+            - ecdsaSignatureDigestX962SHA256 OK
             - ecdsaSignatureDigestX962SHA384
             - ecdsaSignatureDigestX962SHA512
             - ecdsaSignatureMessageX962SHA256
@@ -147,10 +155,17 @@ public class SecureEnclaveSscd: MusapSscdProtocol {
                 https://developer.apple.com/documentation/security/1644057-seckeyisalgorithmsupported
          */
         
+        
+        
         //TODO: Optionally support requiring biometric authentication to allow using the keys
         
-        guard let signature = SecKeyCreateSignature(privateKey, .ecdsaSignatureMessageX962SHA256, dataToSign as CFData, &error) else {
-            print("Signing failed while SecKeyCreateSignature")
+        guard let signAlgorithm = req.algorithm.getAlgorithm() else {
+            print("No sign algorithm in SignatureReq")
+            throw MusapError.internalError
+        }
+        
+        guard let signature = SecKeyCreateSignature(privateKey, signAlgorithm, dataToSign as CFData, &error) else {
+            print("Signing failed while SecKeyCreateSignature \(error)")
             throw MusapError.internalError
         }
                 
@@ -242,4 +257,30 @@ public class SecureEnclaveSscd: MusapSscdProtocol {
         return false
     }
     
+    func hashDataWithSHA256(data: Data) -> Data {
+        var hash = [UInt8](repeating: 0, count: Int(CC_SHA256_DIGEST_LENGTH))
+        data.withUnsafeBytes {
+            _ = CC_SHA256($0.baseAddress, CC_LONG(data.count), &hash)
+        }
+        return Data(hash)
+    }
+    
+    func hashDataWithSHA384(data: Data) -> Data {
+        var hash = [UInt8](repeating: 0, count: Int(CC_SHA384_DIGEST_LENGTH))
+        data.withUnsafeBytes {
+            _ = CC_SHA384($0.baseAddress, CC_LONG(data.count), &hash)
+        }
+        return Data(hash)
+    }
+    
+    func hashDataWithSHA512(data: Data) -> Data {
+        var hash = [UInt8](repeating: 0, count: Int(CC_SHA512_DIGEST_LENGTH))
+        data.withUnsafeBytes {
+            _ = CC_SHA512($0.baseAddress, CC_LONG(data.count), &hash)
+        }
+        return Data(hash)
+    }
+
+
+
 }

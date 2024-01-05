@@ -33,6 +33,8 @@ public class MetadataStorage {
             throw MusapException.init(MusapError.missingParam)
         }
         
+        print("storeKey debug MusapKey algo: \(String(describing: key.getAlgorithm()))")
+        
         // Create the key-specific store name using the prefix and the key name
         let storeName = makeStoreName(keyName: keyName)
         

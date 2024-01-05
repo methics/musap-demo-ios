@@ -53,6 +53,9 @@
     "Enter PIN" : {
 
     },
+    "Enter your YubiKey PIV PIN" : {
+
+    },
     "Error" : {
 
     },
@@ -60,6 +63,12 @@
 
     },
     "Generate the key" : {
+
+    },
+    "GO TO YUBIKEY" : {
+
+    },
+    "Hello, World!" : {
 
     },
     "Home" : {
@@ -176,6 +185,9 @@
 
     },
     "SSCD Type" : {
+
+    },
+    "Submit" : {
 
     },
     "Success!" : {
