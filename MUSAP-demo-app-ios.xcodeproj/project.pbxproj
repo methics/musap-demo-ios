@@ -49,6 +49,18 @@
 		C47CE32A2B0E2F5D008A878D /* YubikeySscdSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47CE3292B0E2F5D008A878D /* YubikeySscdSettings.swift */; };
 		C48293BA2B03861000FCEDD9 /* KeychainSscd.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48293B92B03861000FCEDD9 /* KeychainSscd.swift */; };
 		C48293BC2B03863500FCEDD9 /* KeychainSscdSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48293BB2B03863500FCEDD9 /* KeychainSscdSettings.swift */; };
+		C48FE09C2B483C2D00B88D01 /* ExternalSscd.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48FE09B2B483C2D00B88D01 /* ExternalSscd.swift */; };
+		C48FE09E2B483C5800B88D01 /* ExternalSscdSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48FE09D2B483C5800B88D01 /* ExternalSscdSettings.swift */; };
+		C497D6B92B4BFEFB00563461 /* ExternalSignaturePayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = C497D6B82B4BFEFB00563461 /* ExternalSignaturePayload.swift */; };
+		C497D6BB2B4C00F300563461 /* MusapLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = C497D6BA2B4C00F300563461 /* MusapLink.swift */; };
+		C497D6BD2B4C04C400563461 /* EnrollDataPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = C497D6BC2B4C04C400563461 /* EnrollDataPayload.swift */; };
+		C497D6BF2B4C070900563461 /* RelyingParty.swift in Sources */ = {isa = PBXBuildFile; fileRef = C497D6BE2B4C070900563461 /* RelyingParty.swift */; };
+		C497D6C12B4C07A600563461 /* LinkAccountResponsePayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = C497D6C02B4C07A600563461 /* LinkAccountResponsePayload.swift */; };
+		C497D6C32B4C07C800563461 /* ResponsePayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = C497D6C22B4C07C800563461 /* ResponsePayload.swift */; };
+		C497D6C52B4C097800563461 /* LinkAccountPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = C497D6C42B4C097800563461 /* LinkAccountPayload.swift */; };
+		C497D6C72B4C0A9100563461 /* PollResponsePayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = C497D6C62B4C0A9100563461 /* PollResponsePayload.swift */; };
+		C497D6C92B4C0B0E00563461 /* SignaturePayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = C497D6C82B4C0B0E00563461 /* SignaturePayload.swift */; };
+		C497D6CB2B4C126D00563461 /* ExternalSignatureResponsePayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = C497D6CA2B4C126D00563461 /* ExternalSignatureResponsePayload.swift */; };
 		C4C52EC22B0B4C0F0052951F /* MusapImportData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C52EC12B0B4C0F0052951F /* MusapImportData.swift */; };
 		C4CD4FB32B10BCCE00E588B3 /* MusapMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CD4FB22B10BCCE00E588B3 /* MusapMessage.swift */; };
 		C4CD4FB52B10C36000E588B3 /* SignatureAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CD4FB42B10C36000E588B3 /* SignatureAttribute.swift */; };
@@ -128,6 +140,18 @@
 		C47CE3292B0E2F5D008A878D /* YubikeySscdSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YubikeySscdSettings.swift; sourceTree = "<group>"; };
 		C48293B92B03861000FCEDD9 /* KeychainSscd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainSscd.swift; sourceTree = "<group>"; };
 		C48293BB2B03863500FCEDD9 /* KeychainSscdSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainSscdSettings.swift; sourceTree = "<group>"; };
+		C48FE09B2B483C2D00B88D01 /* ExternalSscd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalSscd.swift; sourceTree = "<group>"; };
+		C48FE09D2B483C5800B88D01 /* ExternalSscdSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalSscdSettings.swift; sourceTree = "<group>"; };
+		C497D6B82B4BFEFB00563461 /* ExternalSignaturePayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalSignaturePayload.swift; sourceTree = "<group>"; };
+		C497D6BA2B4C00F300563461 /* MusapLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusapLink.swift; sourceTree = "<group>"; };
+		C497D6BC2B4C04C400563461 /* EnrollDataPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnrollDataPayload.swift; sourceTree = "<group>"; };
+		C497D6BE2B4C070900563461 /* RelyingParty.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RelyingParty.swift; sourceTree = "<group>"; };
+		C497D6C02B4C07A600563461 /* LinkAccountResponsePayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkAccountResponsePayload.swift; sourceTree = "<group>"; };
+		C497D6C22B4C07C800563461 /* ResponsePayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ResponsePayload.swift; sourceTree = "<group>"; };
+		C497D6C42B4C097800563461 /* LinkAccountPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkAccountPayload.swift; sourceTree = "<group>"; };
+		C497D6C62B4C0A9100563461 /* PollResponsePayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollResponsePayload.swift; sourceTree = "<group>"; };
+		C497D6C82B4C0B0E00563461 /* SignaturePayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignaturePayload.swift; sourceTree = "<group>"; };
+		C497D6CA2B4C126D00563461 /* ExternalSignatureResponsePayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalSignatureResponsePayload.swift; sourceTree = "<group>"; };
 		C4C52EC12B0B4C0F0052951F /* MusapImportData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusapImportData.swift; sourceTree = "<group>"; };
 		C4CD4FB22B10BCCE00E588B3 /* MusapMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusapMessage.swift; sourceTree = "<group>"; };
 		C4CD4FB42B10C36000E588B3 /* SignatureAttribute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignatureAttribute.swift; sourceTree = "<group>"; };
@@ -180,6 +204,7 @@
 		C40AEE892AF4FC0B006445EB /* datatype */ = {
 			isa = PBXGroup;
 			children = (
+				C497D6B72B4BFEE000563461 /* coupling */,
 				C40AEE8A2AF4FC18006445EB /* KeyAttribute.swift */,
 				C40AEE8C2AF4FD30006445EB /* StepUpPolicy.swift */,
 				C4CD4FB62B10C42900E588B3 /* CmsSignature.swift */,
@@ -196,6 +221,8 @@
 				C44B3AFE2AFBA30A002240EE /* KeyAlgorithm.swift */,
 				C4409AC42AF924AD0068B793 /* KeyURI.swift */,
 				C4578BE52AFA1D1B00C0EABB /* MusapLoa.swift */,
+				C497D6BA2B4C00F300563461 /* MusapLink.swift */,
+				C497D6BE2B4C070900563461 /* RelyingParty.swift */,
 			);
 			path = datatype;
 			sourceTree = "<group>";
@@ -248,6 +275,7 @@
 		C42FFEDD2AF91141004CEB5E /* sscd */ = {
 			isa = PBXGroup;
 			children = (
+				C48FE09A2B483C1A00B88D01 /* external */,
 				C47CE3262B0E2F41008A878D /* yubikey */,
 				C48293B82B0385FE00FCEDD9 /* keychain */,
 				C42FFEDE2AF9116B004CEB5E /* secure-enclave */,
@@ -337,6 +365,30 @@
 				C48293BB2B03863500FCEDD9 /* KeychainSscdSettings.swift */,
 			);
 			path = keychain;
+			sourceTree = "<group>";
+		};
+		C48FE09A2B483C1A00B88D01 /* external */ = {
+			isa = PBXGroup;
+			children = (
+				C48FE09B2B483C2D00B88D01 /* ExternalSscd.swift */,
+				C48FE09D2B483C5800B88D01 /* ExternalSscdSettings.swift */,
+			);
+			path = external;
+			sourceTree = "<group>";
+		};
+		C497D6B72B4BFEE000563461 /* coupling */ = {
+			isa = PBXGroup;
+			children = (
+				C497D6B82B4BFEFB00563461 /* ExternalSignaturePayload.swift */,
+				C497D6C42B4C097800563461 /* LinkAccountPayload.swift */,
+				C497D6CA2B4C126D00563461 /* ExternalSignatureResponsePayload.swift */,
+				C497D6BC2B4C04C400563461 /* EnrollDataPayload.swift */,
+				C497D6C02B4C07A600563461 /* LinkAccountResponsePayload.swift */,
+				C497D6C22B4C07C800563461 /* ResponsePayload.swift */,
+				C497D6C62B4C0A9100563461 /* PollResponsePayload.swift */,
+				C497D6C82B4C0B0E00563461 /* SignaturePayload.swift */,
+			);
+			path = coupling;
 			sourceTree = "<group>";
 		};
 		C4D693832B148829005E0142 /* ui */ = {
@@ -594,17 +646,25 @@
 				C4DBFFAB2AF2504100253DE4 /* HomeView.swift in Sources */,
 				C4CD4FB52B10C36000E588B3 /* SignatureAttribute.swift in Sources */,
 				C44B3B032AFBB963002240EE /* KeyDiscoveryAPI.swift in Sources */,
+				C497D6B92B4BFEFB00563461 /* ExternalSignaturePayload.swift in Sources */,
 				C4578BEA2AFA223800C0EABB /* MusapSignature.swift in Sources */,
 				C48293BC2B03863500FCEDD9 /* KeychainSscdSettings.swift in Sources */,
+				C497D6BB2B4C00F300563461 /* MusapLink.swift in Sources */,
+				C497D6CB2B4C126D00563461 /* ExternalSignatureResponsePayload.swift in Sources */,
+				C497D6BF2B4C070900563461 /* RelyingParty.swift in Sources */,
 				C47CE3282B0E2F50008A878D /* YubikeySscd.swift in Sources */,
+				C497D6C32B4C07C800563461 /* ResponsePayload.swift in Sources */,
+				C497D6C12B4C07A600563461 /* LinkAccountResponsePayload.swift in Sources */,
 				C4409ABF2AF9119E0068B793 /* SecureEnclaveSettings.swift in Sources */,
 				C41B421C2B1878D700C64AAD /* YubiKeyConnection.swift in Sources */,
 				C44CB13A2AF4E7A100C15143 /* MusapConstants.swift in Sources */,
+				C497D6BD2B4C04C400563461 /* EnrollDataPayload.swift in Sources */,
 				C44494EA2AF3B89C00D8096C /* ConfirmSignView.swift in Sources */,
 				C44B3B072AFBBADE002240EE /* KeySearchReq.swift in Sources */,
 				C44B3B052AFBBA2C002240EE /* SscdSearchReq.swift in Sources */,
 				C40AEEA02AF51000006445EB /* MusapSscd.swift in Sources */,
 				C4409AC52AF924AD0068B793 /* KeyURI.swift in Sources */,
+				C497D6C72B4C0A9100563461 /* PollResponsePayload.swift in Sources */,
 				C44CB1362AF4DF6300C15143 /* MusapClient.swift in Sources */,
 				C44CB1422AF4F00D00C15143 /* SscdSettings.swift in Sources */,
 				C4DBFFDA2AF26CD800253DE4 /* KeystoreListView.swift in Sources */,
@@ -619,9 +679,12 @@
 				C4C52EC22B0B4C0F0052951F /* MusapImportData.swift in Sources */,
 				C40AEE8B2AF4FC18006445EB /* KeyAttribute.swift in Sources */,
 				C4578BE82AFA222400C0EABB /* KeyAttestation.swift in Sources */,
+				C497D6C92B4C0B0E00563461 /* SignaturePayload.swift in Sources */,
+				C48FE09E2B483C5800B88D01 /* ExternalSscdSettings.swift in Sources */,
 				C44494E62AF3985200D8096C /* EnterPinView.swift in Sources */,
 				C40AEE8F2AF50041006445EB /* MusapKey.swift in Sources */,
 				C42FFEDA2AF8F388004CEB5E /* GenerateKeyTask.swift in Sources */,
+				C48FE09C2B483C2D00B88D01 /* ExternalSscd.swift in Sources */,
 				C48293BA2B03861000FCEDD9 /* KeychainSscd.swift in Sources */,
 				C40AEE962AF50D22006445EB /* KeyGenReq.swift in Sources */,
 				C4DBFFA92AF2504100253DE4 /* MUSAP_demo_app_ios.swift in Sources */,
@@ -635,6 +698,7 @@
 				C40AEE9A2AF50EB7006445EB /* SignatureReq.swift in Sources */,
 				C44CB1382AF4E01900C15143 /* MusapError.swift in Sources */,
 				C44CB1442AF4F31F00C15143 /* MusapSscdProtocol.swift in Sources */,
+				C497D6C52B4C097800563461 /* LinkAccountPayload.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

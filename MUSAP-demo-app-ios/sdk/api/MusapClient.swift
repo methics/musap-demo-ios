@@ -260,10 +260,23 @@ public class MusapClient {
         
     }
     
+    public static func isLinkEnabled() -> Bool {
+        return true //TODO: ?
+    }
+    
     public static func updateKey(req: UpdateKeyReq) -> Bool {
         let storage = MetadataStorage()
         return storage.updateKeyMetaData(req: req)
     }
+    
+    public static func getMusapId() -> String? {
+        //TODO: Finish
+    }
+    
+    public static func getMusapLink() {
+        //TODO: Finish
+    }
+    
     
 }
 
