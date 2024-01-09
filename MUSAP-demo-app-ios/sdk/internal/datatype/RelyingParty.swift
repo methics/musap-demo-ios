@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class RelyingParty {
+public class RelyingParty: Codable {
     
     private var name: String
     private var linkId: String
@@ -29,5 +29,17 @@ public class RelyingParty {
     public func getLinkId() -> String {
         return self.linkId
     }
+    
+    public func getBase64Encoded() -> String? {
+        let encoder = JSONEncoder()
+        do {
+            let jsonData = try encoder.encode(self)
+            return jsonData.base64EncodedString()
+        } catch {
+            print("Error encoding object: \(error)")
+            return nil
+        }
+    }
+
     
 }

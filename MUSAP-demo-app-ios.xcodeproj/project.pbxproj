@@ -61,6 +61,7 @@
 		C497D6C72B4C0A9100563461 /* PollResponsePayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = C497D6C62B4C0A9100563461 /* PollResponsePayload.swift */; };
 		C497D6C92B4C0B0E00563461 /* SignaturePayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = C497D6C82B4C0B0E00563461 /* SignaturePayload.swift */; };
 		C497D6CB2B4C126D00563461 /* ExternalSignatureResponsePayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = C497D6CA2B4C126D00563461 /* ExternalSignatureResponsePayload.swift */; };
+		C4A5303B2B4D3D5A002F97B0 /* MusapStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A5303A2B4D3D5A002F97B0 /* MusapStorage.swift */; };
 		C4C52EC22B0B4C0F0052951F /* MusapImportData.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4C52EC12B0B4C0F0052951F /* MusapImportData.swift */; };
 		C4CD4FB32B10BCCE00E588B3 /* MusapMessage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CD4FB22B10BCCE00E588B3 /* MusapMessage.swift */; };
 		C4CD4FB52B10C36000E588B3 /* SignatureAttribute.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4CD4FB42B10C36000E588B3 /* SignatureAttribute.swift */; };
@@ -152,6 +153,7 @@
 		C497D6C62B4C0A9100563461 /* PollResponsePayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollResponsePayload.swift; sourceTree = "<group>"; };
 		C497D6C82B4C0B0E00563461 /* SignaturePayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignaturePayload.swift; sourceTree = "<group>"; };
 		C497D6CA2B4C126D00563461 /* ExternalSignatureResponsePayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalSignatureResponsePayload.swift; sourceTree = "<group>"; };
+		C4A5303A2B4D3D5A002F97B0 /* MusapStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusapStorage.swift; sourceTree = "<group>"; };
 		C4C52EC12B0B4C0F0052951F /* MusapImportData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusapImportData.swift; sourceTree = "<group>"; };
 		C4CD4FB22B10BCCE00E588B3 /* MusapMessage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusapMessage.swift; sourceTree = "<group>"; };
 		C4CD4FB42B10C36000E588B3 /* SignatureAttribute.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignatureAttribute.swift; sourceTree = "<group>"; };
@@ -326,6 +328,7 @@
 		C44CB1452AF4F37F00C15143 /* internal */ = {
 			isa = PBXGroup;
 			children = (
+				C4A530392B4D3D3E002F97B0 /* util */,
 				C42FFED82AF8F2D5004CEB5E /* async */,
 				C40AEE982AF50EAA006445EB /* sign */,
 				C40AEE942AF50D13006445EB /* keygeneration */,
@@ -389,6 +392,14 @@
 				C497D6C82B4C0B0E00563461 /* SignaturePayload.swift */,
 			);
 			path = coupling;
+			sourceTree = "<group>";
+		};
+		C4A530392B4D3D3E002F97B0 /* util */ = {
+			isa = PBXGroup;
+			children = (
+				C4A5303A2B4D3D5A002F97B0 /* MusapStorage.swift */,
+			);
+			path = util;
 			sourceTree = "<group>";
 		};
 		C4D693832B148829005E0142 /* ui */ = {
@@ -667,6 +678,7 @@
 				C497D6C72B4C0A9100563461 /* PollResponsePayload.swift in Sources */,
 				C44CB1362AF4DF6300C15143 /* MusapClient.swift in Sources */,
 				C44CB1422AF4F00D00C15143 /* SscdSettings.swift in Sources */,
+				C4A5303B2B4D3D5A002F97B0 /* MusapStorage.swift in Sources */,
 				C4DBFFDA2AF26CD800253DE4 /* KeystoreListView.swift in Sources */,
 				C44B3AFF2AFBA30A002240EE /* KeyAlgorithm.swift in Sources */,
 				C40AEE932AF50BED006445EB /* PublicKey.swift in Sources */,

@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class MusapLink {
+public class MusapLink: Encodable {
     
     private static let COUPLE_MSG_TYPE       = "linkaccount"
     private static let ENROLL_MSG_TYPE       = "enrolldata"
@@ -145,7 +145,5 @@ public class MusapLink {
     public func getMusapId() -> String {
         return self.musapId
     }
-    
-    
     
 }
