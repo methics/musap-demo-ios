@@ -28,9 +28,11 @@ struct HomeView: View {
         .padding(.top, 50)
         .padding()
         .onAppear {
+            Task {
+                await self.enableSscds()
+            }
             self.checkKeys()
             self.printAllKeysInfo()
-            self.enableSscds()
         }
     }
     
@@ -41,7 +43,6 @@ struct HomeView: View {
         }
         
         return "1.0.0"
-        
     }
     
     func checkKeys() {
@@ -116,10 +117,40 @@ struct HomeView: View {
         }
     }
     
-    func enableSscds() {
+    func enableSscds() async {
+        print("Enabling SecureEnclaveSscd")
         MusapClient.enableSscd(sscd: SecureEnclaveSscd())
+        print("Enabling KeychainSscd")
         MusapClient.enableSscd(sscd: KeychainSscd())
+        print("Enabling YubikeySscd")
         MusapClient.enableSscd(sscd: YubikeySscd())
+        
+        let externalSettings = ExternalSscdSettings(clientId: "") //TODO: where to get clientId?
+                
+        print("Got external sscd settings")
+        
+        
+        
+        print("Getting Musap ID ")
+        let musapId = MusapClient.getMusapId()
+        print("got musap ID: \(String(describing: musapId))")
+        
+        if musapId == nil {
+            print("Musap ID was nil")
+            
+            if let link = await MusapClient.enableLink(url: "https://demo.methics.fi/musapdemo/", fcmToken: "123") {
+                //MusapClient.enableSscd(sscd: ExternalSscd(settings: externalSettings, clientId: "", musapLink: link))
+                print("ENabled Musap Link")
+            } else {
+                print("Enabling link failed")
+            }
+        } else {
+            // link enrolled already
+            print("Musap ID was not nil")
+        }
+         
+
+        
     }
     
     func exportData() {

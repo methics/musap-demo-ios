@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class MusapLink: Encodable {
+public class MusapLink: Encodable, Decodable {
     
     private static let COUPLE_MSG_TYPE       = "linkaccount"
     private static let ENROLL_MSG_TYPE       = "enrolldata"
@@ -18,11 +18,11 @@ public class MusapLink: Encodable {
     private static let POLL_AMOUNT = 20
     
     private let url:     String
-    private var musapId: String
+    private var musapId: String?
     private var aesKey:  String?
     private var macKey:  String?
     
-    init(url: String, musapId: String) {
+    init(url: String, musapId: String?) {
         self.url = url
         self.musapId = musapId
     }
@@ -47,10 +47,16 @@ public class MusapLink: Encodable {
         //TODO:
     }
     
+    /**
+    Enroll this MUSAP instance with MUSAP Link
+     - returns: MusapLink
+     - throws:  MusapError
+     */
     public func enroll(fcmToken: String) async throws -> MusapLink {
         let payload = EnrollDataPayload(fcmToken: fcmToken)
         
         guard let payload = payload.getBase64Encoded() else {
+            print("MusapLink.enroll(): no payload")
             throw MusapError.internalError
         }
         
@@ -59,6 +65,7 @@ public class MusapLink: Encodable {
         msg.type    = MusapLink.ENROLL_MSG_TYPE
         
         guard let url = URL(string: self.url) else {
+            print("Could not create URL object")
             throw MusapError.internalError
         }
         
@@ -71,22 +78,39 @@ public class MusapLink: Encodable {
             let jsonData = try encoder.encode(msg)
             request.httpBody = jsonData
         } catch {
+            print("Failed to encode to JSON")
             throw MusapError.internalError
         }
         
         let (data, response) = try await URLSession.shared.data(for: request)
         
         guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+            print("Bad http response or statuscode: \(response)")
             throw MusapError.internalError
         }
         
         do {
+            // Get the MusapMessage from json
             let decodedMessage = try JSONDecoder().decode(MusapMessage.self, from: data)
             
-            guard let musapId = decodedMessage.musapId else {
+            // Make sure payload is there, and turn it into data from base64encoded str
+            guard let payloadBase64 = decodedMessage.payload,
+                  let payloadData = Data(base64Encoded: payloadBase64)
+            else {
+                print("Failed to turn payload to data")
                 throw MusapError.internalError
             }
             
+            // Turn the data to EnrollDataResponsePayload
+            let enrollDataResponsePayload = try JSONDecoder().decode(EnrollDataResponsePayload.self, from: payloadData)
+            
+            // Make sure the musap ID is there since it is required
+            guard let musapId = enrollDataResponsePayload.musapid else {
+                print("enroll: Could not get Musap ID ")
+                throw MusapError.internalError
+            }
+            
+            // Return MusapLink
             self.musapId = musapId
             return self
         } catch {
@@ -103,12 +127,13 @@ public class MusapLink: Encodable {
         let payload = LinkAccountPayload(couplingCode: couplingCode, musapId: uuid)
         
         let msg = MusapMessage()
+        msg.type = MusapLink.COUPLE_MSG_TYPE
+        
         if let payload = payload.getBase64Encoded() {
             msg.payload = payload
         } else {
             throw MusapError.internalError
         }
-        msg.type = MusapLink.COUPLE_MSG_TYPE
         
         guard let url = URL(string: self.url) else {
             throw MusapError.internalError
@@ -157,7 +182,7 @@ public class MusapLink: Encodable {
     public func poll() async throws -> PollResponsePayload? {
         let msg = MusapMessage()
         msg.type = MusapLink.POLL_MSG_TYPE
-        msg.musapId = self.musapId
+        msg.musapid = self.musapId
         
         guard let url = URL(string: self.url) else {
             return nil
@@ -206,7 +231,7 @@ public class MusapLink: Encodable {
         do {
             let signaturePayload = try decoder.decode(SignaturePayload.self, from: payloadData)
             
-            guard let transId = respMsg.transId else {
+            guard let transId = respMsg.transid else {
                 print("error in poll: no transId")
                 throw MusapError.internalError
             }
@@ -240,7 +265,7 @@ public class MusapLink: Encodable {
         let msg = MusapMessage()
         msg.payload = payloadBase64
         msg.type = MusapLink.SIGN_MSG_TYPE
-        msg.musapId = self.getMusapId()
+        msg.musapid = self.getMusapId()
 
         self.sendRequest(msg) { respMsg, error in
             if let error = error {
@@ -328,7 +353,7 @@ public class MusapLink: Encodable {
                 let msg = MusapMessage()
                 msg.payload = payloadBase64
                 msg.type = MusapLink.SIGN_MSG_TYPE
-                msg.musapId = self.getMusapId()
+                msg.musapid = self.getMusapId()
 
                 self.sendRequest(msg) { respMsg, error in
                     if let error = error {
@@ -367,7 +392,7 @@ public class MusapLink: Encodable {
         }
     }
     
-    public func getMusapId() -> String {
+    public func getMusapId() -> String? {
         return self.musapId
     }
     

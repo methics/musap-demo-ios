@@ -92,7 +92,7 @@ public class MusapStorage {
      Store the MUSAP Link
      */
     public func storeLink(link: MusapLink) -> Void {
-        
+        print("Storing MusapLink")
         let encoder = JSONEncoder()
         do {
             let jsonStringBase64 = try encoder.encode(link).base64EncodedString()
@@ -105,11 +105,21 @@ public class MusapStorage {
     }
     
     public func getMusaplink() -> MusapLink? {
-        guard let link = self.getMusaplink() else {
+        guard let prefValue = self.getPrefValue(prefName: MusapStorage.MUSAP_ID_PREF),
+            let jsonData = Data(base64Encoded: prefValue)
+        else {
             return nil
         }
         
-        return link
+        let decoder = JSONDecoder()
+        
+        do {
+            let musapLink = try decoder.decode(MusapLink.self, from: jsonData)
+            return musapLink
+        } catch {
+            print("error getting musap link: \(error)")
+            return nil
+        }
     }
     
     public func getMusapId() -> String? {

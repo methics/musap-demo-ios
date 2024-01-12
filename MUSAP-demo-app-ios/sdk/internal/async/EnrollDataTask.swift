@@ -17,7 +17,7 @@ public class EnrollDataTask {
         self.fcmToken = fcmToken
     }
     
-    private func enrollData() async throws -> MusapLink {
+    func enrollData() async throws -> MusapLink {
         do {
             let link: MusapLink = try await self.link.enroll(fcmToken: self.fcmToken)
             MusapStorage().storeLink(link: link)

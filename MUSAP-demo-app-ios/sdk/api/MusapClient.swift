@@ -246,18 +246,43 @@ public class MusapClient {
         //TODO: code this
     }
     
-    //TODO: return new MusapLink
-    public static func enableLink(url: String, fcmToken: String) {
-        
+    public static func enableLink(url: String, fcmToken: String) async -> MusapLink? {
+        let link = MusapLink(url: url, musapId: nil)
+        let enrollTask = EnrollDataTask(link: link, fcmToken: fcmToken)
+        do {
+            let link = try await enrollTask.enrollData()
+            return link
+        } catch {
+            print("error enabling link: \(error)")
+            return nil
+        }
     }
     
     public static func disableLink() -> Void {
         MusapStorage().removeLink()
     }
     
-    //TODO: returns signatureReq
-    public static func pollLink() {
-        //TODO: PollTask
+    public static func pollLink() async throws {
+        guard let link = self.getMusapLink() else {
+            return
+        }
+        
+        let pollTask = PollTask(link: link)
+        
+        do {
+            let pollResponsePayload = try await pollTask.pollAsync() { result in
+                switch result {
+                case .success(let payload):
+                    print("got payload \(payload.status)")
+                case .failure(let error):
+                    print("error in pollLink(): \(error)")
+                }
+                
+            }
+        } catch {
+            print("error in poll: \(error)")
+        }
+        
     }
     
     public static func isLinkEnabled() -> Bool {

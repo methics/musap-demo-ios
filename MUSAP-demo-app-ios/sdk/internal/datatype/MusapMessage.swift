@@ -11,29 +11,29 @@ import Foundation
 public class MusapMessage: Codable {
     
     public var payload:   String?
-    public var musapId:   String?
+    public var musapid:   String?
     public var type:      String?
     public var uuid:      String?
-    public var transId:   String?
-    public var requestId: String?
+    public var transid:   String?
+    public var requestid: String?
     public var mac:       String?
     public var iv:        String?
     
     init(payload:   String,
-         musapId:   String,
+         musapid:   String,
          type:      String,
          uuid:      String,
-         transId:   String,
-         requestId: String,
+         transid:   String,
+         requestid: String,
          mac:       String,
          iv:        String
     ) {
         self.payload = payload
-        self.musapId = musapId
+        self.musapid = musapid
         self.type = type
         self.uuid = uuid
-        self.transId = transId
-        self.requestId = requestId
+        self.transid = transid
+        self.requestid = requestid
         self.mac = mac
         self.iv = iv
     }
