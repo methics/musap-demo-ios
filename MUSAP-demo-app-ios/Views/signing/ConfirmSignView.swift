@@ -79,7 +79,7 @@ struct ConfirmSignView: View {
         }
         let algo = SignatureAlgorithm(algorithm: .ecdsaSignatureMessageX962SHA256)
         let signatureFormat = SignatureFormat("RAW")
-        let sigReq = SignatureReq(key: musapKey, data: data, algorithm: algo, format: signatureFormat)
+        let sigReq = SignatureReq(key: musapKey, data: data, algorithm: algo, format: signatureFormat, displayText: "Display text", attributes: [SignatureAttribute(name: "yes", value: "yes")])
         
         Task {
             await MusapClient.sign(req: sigReq) { result in

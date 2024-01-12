@@ -12,14 +12,24 @@ public class PollResponsePayload: ResponsePayload {
     private let signaturePayload: SignaturePayload
     private let transId: String
     
-    init(signaturePayload: SignaturePayload, transId: String) {
+    init(signaturePayload: SignaturePayload, transId: String, status: String?, errorCode: String?) {
         self.signaturePayload = signaturePayload
         self.transId = transId
+        super.init(status: status ?? "", errorCode: errorCode)
     }
     
-    public func toSignatureReq(key: MusapKey) -> SignatureReq {
+    required init(from decoder: Decoder) throws {
+        fatalError("init(from:) has not been implemented")
+    }
+    
+    public func toSignatureReq(key: MusapKey) -> SignatureReq? {
         let req = self.signaturePayload.toSignatureReq(key: key)
         
+        guard req != nil else {
+            return nil
+        }
+        
+        return req
     }
     
 }

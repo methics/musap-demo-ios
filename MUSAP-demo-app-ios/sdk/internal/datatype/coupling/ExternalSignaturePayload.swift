@@ -10,15 +10,15 @@ import Foundation
 
 public class ExternalSignaturePayload: Codable {
     
-    public var clientId: String
-    public var sscdName: String
-    public var data:     String
-    public var display:  String
-    public var format:   String
-    public var publicKey: String
-    public var timeout: String
-    public var transId: String
-    public var attributes: [String:String]
+    public var clientId: String?
+    public var sscdName: String?
+    public var data:     String?
+    public var display:  String?
+    public var format:   String?
+    public var publicKey: String?
+    public var timeout: String?
+    public var transId: String?
+    public var attributes: [String:String]?
     
     
     init(clientId: String) {

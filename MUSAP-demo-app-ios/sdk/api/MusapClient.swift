@@ -247,21 +247,21 @@ public class MusapClient {
     }
     
     //TODO: return new MusapLink
-    public static func enableLink() {
+    public static func enableLink(url: String, fcmToken: String) {
         
     }
     
-    public static func disableLink() {
-        
+    public static func disableLink() -> Void {
+        MusapStorage().removeLink()
     }
     
     //TODO: returns signatureReq
     public static func pollLink() {
-        
+        //TODO: PollTask
     }
     
     public static func isLinkEnabled() -> Bool {
-        return true //TODO: ?
+        return self.getMusapId() != nil
     }
     
     public static func updateKey(req: UpdateKeyReq) -> Bool {
@@ -270,11 +270,11 @@ public class MusapClient {
     }
     
     public static func getMusapId() -> String? {
-        //TODO: Finish
+        return MusapStorage().getMusapId()
     }
     
-    public static func getMusapLink() {
-        //TODO: Finish
+    public static func getMusapLink() -> MusapLink? {
+        return MusapStorage().getMusaplink()
     }
     
     

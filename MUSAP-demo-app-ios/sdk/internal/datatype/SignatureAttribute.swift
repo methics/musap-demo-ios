@@ -7,7 +7,7 @@
 
 import Foundation
 
-public class SignatureAttribute {
+public class SignatureAttribute: Decodable {
     
     public let name: String
     public let value: String

@@ -43,6 +43,8 @@
 		C4578BEA2AFA223800C0EABB /* MusapSignature.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4578BE92AFA223800C0EABB /* MusapSignature.swift */; };
 		C457E3BF2B04F9A200B49570 /* BindKeyTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = C457E3BE2B04F9A200B49570 /* BindKeyTask.swift */; };
 		C45F2E4A2B147A200091203C /* YubiKit in Frameworks */ = {isa = PBXBuildFile; productRef = C45F2E492B147A200091203C /* YubiKit */; };
+		C46FBF0F2B4FF13D002442DD /* EnrollDataTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46FBF0E2B4FF13D002442DD /* EnrollDataTask.swift */; };
+		C46FBF112B500A58002442DD /* MsisdnInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C46FBF102B500A58002442DD /* MsisdnInputView.swift */; };
 		C47257882B28437400282693 /* PINInputView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47257872B28437400282693 /* PINInputView.swift */; };
 		C479F0772B0F35310075C60A /* UpdateKeyReq.swift in Sources */ = {isa = PBXBuildFile; fileRef = C479F0762B0F35310075C60A /* UpdateKeyReq.swift */; };
 		C47CE3282B0E2F50008A878D /* YubikeySscd.swift in Sources */ = {isa = PBXBuildFile; fileRef = C47CE3272B0E2F50008A878D /* YubikeySscd.swift */; };
@@ -135,6 +137,8 @@
 		C4578BE72AFA222400C0EABB /* KeyAttestation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeyAttestation.swift; sourceTree = "<group>"; };
 		C4578BE92AFA223800C0EABB /* MusapSignature.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusapSignature.swift; sourceTree = "<group>"; };
 		C457E3BE2B04F9A200B49570 /* BindKeyTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindKeyTask.swift; sourceTree = "<group>"; };
+		C46FBF0E2B4FF13D002442DD /* EnrollDataTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnrollDataTask.swift; sourceTree = "<group>"; };
+		C46FBF102B500A58002442DD /* MsisdnInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MsisdnInputView.swift; sourceTree = "<group>"; };
 		C47257872B28437400282693 /* PINInputView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PINInputView.swift; sourceTree = "<group>"; };
 		C479F0762B0F35310075C60A /* UpdateKeyReq.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = UpdateKeyReq.swift; sourceTree = "<group>"; };
 		C47CE3272B0E2F50008A878D /* YubikeySscd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YubikeySscd.swift; sourceTree = "<group>"; };
@@ -270,6 +274,7 @@
 				C42FFED92AF8F388004CEB5E /* GenerateKeyTask.swift */,
 				C44B3B002AFBB7DA002240EE /* SignTask.swift */,
 				C457E3BE2B04F9A200B49570 /* BindKeyTask.swift */,
+				C46FBF0E2B4FF13D002442DD /* EnrollDataTask.swift */,
 			);
 			path = async;
 			sourceTree = "<group>";
@@ -406,6 +411,7 @@
 			isa = PBXGroup;
 			children = (
 				C47257872B28437400282693 /* PINInputView.swift */,
+				C46FBF102B500A58002442DD /* MsisdnInputView.swift */,
 			);
 			path = ui;
 			sourceTree = "<group>";
@@ -667,6 +673,7 @@
 				C497D6C32B4C07C800563461 /* ResponsePayload.swift in Sources */,
 				C497D6C12B4C07A600563461 /* LinkAccountResponsePayload.swift in Sources */,
 				C4409ABF2AF9119E0068B793 /* SecureEnclaveSettings.swift in Sources */,
+				C46FBF112B500A58002442DD /* MsisdnInputView.swift in Sources */,
 				C41B421C2B1878D700C64AAD /* YubiKeyConnection.swift in Sources */,
 				C44CB13A2AF4E7A100C15143 /* MusapConstants.swift in Sources */,
 				C497D6BD2B4C04C400563461 /* EnrollDataPayload.swift in Sources */,
@@ -702,6 +709,7 @@
 				C4DBFFA92AF2504100253DE4 /* MUSAP_demo_app_ios.swift in Sources */,
 				C40AEE9C2AF50F26006445EB /* SignatureAlgorithm.swift in Sources */,
 				C457E3BF2B04F9A200B49570 /* BindKeyTask.swift in Sources */,
+				C46FBF0F2B4FF13D002442DD /* EnrollDataTask.swift in Sources */,
 				C4578BE42AFA19F100C0EABB /* MusapCertificate.swift in Sources */,
 				C40AEE9E2AF50F4C006445EB /* SignatureFormat.swift in Sources */,
 				C4CD4FB32B10BCCE00E588B3 /* MusapMessage.swift in Sources */,
