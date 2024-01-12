@@ -27,6 +27,28 @@ public class KeyURI: Codable, Equatable, Hashable {
         self.keyUriMap = self.parseUri(keyUri)
     }
     
+    init(key: MusapKey) {
+        if key.getKeyAlias()    != nil { keyUriMap["alias"]      = key.getKeyAlias()                            }
+        if key.getAlgorithm()   != nil { keyUriMap["algorithm"]  = (key.getAlgorithm()?.isEc())! ? "EC" : "RSA" }
+        if key.getCreatedDate() != nil { keyUriMap["created_dt"] = key.getCreatedDate()?.ISO8601Format()        }
+        
+        if key.getAttributeValue(attrName: "msisdn") != nil { keyUriMap["msisdn"] = key.getAttributeValue(attrName: "msisdn") }
+        if key.getAttributeValue(attrName: "serial") != nil { keyUriMap["serial"] = key.getAttributeValue(attrName: "serial")}
+        
+        if key.getSscdInfo() != nil {
+            let sscdName = key.getSscdInfo()?.sscdName
+            let sscdCountry = key.getSscdInfo()?.country
+            let sscdProvider = key.getSscdInfo()?.provider
+            
+            if sscdName     != nil  { keyUriMap["sscd"]     = sscdName     }
+            if sscdCountry  != nil  { keyUriMap["country"]  = sscdCountry  }
+            if sscdProvider != nil  { keyUriMap["provider"] = sscdProvider }
+            
+        }
+        
+    }
+    
+    
     private func parseUri(_ keyUri: String) -> [String: String] {
         var keyUriMap = [String: String]()
         print("Parsing KeyURI: \(keyUri)")

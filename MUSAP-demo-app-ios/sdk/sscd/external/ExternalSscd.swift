@@ -52,15 +52,13 @@ public class ExternalSscd: MusapSscdProtocol {
         }
         
         
-        request.data = base64Data
+        request.data     = base64Data
         request.clientId = self.clientId
         request.display  = req.getDisplayText()
         request.format   = "CMS"
-        
         request.attributes?[ExternalSscd.ATTRIBUTE_MSISDN] = theMsisdn
-
         
-        do {            
+        do {
             var theKey: MusapKey?
             
             self.musapLink.sign(payload: request) { result in

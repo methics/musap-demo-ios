@@ -216,6 +216,8 @@ public class MusapKey: Codable, Identifiable {
         
     }
     
+    
+    
     //TODO: finish
     public func getDefaultKeyAlgorithm() -> SecKeyAlgorithm {
         guard let algorithm = self.algorithm else {
@@ -224,6 +226,18 @@ public class MusapKey: Codable, Identifiable {
         }
         return SignatureAlgorithm.SHA256withECDSA
 
+    }
+    
+    public func getSscdInfo() -> MusapSscd? {
+        if (self.sscdId == nil) { return nil }
+        
+        for sscd in MusapClient.listActiveSscds() {
+            if (self.sscdId == sscd.sscdId) {
+                return sscd
+            }
+        }
+        
+        return nil
     }
     
 }
