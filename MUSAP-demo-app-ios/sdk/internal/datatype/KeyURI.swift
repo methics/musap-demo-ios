@@ -43,9 +43,7 @@ public class KeyURI: Codable, Equatable, Hashable {
             if sscdName     != nil  { keyUriMap["sscd"]     = sscdName     }
             if sscdCountry  != nil  { keyUriMap["country"]  = sscdCountry  }
             if sscdProvider != nil  { keyUriMap["provider"] = sscdProvider }
-            
         }
-        
     }
     
     

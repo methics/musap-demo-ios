@@ -54,7 +54,7 @@ public class MusapLink: Encodable {
             throw MusapError.internalError
         }
         
-        var msg = MusapMessage()
+        let msg = MusapMessage()
         msg.payload = payload
         msg.type    = MusapLink.ENROLL_MSG_TYPE
         
@@ -97,6 +97,8 @@ public class MusapLink: Encodable {
         throw MusapError.internalError
     }
     
+    
+    //TODO: Finish
     public func couple(couplingCode: String, uuid: String) async throws -> RelyingParty {
         let payload = LinkAccountPayload(couplingCode: couplingCode, musapId: uuid)
         
@@ -235,7 +237,7 @@ public class MusapLink: Encodable {
             return
         }
 
-        var msg = MusapMessage()
+        let msg = MusapMessage()
         msg.payload = payloadBase64
         msg.type = MusapLink.SIGN_MSG_TYPE
         msg.musapId = self.getMusapId()
@@ -243,7 +245,7 @@ public class MusapLink: Encodable {
         self.sendRequest(msg) { respMsg, error in
             if let error = error {
                 DispatchQueue.main.async {
-                    completion(.failure(MusapError.internalError))
+                    completion(.failure(error))
                 }
                 return
             }
@@ -323,7 +325,7 @@ public class MusapLink: Encodable {
                     return
                 }
 
-                var msg = MusapMessage()
+                let msg = MusapMessage()
                 msg.payload = payloadBase64
                 msg.type = MusapLink.SIGN_MSG_TYPE
                 msg.musapId = self.getMusapId()
@@ -364,50 +366,6 @@ public class MusapLink: Encodable {
             }
         }
     }
-    
-    /*
-    private func pollForSignature(transId: String, completion: @escaping (Result<ExternalSignatureResponsePayload, Error>) -> Void) {
-        for i in 0..<MusapLink.POLL_AMOUNT {
-            DispatchQueue.global().asyncAfter(deadline: .now() + .seconds(2 * i)) {
-                let payload = ExternalSignaturePayload()
-                payload.transId = transId
-
-                guard let payloadBase64 = payload.getBase64Encoded() else {
-                    completion(.failure(MusapError.internalError))
-                    return
-                }
-
-                var msg = MusapMessage()
-                msg.payload = payloadBase64
-                msg.type = MusapLink.SIGN_MSG_TYPE
-                msg.musapId = self.getMusapId()
-
-                guard let respMsg = self.sendRequest(msg),
-                      let payloadData = Data(base64Encoded: payloadBase64)
-                else {
-                    completion(.failure(MusapError.internalError))
-                    return
-                }
-
-                if let resp = try? JSONDecoder().decode(ExternalSignatureResponsePayload.self, from: payloadData) {
-                    if resp.status == "pending" {
-                        return
-                    }
-
-                    if resp.status == "failed" {
-                        completion(.failure(MusapError.internalError))
-                        return
-                    }
-
-                    completion(.success(resp))
-                    return
-                } else {
-                    completion(.failure(MusapError.internalError))
-                }
-            }
-        }
-    }
-     */
     
     public func getMusapId() -> String {
         return self.musapId

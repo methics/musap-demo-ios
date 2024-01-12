@@ -13,7 +13,6 @@ import SwiftUI
  */
 public class ExternalSscd: MusapSscdProtocol {
 
-    
     typealias CustomSscdSettings = ExternalSscdSettings
     
     static let SSCD_TYPE           = "External Signature"
@@ -32,7 +31,7 @@ public class ExternalSscd: MusapSscdProtocol {
     }
     
     func bindKey(req: KeyBindReq) throws -> MusapKey {
-        var request: ExternalSignaturePayload = ExternalSignaturePayload(clientId: self.clientId)
+        let request: ExternalSignaturePayload = ExternalSignaturePayload(clientId: self.clientId)
         
         var theMsisdn: String? = nil
         let msisdn = req.getAttribute(name: ExternalSscd.ATTRIBUTE_MSISDN)
@@ -102,7 +101,7 @@ public class ExternalSscd: MusapSscdProtocol {
     }
     
     func sign(req: SignatureReq) throws -> MusapSignature {
-        var request = ExternalSignaturePayload(clientId: self.clientId)
+        let request = ExternalSignaturePayload(clientId: self.clientId)
         
         var theMsisdn: String? = nil // Eventually this gets set into the attributes
         

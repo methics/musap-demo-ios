@@ -16,10 +16,10 @@ public class ExternalSscdSettings: SscdSettings {
     private var settings: [String: String] = [:]
     private var timeout: TimeInterval
     
-    init(timeout: TimeInterval, clientId: String) {
-        self.timeout = timeout
-        settings[ExternalSscdSettings.SETTINGS_TIMEOUT, default: ""]//TODO: Duration
-        settings[ExternalSscdSettings.SETTINGS_CLIENT_ID, default: clientId]
+    init(clientId: String) {
+        self.timeout = 2 * 60
+        settings[ExternalSscdSettings.SETTINGS_TIMEOUT]   = String(self.timeout * 1000)
+        settings[ExternalSscdSettings.SETTINGS_CLIENT_ID] = clientId
     }
     
     public func setSscdName(name: String) {
