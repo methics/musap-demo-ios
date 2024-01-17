@@ -249,14 +249,18 @@ public class MusapLink: Encodable, Decodable {
             throw MusapError.internalError
         }
         
+        print("Payload: \(payloadBase64)")
+        
         guard let payloadData = Data(base64Encoded: payloadBase64) else {
             print("Cant turn payload to Data()")
             throw MusapError.internalError
         }
         
         do {
+            print("trying to make SignaturePayload object from JSON")
             let signaturePayload = try decoder.decode(SignaturePayload.self, from: payloadData)
             
+            print("Got the obj: \(signaturePayload.display)")
             guard let transId = respMsg.transid else {
                 print("error in poll: no transId")
                 throw MusapError.internalError

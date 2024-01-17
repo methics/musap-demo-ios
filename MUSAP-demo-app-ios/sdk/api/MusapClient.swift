@@ -246,7 +246,7 @@ public class MusapClient {
         //TODO: code this
     }
     
-    public static func listRelyingPartyies() -> [RelyingParty]? {
+    public static func listRelyingParties() -> [RelyingParty]? {
         return MusapStorage().listRelyingParties()
     }
     
@@ -282,26 +282,27 @@ public class MusapClient {
         //TODO: DO THIS
     }
     
-    //TODO: Add completion handler?
-    public static func pollLink() async throws {
+    static func pollLink(completion: @escaping (Result<PollResponsePayload, MusapError>) -> Void) async {
         guard let link = self.getMusapLink() else {
+            completion(.failure(MusapError.internalError))
             return
         }
         
-        let pollTask = PollTask(link: link)
-        
         do {
-            let pollResponsePayload = try await pollTask.pollAsync() { result in
+            let pollResponsePayload = try await PollTask(link: link).pollAsync() { result in
+                
                 switch result {
                 case .success(let payload):
-                    print("got payload \(payload.status)")
+                    completion(.success(payload))
+                    return
                 case .failure(let error):
-                    print("error in pollLink(): \(error)")
+                    completion(.failure(error))
+                    return
                 }
                 
             }
         } catch {
-            print("error in poll: \(error)")
+            completion(.failure(MusapError.internalError))
         }
         
     }

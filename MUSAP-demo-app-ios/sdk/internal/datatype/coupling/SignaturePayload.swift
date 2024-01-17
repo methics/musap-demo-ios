@@ -10,28 +10,40 @@ import Foundation
 public class SignaturePayload: Decodable {
     
     public var data: String
-    public let display = "Sign with MUSAP"
-    public let format: String
-    public let scheme: String?
-    public let hashAlgo = "SHA-256" //TODO: Swiftify?
-    public let linkId: String
-    public let key: KeyIdentifier
-    public let attributes: [SignatureAttribute]
-    public let genKey: Bool
+    public var display = "Sign with MUSAP"
+    public var format: String? = "RAW"
+    public var scheme: String?
+    public var hashAlgo: String? = "SHA-256" //TODO: Swiftify?
+    public let linkid: String
+    public var key: KeyIdentifier? = nil
+    public var attributes: [SignatureAttribute]?
+    public var genKey: Bool? = false
     
-    init(data: String, format: String, scheme: String?, linkId: String, key: KeyIdentifier, attributes: [SignatureAttribute], genKey: Bool) {
+    init(data:  String,
+         format: String? = "RAW",
+         scheme: String?,
+         linkid: String,
+         key: KeyIdentifier?,
+         attributes: [SignatureAttribute]?,
+         genKey: Bool? = false,
+         hashAlgo: String? = "SHA-256"
+    )
+    {
         self.data = data
         self.format = format
         self.scheme = scheme
-        self.linkId = linkId
+        self.linkid = linkid
         self.key = key
         self.attributes = attributes
         self.genKey = genKey
+        self.hashAlgo = hashAlgo ?? "SHA-256"
     }
     
-    
     public func toSignatureReq(key: MusapKey) -> SignatureReq? {
-        let format = SignatureFormat.init(self.format)
+        guard let format = self.format else {
+            return nil
+        }
+        let signatureFormat = SignatureFormat.fromString(format: format)
         let keyAlgo = key.getAlgorithm()
         
         //TODO: This needs work probably
@@ -55,9 +67,9 @@ public class SignaturePayload: Decodable {
         let sigReq = SignatureReq(key: key,
                                   data: dataBase64,
                                   algorithm: signAlgo ?? SignatureAlgorithm(algorithm: SecKeyAlgorithm.ecdsaSignatureMessageX962SHA256),
-                                  format: format,
+                                  format: signatureFormat,
                                   displayText: self.display,
-                                  attributes: self.attributes
+                                  attributes: self.attributes ?? [SignatureAttribute]()
         )
         
         return sigReq
@@ -74,7 +86,5 @@ public class SignaturePayload: Decodable {
             self.publicKeyHash = publicKeyHash
         }
     }
-    
-    
     
 }

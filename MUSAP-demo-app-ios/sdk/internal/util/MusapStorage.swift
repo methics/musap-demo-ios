@@ -73,13 +73,17 @@ public class MusapStorage {
     }
     
     public func listRelyingParties() -> [RelyingParty]? {
-        guard let jsonString = self.getPrefValue(prefName: MusapStorage.RP_PREF) else {
+        guard let base64Json = self.getPrefValue(prefName: MusapStorage.RP_PREF) else {
+            return nil
+        }
+        
+        guard let jsonData = Data(base64Encoded: base64Json) else {
             return nil
         }
         
         let decoder = JSONDecoder()
         do {
-            let relyingParties = try decoder.decode([RelyingParty].self, from: Data(jsonString.utf8))
+            let relyingParties = try decoder.decode([RelyingParty].self, from: Data(jsonData))
             return relyingParties
         } catch {
             print("Error decoding JSON: \(error)")
@@ -101,7 +105,7 @@ public class MusapStorage {
             print("error turning MusapLink to json string: \(error)")
         }
         
-        print("Stored MUSAP Link with MUSAP ID: \(link.getMusapId())")
+        print("Stored MUSAP Link with MUSAP ID: \(String(describing: link.getMusapId()))")
     }
     
     public func getMusaplink() -> MusapLink? {

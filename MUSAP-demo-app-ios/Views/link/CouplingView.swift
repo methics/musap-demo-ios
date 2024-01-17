@@ -10,9 +10,10 @@ import SwiftUI
 struct CouplingView: View {
     @State private var couplingCode: String = ""
     @State private var isCouplingSuccess: Bool = false
-    @State private var isError: Bool = false
-    @State private var errorMessage  = "Failed to couple."
+    @State private var isError: Bool  = false
+    @State private var errorMessage   = "Failed to couple."
     @State private var successMessage = ""
+    @State private var showPollView   = false
     
     var body: some View {
         TextField("Enter Coupling Code", text: $couplingCode)
@@ -40,9 +41,16 @@ struct CouplingView: View {
                 dismissButton: .default(Text("OK"), action: {
                     self.isError = false
                 })
-            
             )
         }
+        
+        NavigationLink(destination: PollView(), isActive: $showPollView) {
+            
+        }
+        .onAppear {
+            isCoupledAlready()
+        }
+        
     }
     
     func sendCoupleReq() {
@@ -57,6 +65,8 @@ struct CouplingView: View {
                         print("Coupling OK: RP name: \(rp.getName())  linkid: \(rp.getLinkId())")
                         self.successMessage = "Link ID: \(rp.getLinkId())"
                         self.isCouplingSuccess = true
+                        self.showPollView = true
+                        
                     case .failure(let error):
                         self.isError = true
                         self.errorMessage = "Coupling failed"
@@ -65,6 +75,14 @@ struct CouplingView: View {
                 }
             }
         }
-        
     }
+    
+    func isCoupledAlready() {
+        guard MusapClient.listRelyingParties() != nil else {
+            return
+        }
+        
+        self.showPollView = true
+    }
+    
 }
