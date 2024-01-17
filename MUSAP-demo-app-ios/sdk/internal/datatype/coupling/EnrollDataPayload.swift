@@ -9,10 +9,10 @@ import Foundation
 
 class EnrollDataPayload: Codable {
     
-    private let fcmToken: String
+    private let apnsToken: String?
     
-    public init(fcmToken: String) {
-        self.fcmToken = fcmToken
+    public init(apnsToken: String?) {
+        self.apnsToken = apnsToken
     }
     
     public func getBase64Encoded() -> String? {

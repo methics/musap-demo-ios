@@ -54,6 +54,8 @@
 		C48293BC2B03863500FCEDD9 /* KeychainSscdSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48293BB2B03863500FCEDD9 /* KeychainSscdSettings.swift */; };
 		C48FE09C2B483C2D00B88D01 /* ExternalSscd.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48FE09B2B483C2D00B88D01 /* ExternalSscd.swift */; };
 		C48FE09E2B483C5800B88D01 /* ExternalSscdSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C48FE09D2B483C5800B88D01 /* ExternalSscdSettings.swift */; };
+		C492D7862B5526A80039A7BF /* CoupleTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = C492D7852B5526A80039A7BF /* CoupleTask.swift */; };
+		C492D7882B552EB50039A7BF /* SignatureCallbackTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = C492D7872B552EB50039A7BF /* SignatureCallbackTask.swift */; };
 		C497D6B92B4BFEFB00563461 /* ExternalSignaturePayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = C497D6B82B4BFEFB00563461 /* ExternalSignaturePayload.swift */; };
 		C497D6BB2B4C00F300563461 /* MusapLink.swift in Sources */ = {isa = PBXBuildFile; fileRef = C497D6BA2B4C00F300563461 /* MusapLink.swift */; };
 		C497D6BD2B4C04C400563461 /* EnrollDataPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = C497D6BC2B4C04C400563461 /* EnrollDataPayload.swift */; };
@@ -84,6 +86,7 @@
 		C4DBFFDE2AF26D0800253DE4 /* SigningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DBFFDD2AF26D0800253DE4 /* SigningView.swift */; };
 		C4DBFFE02AF274DC00253DE4 /* Localizable.xcstrings in Resources */ = {isa = PBXBuildFile; fileRef = C4DBFFDF2AF274DC00253DE4 /* Localizable.xcstrings */; };
 		C4DBFFE22AF28F9A00253DE4 /* KeystoreDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DBFFE12AF28F9A00253DE4 /* KeystoreDetailView.swift */; };
+		C4FA6F6C2B552FE60085DAD9 /* SignatureCallbackPayload.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4FA6F6B2B552FE60085DAD9 /* SignatureCallbackPayload.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXContainerItemProxy section */
@@ -151,6 +154,8 @@
 		C48293BB2B03863500FCEDD9 /* KeychainSscdSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeychainSscdSettings.swift; sourceTree = "<group>"; };
 		C48FE09B2B483C2D00B88D01 /* ExternalSscd.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalSscd.swift; sourceTree = "<group>"; };
 		C48FE09D2B483C5800B88D01 /* ExternalSscdSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalSscdSettings.swift; sourceTree = "<group>"; };
+		C492D7852B5526A80039A7BF /* CoupleTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CoupleTask.swift; sourceTree = "<group>"; };
+		C492D7872B552EB50039A7BF /* SignatureCallbackTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignatureCallbackTask.swift; sourceTree = "<group>"; };
 		C497D6B82B4BFEFB00563461 /* ExternalSignaturePayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ExternalSignaturePayload.swift; sourceTree = "<group>"; };
 		C497D6BA2B4C00F300563461 /* MusapLink.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MusapLink.swift; sourceTree = "<group>"; };
 		C497D6BC2B4C04C400563461 /* EnrollDataPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EnrollDataPayload.swift; sourceTree = "<group>"; };
@@ -185,6 +190,7 @@
 		C4DBFFDD2AF26D0800253DE4 /* SigningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SigningView.swift; sourceTree = "<group>"; };
 		C4DBFFDF2AF274DC00253DE4 /* Localizable.xcstrings */ = {isa = PBXFileReference; lastKnownFileType = text.json.xcstrings; path = Localizable.xcstrings; sourceTree = "<group>"; };
 		C4DBFFE12AF28F9A00253DE4 /* KeystoreDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeystoreDetailView.swift; sourceTree = "<group>"; };
+		C4FA6F6B2B552FE60085DAD9 /* SignatureCallbackPayload.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SignatureCallbackPayload.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -279,7 +285,9 @@
 			children = (
 				C42FFED92AF8F388004CEB5E /* GenerateKeyTask.swift */,
 				C44B3B002AFBB7DA002240EE /* SignTask.swift */,
+				C492D7852B5526A80039A7BF /* CoupleTask.swift */,
 				C457E3BE2B04F9A200B49570 /* BindKeyTask.swift */,
+				C492D7872B552EB50039A7BF /* SignatureCallbackTask.swift */,
 				C46FBF0E2B4FF13D002442DD /* EnrollDataTask.swift */,
 				C40CD0852B5148B6004740E1 /* PollTask.swift */,
 			);
@@ -397,6 +405,7 @@
 				C497D6B82B4BFEFB00563461 /* ExternalSignaturePayload.swift */,
 				C497D6C42B4C097800563461 /* LinkAccountPayload.swift */,
 				C497D6CA2B4C126D00563461 /* ExternalSignatureResponsePayload.swift */,
+				C4FA6F6B2B552FE60085DAD9 /* SignatureCallbackPayload.swift */,
 				C497D6BC2B4C04C400563461 /* EnrollDataPayload.swift */,
 				C497D6C02B4C07A600563461 /* LinkAccountResponsePayload.swift */,
 				C497D6C22B4C07C800563461 /* ResponsePayload.swift */,
@@ -677,6 +686,7 @@
 				C4DBFFDE2AF26D0800253DE4 /* SigningView.swift in Sources */,
 				C47CE32A2B0E2F5D008A878D /* YubikeySscdSettings.swift in Sources */,
 				C4578BE62AFA1D1B00C0EABB /* MusapLoa.swift in Sources */,
+				C4FA6F6C2B552FE60085DAD9 /* SignatureCallbackPayload.swift in Sources */,
 				C4DBFFAB2AF2504100253DE4 /* HomeView.swift in Sources */,
 				C4CD4FB52B10C36000E588B3 /* SignatureAttribute.swift in Sources */,
 				C44B3B032AFBB963002240EE /* KeyDiscoveryAPI.swift in Sources */,
@@ -709,6 +719,7 @@
 				C40AEE932AF50BED006445EB /* PublicKey.swift in Sources */,
 				C40AEE882AF4F3E5006445EB /* KeyBindReq.swift in Sources */,
 				C44494E82AF3B1F300D8096C /* ChooseKeyForSigningView.swift in Sources */,
+				C492D7882B552EB50039A7BF /* SignatureCallbackTask.swift in Sources */,
 				C47257882B28437400282693 /* PINInputView.swift in Sources */,
 				C4CD4FB72B10C42900E588B3 /* CmsSignature.swift in Sources */,
 				C479F0772B0F35310075C60A /* UpdateKeyReq.swift in Sources */,
@@ -720,6 +731,7 @@
 				C497D6C92B4C0B0E00563461 /* SignaturePayload.swift in Sources */,
 				C48FE09E2B483C5800B88D01 /* ExternalSscdSettings.swift in Sources */,
 				C44494E62AF3985200D8096C /* EnterPinView.swift in Sources */,
+				C492D7862B5526A80039A7BF /* CoupleTask.swift in Sources */,
 				C40AEE8F2AF50041006445EB /* MusapKey.swift in Sources */,
 				C42FFEDA2AF8F388004CEB5E /* GenerateKeyTask.swift in Sources */,
 				C48FE09C2B483C2D00B88D01 /* ExternalSscd.swift in Sources */,

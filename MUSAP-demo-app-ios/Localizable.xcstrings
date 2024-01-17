@@ -74,6 +74,9 @@
     "Generate the key" : {
 
     },
+    "GO TO MUSAP COUPLING" : {
+
+    },
     "GO TO YUBIKEY" : {
 
     },
@@ -200,6 +203,9 @@
 
     },
     "Success!" : {
+
+    },
+    "Successfully coupled!" : {
 
     },
     "Successfully created a key" : {

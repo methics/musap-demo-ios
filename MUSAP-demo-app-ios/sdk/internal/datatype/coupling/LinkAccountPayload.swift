@@ -9,12 +9,12 @@ import Foundation
 
 public class LinkAccountPayload: Codable {
     
-    public let couplingCode: String
-    public let musapId:      String
+    public let couplingcode: String
+    public let musapid:      String
     
-    init(couplingCode: String, musapId: String) {
-        self.couplingCode = couplingCode
-        self.musapId = musapId
+    init(couplingcode: String, musapid: String) {
+        self.couplingcode = couplingcode
+        self.musapid = musapid
     }
     
     public func getBase64Encoded() -> String? {

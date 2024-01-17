@@ -10,16 +10,16 @@ import Foundation
 public class EnrollDataTask {
     
     private let link:     MusapLink
-    private let fcmToken: String
+    private let apnsToken: String?
     
-    init(link: MusapLink, fcmToken: String) {
+    init(link: MusapLink, apnsToken: String?) {
         self.link = link
-        self.fcmToken = fcmToken
+        self.apnsToken = apnsToken
     }
     
     func enrollData() async throws -> MusapLink {
         do {
-            let link: MusapLink = try await self.link.enroll(fcmToken: self.fcmToken)
+            let link: MusapLink = try await self.link.enroll(apnsToken: self.apnsToken)
             MusapStorage().storeLink(link: link)
             return link
         } catch {

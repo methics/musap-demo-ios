@@ -20,6 +20,10 @@ struct HomeView: View {
                 Text("GO TO YUBIKEY")
                     .background(Color.gray)
             }
+            NavigationLink(destination: CouplingView()) {
+                Text("GO TO MUSAP COUPLING")
+                    .background(Color.green)
+            }
             Button("RESET APP", action: self.deleteAllItems)
             Button("EXPORT DATA", action: self.exportData)
             Text("Version: \(self.getAppVersion())")
@@ -128,25 +132,22 @@ struct HomeView: View {
         let externalSettings = ExternalSscdSettings(clientId: "") //TODO: where to get clientId?
                 
         print("Got external sscd settings")
-        
-        
-        
-        print("Getting Musap ID ")
-        let musapId = MusapClient.getMusapId()
+    
+        let musapId = MusapClient.getMusapId() // We also have MusapClient.isLinkEnabled()
         print("got musap ID: \(String(describing: musapId))")
         
         if musapId == nil {
             print("Musap ID was nil")
             
-            if let link = await MusapClient.enableLink(url: "https://demo.methics.fi/musapdemo/", fcmToken: "123") {
+            if let link = await MusapClient.enableLink(url: "https://demo.methics.fi/musapdemo/", apnsToken: "123") {
                 //MusapClient.enableSscd(sscd: ExternalSscd(settings: externalSettings, clientId: "", musapLink: link))
                 print("ENabled Musap Link")
             } else {
                 print("Enabling link failed")
             }
         } else {
-            // link enrolled already
-            print("Musap ID was not nil")
+            print("Musap Link enrolled!")
+            
         }
          
 

@@ -13,7 +13,7 @@ public class RelyingParty: Codable {
     private var linkId: String
     
     init(payload: LinkAccountResponsePayload) {
-        self.linkId = payload.linkId
+        self.linkId = payload.linkid
         self.name   = payload.name
     }
     

@@ -52,8 +52,8 @@ public class MusapLink: Encodable, Decodable {
      - returns: MusapLink
      - throws:  MusapError
      */
-    public func enroll(fcmToken: String) async throws -> MusapLink {
-        let payload = EnrollDataPayload(fcmToken: fcmToken)
+    public func enroll(apnsToken: String?) async throws -> MusapLink {
+        let payload = EnrollDataPayload(apnsToken: apnsToken)
         
         guard let payload = payload.getBase64Encoded() else {
             print("MusapLink.enroll(): no payload")
@@ -122,9 +122,14 @@ public class MusapLink: Encodable, Decodable {
     }
     
     
-    //TODO: Finish
-    public func couple(couplingCode: String, uuid: String) async throws -> RelyingParty {
-        let payload = LinkAccountPayload(couplingCode: couplingCode, musapId: uuid)
+    /**
+      Couple this MUSAP with a MUSAP Link.
+      This performs networking operations.
+     - parameters:
+       - returns: RelyingParty if pairing was a success
+     */
+    public func couple(couplingCode: String, musapid: String) async throws -> RelyingParty {
+        let payload = LinkAccountPayload(couplingcode: couplingCode, musapid: musapid)
         
         let msg = MusapMessage()
         msg.type = MusapLink.COUPLE_MSG_TYPE
@@ -132,10 +137,12 @@ public class MusapLink: Encodable, Decodable {
         if let payload = payload.getBase64Encoded() {
             msg.payload = payload
         } else {
+            print("MusapLink.couple(): Failed to get base64")
             throw MusapError.internalError
         }
         
         guard let url = URL(string: self.url) else {
+            print("MusapLink.couple(): Failed get URL")
             throw MusapError.internalError
         }
         
@@ -162,14 +169,33 @@ public class MusapLink: Encodable, Decodable {
         let (data, response) = try await URLSession.shared.data(for: request)
         
         guard let httpResponse = response as? HTTPURLResponse, httpResponse.statusCode == 200 else {
+            print("MusapLink.couple(): HTTP ERROR?")
             throw MusapError.internalError
         }
         
         do {
-            
+            // Form a MusapMessage from server response
             let musapMessage = try JSONDecoder().decode(MusapMessage.self, from: data)
-            let rp = RelyingParty(name: "name", linkId: "link_id")
-            //TODO: This needs some work still, debug
+            
+            // Make sure payload is there, and turn it into data from base64encoded str
+            guard let payloadBase64 = musapMessage.payload,
+                  let payloadData = Data(base64Encoded: payloadBase64) 
+            else {
+                print("Failed to turn payload to data")
+                throw MusapError.internalError
+            }
+            
+            print("JSON: \(String(describing: String(data: payloadData, encoding: .utf8)))")
+            
+            // Turn the data to LinkAccountResponsePayload
+            let linkAccountResponsePayload = try JSONDecoder().decode(LinkAccountResponsePayload.self, from: payloadData)
+            //TODO: This should probably error better
+
+            // Get the Link ID and RP name
+            let linkId = linkAccountResponsePayload.linkid
+            let rpName = linkAccountResponsePayload.name
+            
+            let rp = RelyingParty(name: rpName, linkId: linkId)
             return rp
             
         } catch {
@@ -253,6 +279,36 @@ public class MusapLink: Encodable, Decodable {
     
     public func sendSignatureCallback(signature: MusapSignature, transId: String) throws {
         
+        let payload = SignatureCallbackPayload(linkid: nil, signature: signature)
+        
+        let msg = MusapMessage()
+        msg.type = MusapLink.SIG_CALLBACK_MSG_TYPE
+        msg.payload = payload.toBase64()
+        msg.musapid = self.musapId
+        msg.transid = transId
+        
+        guard let url = URL(string: self.url) else {
+            return
+        }
+        
+        var request = URLRequest(url: url)
+        request.httpMethod = "POST"
+        request.httpBody   = payload.toBase64()?.data(using: .utf8)
+        request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        let task = URLSession.shared.dataTask(with: request) { data, response, error in
+            if let error = error {
+                print("sendSignatureCallback error: \(error)")
+                return
+            }
+            
+            guard let data = data,
+                  let responseMsg = try? JSONDecoder().decode(MusapMessage.self, from: data)
+            else {
+                print("Null payload")
+                return
+            }
+        }
     }
     
     func sign(payload: ExternalSignaturePayload, completion: @escaping (Result<ExternalSignatureResponsePayload, Error>) -> Void) {

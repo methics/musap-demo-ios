@@ -18,7 +18,6 @@ public class SignatureReq {
     
     private let transId: String? = "" //TODO: ?
     
-    
     init(key: MusapKey, data: Data, algorithm: SignatureAlgorithm, format: SignatureFormat, displayText: String, attributes: [SignatureAttribute]) {
         self.key         = key
         self.data        = data
