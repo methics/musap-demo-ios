@@ -104,6 +104,9 @@
     "KeyURI:" : {
 
     },
+    "Loading..." : {
+
+    },
     "MENU_HOME" : {
       "extractionState" : "manual",
       "localizations" : {
@@ -191,6 +194,9 @@
 
     },
     "Signing" : {
+
+    },
+    "Signing: %@" : {
 
     },
     "SSCD Details" : {

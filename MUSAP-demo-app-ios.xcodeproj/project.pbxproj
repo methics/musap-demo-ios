@@ -21,6 +21,7 @@
 		C41B421C2B1878D700C64AAD /* YubiKeyConnection.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41B421B2B1878D700C64AAD /* YubiKeyConnection.swift */; };
 		C41B42212B18799700C64AAD /* YubiKeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41B42202B18799700C64AAD /* YubiKeyView.swift */; };
 		C41F6B0D2B57CDE400C175CE /* PollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41F6B0C2B57CDE400C175CE /* PollView.swift */; };
+		C41F6B112B57E75500C175CE /* LinkSigningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41F6B102B57E75500C175CE /* LinkSigningView.swift */; };
 		C42FFEDA2AF8F388004CEB5E /* GenerateKeyTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42FFED92AF8F388004CEB5E /* GenerateKeyTask.swift */; };
 		C42FFEDC2AF8F4FC004CEB5E /* MetadataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42FFEDB2AF8F4FC004CEB5E /* MetadataStorage.swift */; };
 		C4409ABF2AF9119E0068B793 /* SecureEnclaveSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4409ABE2AF9119E0068B793 /* SecureEnclaveSettings.swift */; };
@@ -122,6 +123,7 @@
 		C41B421B2B1878D700C64AAD /* YubiKeyConnection.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YubiKeyConnection.swift; sourceTree = "<group>"; };
 		C41B42202B18799700C64AAD /* YubiKeyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YubiKeyView.swift; sourceTree = "<group>"; };
 		C41F6B0C2B57CDE400C175CE /* PollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollView.swift; sourceTree = "<group>"; };
+		C41F6B102B57E75500C175CE /* LinkSigningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkSigningView.swift; sourceTree = "<group>"; };
 		C42FFED92AF8F388004CEB5E /* GenerateKeyTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateKeyTask.swift; sourceTree = "<group>"; };
 		C42FFEDB2AF8F4FC004CEB5E /* MetadataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetadataStorage.swift; sourceTree = "<group>"; };
 		C4409ABE2AF9119E0068B793 /* SecureEnclaveSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureEnclaveSettings.swift; sourceTree = "<group>"; };
@@ -423,6 +425,7 @@
 			children = (
 				C4A3B6912B5156AC0019D54D /* CouplingView.swift */,
 				C41F6B0C2B57CDE400C175CE /* PollView.swift */,
+				C41F6B102B57E75500C175CE /* LinkSigningView.swift */,
 			);
 			path = link;
 			sourceTree = "<group>";
@@ -749,6 +752,7 @@
 				C4A3B6942B5167340019D54D /* EnrollDataResponsePayload.swift in Sources */,
 				C40AEE9E2AF50F4C006445EB /* SignatureFormat.swift in Sources */,
 				C4CD4FB32B10BCCE00E588B3 /* MusapMessage.swift in Sources */,
+				C41F6B112B57E75500C175CE /* LinkSigningView.swift in Sources */,
 				C41B42212B18799700C64AAD /* YubiKeyView.swift in Sources */,
 				C4DBFFE22AF28F9A00253DE4 /* KeystoreDetailView.swift in Sources */,
 				C40AEE9A2AF50EB7006445EB /* SignatureReq.swift in Sources */,

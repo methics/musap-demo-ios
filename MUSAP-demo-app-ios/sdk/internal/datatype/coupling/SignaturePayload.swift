@@ -17,7 +17,8 @@ public class SignaturePayload: Decodable {
     public let linkid: String
     public var key: KeyIdentifier? = nil
     public var attributes: [SignatureAttribute]?
-    public var genKey: Bool? = false
+    public var mode: String? = nil
+    
     
     init(data:  String,
          format: String? = "RAW",
@@ -25,8 +26,8 @@ public class SignaturePayload: Decodable {
          linkid: String,
          key: KeyIdentifier?,
          attributes: [SignatureAttribute]?,
-         genKey: Bool? = false,
-         hashAlgo: String? = "SHA-256"
+         hashAlgo: String? = "SHA-256",
+         mode: String?
     )
     {
         self.data = data
@@ -35,8 +36,8 @@ public class SignaturePayload: Decodable {
         self.linkid = linkid
         self.key = key
         self.attributes = attributes
-        self.genKey = genKey
         self.hashAlgo = hashAlgo ?? "SHA-256"
+        self.mode = mode
     }
     
     public func toSignatureReq(key: MusapKey) -> SignatureReq? {
@@ -46,7 +47,6 @@ public class SignaturePayload: Decodable {
         let signatureFormat = SignatureFormat.fromString(format: format)
         let keyAlgo = key.getAlgorithm()
         
-        //TODO: This needs work probably
         var signAlgo: SignatureAlgorithm?
         if (self.scheme == nil) {
             signAlgo = keyAlgo?.toSignatureAlgorithm()
@@ -74,6 +74,7 @@ public class SignaturePayload: Decodable {
         
         return sigReq
     }
+
     
     public class KeyIdentifier: Decodable {
         public let keyId: String
