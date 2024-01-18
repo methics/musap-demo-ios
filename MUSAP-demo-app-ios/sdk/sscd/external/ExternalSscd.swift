@@ -7,6 +7,7 @@
 
 import Foundation
 import SwiftUI
+import Security
 
 /**
  * SSCD that uses MUSAP Link to request signatures with the "externalsign" Coupling API call
@@ -20,72 +21,112 @@ public class ExternalSscd: MusapSscdProtocol {
     static let SIGN_MSG_TYPE       = "externalsignature"
     private static let POLL_AMOUNT = 10
     
-    private let clientId:  String
+    private let clientid:  String
     private let settings:  ExternalSscdSettings
     private let musapLink: MusapLink
     
-    init(settings: ExternalSscdSettings, clientId: String, musapLink: MusapLink) {
+    init(settings: ExternalSscdSettings, clientid: String, musapLink: MusapLink) {
         self.settings = settings
-        self.clientId = settings.getClientId() ?? ""
+        self.clientid = settings.getClientId() ?? "LOCAL"
         self.musapLink = settings.getMusapLink()! //TODO: Dont use !
     }
     
     func bindKey(req: KeyBindReq) throws -> MusapKey {
-        let request: ExternalSignaturePayload = ExternalSignaturePayload(clientId: self.clientId)
+        print("ExternalSscd.bindKey() started")
+        let request: ExternalSignaturePayload = ExternalSignaturePayload(clientid: self.clientid)
         
         var theMsisdn: String? = nil
         let msisdn = req.getAttribute(name: ExternalSscd.ATTRIBUTE_MSISDN)
+        
+        let semaphore = DispatchSemaphore(value: 0)
         if msisdn == nil {
             ExternalSscd.showEnterMsisdnDialog { msisdn in
                 print("Received MSISDN: \(msisdn)")
                 theMsisdn = msisdn
+                semaphore.signal()
             }
         } else {
             theMsisdn = msisdn
         }
         
+        semaphore.wait()
         
         let data = "Bind Key".data(using: .utf8)
         guard let base64Data = data?.base64EncodedString(options: .lineLength64Characters) else {
             throw MusapError.internalError
         }
         
-        
         request.data     = base64Data
-        request.clientId = self.clientId
+        request.clientid = self.clientid
         request.display  = req.getDisplayText()
-        request.format   = "CMS"
+        request.format   = "RAW"
+        
+        if request.attributes == nil {
+            request.attributes = [String: String]()
+        }
+        
         request.attributes?[ExternalSscd.ATTRIBUTE_MSISDN] = theMsisdn
         
         do {
             var theKey: MusapKey?
             
+            let signSemaphore = DispatchSemaphore(value: 0)
+            print("Starting sign for key bind")
             self.musapLink.sign(payload: request) { result in
                 
                 switch result {
                 case .success(let response):
-                    guard let publicKeyData = response.getPublicKey().data(using: .utf8) else {
+                    
+                    guard let signature = response.signature else {
+                        print("no signature")
+                        return
+                    }
+                    
+                    print("the signature: \(signature)")
+                    
+                    guard let certData = Data(base64Encoded: signature) else {
+                        print("unable to create Data() from signature")
+                        return
+                    }
+                    
+                    guard let certificate = SecCertificateCreateWithData(nil, certData as CFData) else {
+                        print("unable to create certificate")
+                        return
+                    }
+                    
+                    guard let publicKey = MusapCertificate(cert: certificate)?.getPublicKey().getDER() else {
+                        print("bad publickey")
+                        return
+                    }
+                    /*
+                    guard let publicKeyData = publicKey.data(using: .utf8) else {
                         print("Could not get public key in bindKey()")
                         return
                     }
+                     */
+                    print("Succesfully signed and got public keye")
                     
                     theKey =  MusapKey(
                         keyAlias: req.getKeyAlias(),
                         sscdType: ExternalSscd.SSCD_TYPE,
-                        publicKey: PublicKey(publicKey: publicKeyData),
+                        publicKey: PublicKey(publicKey: publicKey),
                         keyUri: KeyURI(name: req.getKeyAlias(), sscd: ExternalSscd.SSCD_TYPE, loa: "loa2") //TODO: What LoA?
                     )
                     
                 case .failure(let error):
-                    print("error while binding key: \(error)")
+                    print("bindKey()->musapLink->sign() error while binding key: \(error)")
+    
                 }
-                
+                signSemaphore.signal()
             }
+            signSemaphore.wait()
         
             guard let musapKey = theKey else {
+                print("ExternalSscd.bindKey() - ERROR: No MUSAP KEY")
                 throw MusapError.internalError
             }
             
+            print("RETURNING MUSAP KEY \(musapKey.getPublicKey())")
             return musapKey
 
         } catch {
@@ -101,7 +142,7 @@ public class ExternalSscd: MusapSscdProtocol {
     }
     
     func sign(req: SignatureReq) throws -> MusapSignature {
-        let request = ExternalSignaturePayload(clientId: self.clientId)
+        let request = ExternalSignaturePayload(clientid: self.clientid)
         
         var theMsisdn: String? = nil // Eventually this gets set into the attributes
         
@@ -118,7 +159,7 @@ public class ExternalSscd: MusapSscdProtocol {
         let dataBase64 = req.getData().base64EncodedString(options: .lineLength64Characters)
         
         request.attributes?[ExternalSscd.ATTRIBUTE_MSISDN] = theMsisdn
-        request.clientId = self.clientId
+        request.clientid = self.clientid
         request.display  = req.getDisplayText()
         request.format   = req.getFormat().getFormat()
         request.data     = dataBase64

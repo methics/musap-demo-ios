@@ -280,25 +280,36 @@ public class MusapLink: Encodable, Decodable {
         
     }
     
-    
     public func sendSignatureCallback(signature: MusapSignature, transId: String) throws {
-        
         let payload = SignatureCallbackPayload(linkid: nil, signature: signature)
         
         let msg = MusapMessage()
         msg.type = MusapLink.SIG_CALLBACK_MSG_TYPE
-        msg.payload = payload.toBase64()
+        msg.payload = payload.getBase64Encoded()
         msg.musapid = self.musapId
         msg.transid = transId
         
+        print("signatureCallback: MusapMEssage created. Payload: \(String(describing: payload.getBase64Encoded()))")
+        
         guard let url = URL(string: self.url) else {
+            print("NO URL")
             return
+        }
+        
+        var jsonData: Data?
+        let encoder = JSONEncoder()
+        do {
+            jsonData = try encoder.encode(msg)
+        } catch {
+            print("Could not turn MusapMessage to JSON")
         }
         
         var request = URLRequest(url: url)
         request.httpMethod = "POST"
-        request.httpBody   = payload.toBase64()?.data(using: .utf8)
+        request.httpBody   = jsonData
         request.addValue("application/json", forHTTPHeaderField: "Content-Type")
+        
+        print("HTTP Request created")
         
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
@@ -312,7 +323,11 @@ public class MusapLink: Encodable, Decodable {
                 print("Null payload")
                 return
             }
+            
+            print("Response payload: \(String(describing: responseMsg.payload))")
+            
         }
+        task.resume()
     }
     
     func sign(payload: ExternalSignaturePayload, completion: @escaping (Result<ExternalSignatureResponsePayload, Error>) -> Void) {
@@ -321,6 +336,8 @@ public class MusapLink: Encodable, Decodable {
             completion(.failure(MusapError.internalError))
             return
         }
+        
+        print("Sign payload: \(payloadBase64)")
 
         let msg = MusapMessage()
         msg.payload = payloadBase64
@@ -332,13 +349,33 @@ public class MusapLink: Encodable, Decodable {
                 DispatchQueue.main.async {
                     completion(.failure(error))
                 }
+                print("MusapLink.sign() error: \(error)")
                 return
             }
 
+            guard let resp = respMsg else {
+                print("No Resp message")
+                return
+            }
+            
+            // TODO: We have a problem: No payload
+            guard let payload = resp.payload else {
+                print("No payload in resp")
+                return
+            }
+            
+            print("payload: \(payload)")
+            
+            guard let payloadAsData = Data(base64Encoded: payload) else {
+                print("Could not turn payload to Data")
+                return
+            }
+            
             guard let respMsg = respMsg,
                   let payloadString = respMsg.payload,
                   let payloadData = Data(base64Encoded: payloadString) else {
                 DispatchQueue.main.async {
+                    print("no payload or cant turn payload to Data()")
                     completion(.failure(MusapError.internalError))
                 }
                 return
@@ -346,10 +383,44 @@ public class MusapLink: Encodable, Decodable {
 
             do {
                 let resp = try JSONDecoder().decode(ExternalSignatureResponsePayload.self, from: payloadData)
+                                
                 DispatchQueue.main.async {
                     if resp.status == "pending" {
-                        self.pollForSignature(transId: resp.transId, completion: completion)
+                        print("status: Pending")
+                        self.pollForSignature(transId: resp.transid) { result in
+                                
+                            switch result {
+                            case .success(let payload):
+                                print("got payload: \(payload.isSuccess())")
+                                guard let signature = payload.signature,
+                                      let signatureData = signature.data(using: .utf8)
+                                else {
+                                    completion(.failure(MusapError.internalError))
+                                    return
+                                }
+                                
+                                completion(.success(payload))
+                            
+                                /*
+                                let musapSignature = MusapSignature(rawSignature: signatureData)
+                                do {
+                                    print("Sending signatureCallback")
+                                    try self.sendSignatureCallback(signature: musapSignature, transId: payload.transid)
+                                    completion(.success(resp))
+                                } catch {
+                                    completion(.failure(error))
+                                }
+                                
+                                //completion(.success(payload))
+                                 */
+                            case .failure(let error):
+                                print("Error: \(error)")
+                                completion(.failure(error))
+                            }
+                            
+                        }
                     } else if resp.status == "failed" {
+                        print("status: Failed")
                         completion(.failure(MusapError.internalError))
                     } else {
                         completion(.success(resp))
@@ -357,20 +428,25 @@ public class MusapLink: Encodable, Decodable {
                 }
             } catch {
                 DispatchQueue.main.async {
+                    print("musapLink.sign(): \(error)")
                     completion(.failure(MusapError.internalError))
                 }
             }
         }
     }
-
     
     func sendRequest(_ msg: MusapMessage, completion: @escaping (MusapMessage?, Error?) -> Void) {
         guard let jsonData = try? JSONEncoder().encode(msg) else {
+            print("MusapLink.sendRequest(): Could not turn MusapMessage to JsonData")
             completion(nil, NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to encode message"]))
             return
         }
         
+        print("JSON STRING OF REQUEST: \(jsonData.base64EncodedString())")
+        
+        
         guard let url = URL(string: self.url) else {
+            print("MUsapLink.sendRequest(): No URL")
             completion(nil, MusapError.internalError)
             return
         }
@@ -382,17 +458,25 @@ public class MusapLink: Encodable, Decodable {
 
         let task = URLSession.shared.dataTask(with: request) { data, response, error in
             if let error = error {
+                print("error in URLSession: \(error.localizedDescription)")
                 completion(nil, error)
                 return
+            }
+
+            if let data = data {
+                if let jsonString = String(data: data, encoding: .utf8) {
+                    print("sendRequest jsonString: \(jsonString)")
+                }
             }
 
             guard let data = data,
                   let responseMsg = try? JSONDecoder().decode(MusapMessage.self, from: data)
             else {
+                print("Failed to parse json to MusapMEssage")
                 completion(nil, NSError(domain: "", code: -1, userInfo: [NSLocalizedDescriptionKey: "Failed to decode response"]))
                 return
             }
-
+            print("We completed sendRequest()")
             completion(responseMsg, nil)
         }
 
@@ -400,10 +484,15 @@ public class MusapLink: Encodable, Decodable {
     }
     
     private func pollForSignature(transId: String, completion: @escaping (Result<ExternalSignatureResponsePayload, Error>) -> Void) {
+        print("Polling for signature")
+        
+        var isPollingDone = false
+        
         for i in 0..<MusapLink.POLL_AMOUNT {
             DispatchQueue.global().asyncAfter(deadline: .now() + .seconds(2 * i)) {
+                guard !isPollingDone else { return }
                 let payload = ExternalSignaturePayload()
-                payload.transId = transId
+                payload.transid = transId
 
                 guard let payloadBase64 = payload.getBase64Encoded() else {
                     completion(.failure(MusapError.internalError))
@@ -412,7 +501,7 @@ public class MusapLink: Encodable, Decodable {
 
                 let msg = MusapMessage()
                 msg.payload = payloadBase64
-                msg.type = MusapLink.SIGN_MSG_TYPE
+                msg.type    = MusapLink.SIGN_MSG_TYPE
                 msg.musapid = self.getMusapId()
 
                 self.sendRequest(msg) { respMsg, error in
@@ -424,7 +513,8 @@ public class MusapLink: Encodable, Decodable {
                     }
 
                     guard let respMsg = respMsg,
-                          let payloadData = Data(base64Encoded: respMsg.payload ?? "") else {
+                          let msgPayload = respMsg.payload,
+                          let payloadData = Data(base64Encoded: msgPayload) else {
                         DispatchQueue.main.async {
                             completion(.failure(MusapError.internalError))
                         }
@@ -434,13 +524,19 @@ public class MusapLink: Encodable, Decodable {
                     if let resp = try? JSONDecoder().decode(ExternalSignatureResponsePayload.self, from: payloadData) {
                         DispatchQueue.main.async {
                             if resp.status == "pending" {
+                                print("Status is pending")
                                 return
                             } else if resp.status == "failed" {
+                                print("Status was marked as failed")
+                                isPollingDone = true
                                 completion(.failure(MusapError.internalError))
                                 return
                             }
 
+                            print("Returning success")
+                            isPollingDone = true
                             completion(.success(resp))
+                            return
                         }
                     } else {
                         DispatchQueue.main.async {

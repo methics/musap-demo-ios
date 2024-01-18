@@ -279,7 +279,15 @@ public class MusapClient {
     }
     
     public static func sendSignatureCallback() {
-        //TODO: DO THIS
+        //TODO: DO THIS?
+    }
+    
+    public static func sendKeygenCallback() {
+        //TODO: Do this?
+    }
+    
+    public static func updateApnsToken() {
+        //TODO: Do this
     }
     
     static func pollLink(completion: @escaping (Result<PollResponsePayload, MusapError>) -> Void) async {

@@ -22,6 +22,8 @@
 		C41B42212B18799700C64AAD /* YubiKeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41B42202B18799700C64AAD /* YubiKeyView.swift */; };
 		C41F6B0D2B57CDE400C175CE /* PollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41F6B0C2B57CDE400C175CE /* PollView.swift */; };
 		C41F6B112B57E75500C175CE /* LinkSigningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41F6B102B57E75500C175CE /* LinkSigningView.swift */; };
+		C41F6B152B57FCEC00C175CE /* KeygenAndSignView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41F6B142B57FCEC00C175CE /* KeygenAndSignView.swift */; };
+		C41F6B172B581B7F00C175CE /* BindKeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41F6B162B581B7F00C175CE /* BindKeyView.swift */; };
 		C42FFEDA2AF8F388004CEB5E /* GenerateKeyTask.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42FFED92AF8F388004CEB5E /* GenerateKeyTask.swift */; };
 		C42FFEDC2AF8F4FC004CEB5E /* MetadataStorage.swift in Sources */ = {isa = PBXBuildFile; fileRef = C42FFEDB2AF8F4FC004CEB5E /* MetadataStorage.swift */; };
 		C4409ABF2AF9119E0068B793 /* SecureEnclaveSettings.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4409ABE2AF9119E0068B793 /* SecureEnclaveSettings.swift */; };
@@ -124,6 +126,8 @@
 		C41B42202B18799700C64AAD /* YubiKeyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YubiKeyView.swift; sourceTree = "<group>"; };
 		C41F6B0C2B57CDE400C175CE /* PollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollView.swift; sourceTree = "<group>"; };
 		C41F6B102B57E75500C175CE /* LinkSigningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkSigningView.swift; sourceTree = "<group>"; };
+		C41F6B142B57FCEC00C175CE /* KeygenAndSignView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeygenAndSignView.swift; sourceTree = "<group>"; };
+		C41F6B162B581B7F00C175CE /* BindKeyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BindKeyView.swift; sourceTree = "<group>"; };
 		C42FFED92AF8F388004CEB5E /* GenerateKeyTask.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenerateKeyTask.swift; sourceTree = "<group>"; };
 		C42FFEDB2AF8F4FC004CEB5E /* MetadataStorage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MetadataStorage.swift; sourceTree = "<group>"; };
 		C4409ABE2AF9119E0068B793 /* SecureEnclaveSettings.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SecureEnclaveSettings.swift; sourceTree = "<group>"; };
@@ -426,6 +430,8 @@
 				C4A3B6912B5156AC0019D54D /* CouplingView.swift */,
 				C41F6B0C2B57CDE400C175CE /* PollView.swift */,
 				C41F6B102B57E75500C175CE /* LinkSigningView.swift */,
+				C41F6B142B57FCEC00C175CE /* KeygenAndSignView.swift */,
+				C41F6B162B581B7F00C175CE /* BindKeyView.swift */,
 			);
 			path = link;
 			sourceTree = "<group>";
@@ -686,8 +692,10 @@
 			files = (
 				C40AEE8D2AF4FD30006445EB /* StepUpPolicy.swift in Sources */,
 				C42FFEDC2AF8F4FC004CEB5E /* MetadataStorage.swift in Sources */,
+				C41F6B172B581B7F00C175CE /* BindKeyView.swift in Sources */,
 				C4DBFFDC2AF26CF900253DE4 /* KeyGenerationView.swift in Sources */,
 				C4409AC12AF912EA0068B793 /* SecureEnclaveSscd.swift in Sources */,
+				C41F6B152B57FCEC00C175CE /* KeygenAndSignView.swift in Sources */,
 				C4DBFFD82AF25EA500253DE4 /* NavigationTabView.swift in Sources */,
 				C4DBFFDE2AF26D0800253DE4 /* SigningView.swift in Sources */,
 				C47CE32A2B0E2F5D008A878D /* YubikeySscdSettings.swift in Sources */,

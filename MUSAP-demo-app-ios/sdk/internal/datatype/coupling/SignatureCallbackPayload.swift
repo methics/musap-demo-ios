@@ -19,15 +19,11 @@ public class SignatureCallbackPayload: Encodable {
         self.publickey = signature?.getKey()?.getPublicKey()?.getPEM()
     }
     
-    public func toBase64() -> String? {
-        do {
-            let jsonData = try JSONEncoder().encode(self)
-            let base64String = jsonData.base64EncodedString()
-            return base64String
-        } catch {
-            print("Error encoding to JSON: \(error)")
+    public func getBase64Encoded() -> String? {
+        guard let jsonData = try? JSONEncoder().encode(self) else {
             return nil
         }
+        return jsonData.base64EncodedString()
     }
     
 }

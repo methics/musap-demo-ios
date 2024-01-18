@@ -13,6 +13,7 @@ public class BindKeyTask {
     
     func bindKey(req: KeyBindReq, sscd: any MusapSscdProtocol) async throws -> MusapKey {
         do {
+            print("BindKeyTask.bindKey() - Trying to sscd.bindKey()")
             let key = try sscd.bindKey(req: req)
             print("BindKeyTask got MUSAP key")
             

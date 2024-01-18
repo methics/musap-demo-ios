@@ -71,6 +71,12 @@
     "EXPORT DATA" : {
 
     },
+    "GENERATE and SIGN" : {
+
+    },
+    "GENERATE ONLY" : {
+
+    },
     "Generate the key" : {
 
     },
@@ -196,9 +202,6 @@
     "Signing" : {
 
     },
-    "Signing: %@" : {
-
-    },
     "SSCD Details" : {
 
     },
@@ -209,6 +212,9 @@
 
     },
     "SSCD Type" : {
+
+    },
+    "Start Binding" : {
 
     },
     "Submit" : {
@@ -239,6 +245,9 @@
           }
         }
       }
+    },
+    "You need to bind a key" : {
+
     }
   },
   "version" : "1.0"
