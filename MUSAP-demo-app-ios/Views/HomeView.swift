@@ -16,16 +16,12 @@ struct HomeView: View {
             Text(LocalizedStringKey("WELCOME_TEXT"))
                 .font(.system(size: 24, weight: .heavy))
             Spacer()
-            
-            NavigationLink(destination: YubiKeyView()) {
-                Text("GO TO YUBIKEY")
-                    .background(Color.gray)
-            }
+        
             NavigationLink(destination: CouplingView()) {
                 Text("GO TO MUSAP COUPLING")
                     .background(Color.green)
             }
-            Button("EXPORT DATA", action: self.exportData)
+            //Button("EXPORT DATA", action: self.exportData)
             
             Button("RESET APP", action: self.deleteAllItems)
                 .foregroundColor(.white)

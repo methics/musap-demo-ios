@@ -7,7 +7,6 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
-		C41B42212B18799700C64AAD /* YubiKeyView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41B42202B18799700C64AAD /* YubiKeyView.swift */; };
 		C41F6B0D2B57CDE400C175CE /* PollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41F6B0C2B57CDE400C175CE /* PollView.swift */; };
 		C41F6B112B57E75500C175CE /* LinkSigningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41F6B102B57E75500C175CE /* LinkSigningView.swift */; };
 		C41F6B152B57FCEC00C175CE /* KeygenAndSignView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41F6B142B57FCEC00C175CE /* KeygenAndSignView.swift */; };
@@ -51,7 +50,6 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
-		C41B42202B18799700C64AAD /* YubiKeyView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = YubiKeyView.swift; sourceTree = "<group>"; };
 		C41F6B0C2B57CDE400C175CE /* PollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollView.swift; sourceTree = "<group>"; };
 		C41F6B102B57E75500C175CE /* LinkSigningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkSigningView.swift; sourceTree = "<group>"; };
 		C41F6B142B57FCEC00C175CE /* KeygenAndSignView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeygenAndSignView.swift; sourceTree = "<group>"; };
@@ -122,14 +120,6 @@
 			path = docs;
 			sourceTree = "<group>";
 		};
-		C41B421D2B18797B00C64AAD /* testing */ = {
-			isa = PBXGroup;
-			children = (
-				C41B42202B18799700C64AAD /* YubiKeyView.swift */,
-			);
-			path = testing;
-			sourceTree = "<group>";
-		};
 		C41FA6022AFE0F2E0060A0FD /* signing */ = {
 			isa = PBXGroup;
 			children = (
@@ -155,12 +145,12 @@
 		C4DBFF9C2AF2504100253DE4 = {
 			isa = PBXGroup;
 			children = (
+				692180EC3502ABF08211CEEB /* docs */,
 				C4DBFFA72AF2504100253DE4 /* MUSAP-demo-app-ios */,
 				C4DBFFB82AF2504300253DE4 /* MUSAP-demo-app-iosTests */,
 				C4DBFFC22AF2504300253DE4 /* MUSAP-demo-app-iosUITests */,
 				C4DBFFA62AF2504100253DE4 /* Products */,
 				6921801BB87D0518B985BAFD /* xcschemes */,
-				692180EC3502ABF08211CEEB /* docs */,
 			);
 			sourceTree = "<group>";
 		};
@@ -220,7 +210,6 @@
 			isa = PBXGroup;
 			children = (
 				C4A3B6902B51569B0019D54D /* link */,
-				C41B421D2B18797B00C64AAD /* testing */,
 				C41FA6022AFE0F2E0060A0FD /* signing */,
 				C4DBFFAA2AF2504100253DE4 /* HomeView.swift */,
 				C4DBFFD72AF25EA500253DE4 /* NavigationTabView.swift */,
@@ -406,7 +395,6 @@
 				C4DBFFA92AF2504100253DE4 /* MUSAP_demo_app_ios.swift in Sources */,
 				C41F6B0D2B57CDE400C175CE /* PollView.swift in Sources */,
 				C41F6B112B57E75500C175CE /* LinkSigningView.swift in Sources */,
-				C41B42212B18799700C64AAD /* YubiKeyView.swift in Sources */,
 				C4DBFFE22AF28F9A00253DE4 /* KeystoreDetailView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
