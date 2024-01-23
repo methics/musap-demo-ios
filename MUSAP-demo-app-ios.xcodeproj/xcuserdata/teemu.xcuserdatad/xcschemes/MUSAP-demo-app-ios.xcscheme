@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<Scheme
+   version = "1.3">
+   <BuildAction>
+      <BuildActionEntries>
+         <BuildActionEntry
+            buildForRunning = "YES">
+            <BuildableReference
+               BuildableIdentifier = "primary"
+               BlueprintIdentifier = "C4DBFFA42AF2504100253DE4"
+               BuildableName = "MUSAP-demo-app-ios.app"
+               BlueprintName = "MUSAP-demo-app-ios"
+               ReferencedContainer = "container:MUSAP-demo-app-ios.xcodeproj">
+            </BuildableReference>
+         </BuildActionEntry>
+      </BuildActionEntries>
+   </BuildAction>
+   <LaunchAction
+      useCustomWorkingDirectory = "NO"
+      buildConfiguration = "Debug"
+      allowLocationSimulation = "YES">
+      <BuildableProductRunnable>
+         <BuildableReference
+            BuildableIdentifier = "primary"
+            BlueprintIdentifier = "C4DBFFA42AF2504100253DE4"
+            BuildableName = "MUSAP-demo-app-ios.app"
+            BlueprintName = "MUSAP-demo-app-ios"
+            ReferencedContainer = "container:MUSAP-demo-app-ios.xcodeproj">
+         </BuildableReference>
+      </BuildableProductRunnable>
+   </LaunchAction>
+</Scheme>

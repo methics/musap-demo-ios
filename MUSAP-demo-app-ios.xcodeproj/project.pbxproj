@@ -107,6 +107,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		6921801BB87D0518B985BAFD /* xcschemes */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = xcschemes;
+			path = "MUSAP-demo-app-ios.xcodeproj/project.xcworkspace/xcuserdata/teemu.xcuserdatad/xcschemes";
+			sourceTree = "<group>";
+		};
 		C41B421D2B18797B00C64AAD /* testing */ = {
 			isa = PBXGroup;
 			children = (
@@ -144,6 +152,7 @@
 				C4DBFFB82AF2504300253DE4 /* MUSAP-demo-app-iosTests */,
 				C4DBFFC22AF2504300253DE4 /* MUSAP-demo-app-iosUITests */,
 				C4DBFFA62AF2504100253DE4 /* Products */,
+				6921801BB87D0518B985BAFD /* xcschemes */,
 			);
 			sourceTree = "<group>";
 		};
