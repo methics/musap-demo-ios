@@ -115,6 +115,13 @@
 			path = "MUSAP-demo-app-ios.xcodeproj/project.xcworkspace/xcuserdata/teemu.xcuserdatad/xcschemes";
 			sourceTree = "<group>";
 		};
+		692180EC3502ABF08211CEEB /* docs */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = docs;
+			sourceTree = "<group>";
+		};
 		C41B421D2B18797B00C64AAD /* testing */ = {
 			isa = PBXGroup;
 			children = (
@@ -153,6 +160,7 @@
 				C4DBFFC22AF2504300253DE4 /* MUSAP-demo-app-iosUITests */,
 				C4DBFFA62AF2504100253DE4 /* Products */,
 				6921801BB87D0518B985BAFD /* xcschemes */,
+				692180EC3502ABF08211CEEB /* docs */,
 			);
 			sourceTree = "<group>";
 		};
