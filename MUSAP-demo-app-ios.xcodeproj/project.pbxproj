@@ -113,11 +113,67 @@
 			path = "MUSAP-demo-app-ios.xcodeproj/project.xcworkspace/xcuserdata/teemu.xcuserdatad/xcschemes";
 			sourceTree = "<group>";
 		};
+		69218091EDB3A4B969FE79FA /* 2d */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = 2d;
+			path = .git/objects/2d;
+			sourceTree = "<group>";
+		};
 		692180EC3502ABF08211CEEB /* docs */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			path = docs;
+			sourceTree = "<group>";
+		};
+		692182347C45BE2A2EFC1775 /* 68 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = 68;
+			path = .git/objects/68;
+			sourceTree = "<group>";
+		};
+		6921854100123B81E5F95246 /* 9e */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = 9e;
+			path = .git/objects/9e;
+			sourceTree = "<group>";
+		};
+		692185B6C6C3BA0B897D6D31 /* 18 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = 18;
+			path = .git/objects/18;
+			sourceTree = "<group>";
+		};
+		692186EE578F70CCEA9AFE7D /* 06 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = 06;
+			path = .git/objects/06;
+			sourceTree = "<group>";
+		};
+		692188581A51FEE209F378AE /* 8c */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = 8c;
+			path = .git/objects/8c;
+			sourceTree = "<group>";
+		};
+		69218BE14BF68609D3E4F777 /* b3 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = b3;
+			path = .git/objects/b3;
 			sourceTree = "<group>";
 		};
 		C41FA6022AFE0F2E0060A0FD /* signing */ = {
@@ -151,6 +207,13 @@
 				C4DBFFC22AF2504300253DE4 /* MUSAP-demo-app-iosUITests */,
 				C4DBFFA62AF2504100253DE4 /* Products */,
 				6921801BB87D0518B985BAFD /* xcschemes */,
+				69218BE14BF68609D3E4F777 /* b3 */,
+				69218091EDB3A4B969FE79FA /* 2d */,
+				6921854100123B81E5F95246 /* 9e */,
+				692185B6C6C3BA0B897D6D31 /* 18 */,
+				692186EE578F70CCEA9AFE7D /* 06 */,
+				692182347C45BE2A2EFC1775 /* 68 */,
+				692188581A51FEE209F378AE /* 8c */,
 			);
 			sourceTree = "<group>";
 		};

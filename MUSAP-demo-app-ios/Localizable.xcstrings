@@ -53,9 +53,6 @@
     "Error" : {
 
     },
-    "EXPORT DATA" : {
-
-    },
     "GENERATE and SIGN" : {
 
     },
@@ -68,13 +65,13 @@
     "GO TO MUSAP COUPLING" : {
 
     },
-    "GO TO YUBIKEY" : {
-
-    },
     "Hello, World!" : {
 
     },
     "Home" : {
+
+    },
+    "Key Binding" : {
 
     },
     "Key details" : {

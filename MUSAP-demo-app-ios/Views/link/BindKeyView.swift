@@ -14,6 +14,9 @@ struct BindKeyView: View {
     var mode: String? = "" // if is generate-sign, after generate, add poll button?
                            // if is generate, go to homeview?
     
+    @State private var showAlert = false
+    @State private var alertMessage = ""
+    
     var body: some View {
         Text("You need to bind a key")
             .padding()
@@ -21,6 +24,9 @@ struct BindKeyView: View {
             self.bindKey()
         }
         .padding()
+        .alert(isPresented: $showAlert) {
+            Alert(title: Text("Key Binding"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+        }
     }
     
     private func bindKey() {
@@ -61,8 +67,12 @@ struct BindKeyView: View {
                 switch result {
                 case .success(let musapKey):
                     print("musapKey: \(String(describing: musapKey.getKeyAlias()))")
+                    alertMessage = "Key binding successful!"
+                    showAlert    = true
                 case .failure(let error):
                     print("BindKeyView: error in bindkey: \(error)")
+                    alertMessage = "Error in key binding: \(error.localizedDescription)"
+                    showAlert = true
                 }
                 
                 
