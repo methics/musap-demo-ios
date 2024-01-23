@@ -6,8 +6,11 @@
 //
 
 import SwiftUI
+import musap_ios
 
 struct KeystoreDetailView: View {   
+    @State private var keys: [MusapKey] = [MusapKey]()
+    
     let targetSscd: MusapSscd
 
     var body: some View {
@@ -44,23 +47,38 @@ struct KeystoreDetailView: View {
                         Text(targetSscd.country ?? "")
                     }
                     
+                    /*
+                    Button("View SSCD Keys") {
+                        
+                    }
+                     */
+                    
+                    /*
                     HStack {
                         Text("Algorithms")
                         Spacer()
-                        Text("TODO")
+                        
                     }
+                     */
                 }
             }
             .navigationTitle("Keystore Details")
+            .onAppear {
+                self.getKeys()
+            }
+            
+            
 
         }
     }
     
+    private func getKeys() {
+        let req = KeySearchReq(sscdType: targetSscd.sscdType)
+        let keys = MusapClient.listKeys(req: req)
+        self.keys = keys
+        
+        print("Key amount: \(keys.count)")
+        
+    }
+    
 }
-
-/*
-#Preview {
-    KeystoreDetailView()
-}
-
-*/

@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Foundation
+import musap_ios
 
 struct HomeView: View {
     var body: some View {
@@ -24,8 +25,16 @@ struct HomeView: View {
                 Text("GO TO MUSAP COUPLING")
                     .background(Color.green)
             }
-            Button("RESET APP", action: self.deleteAllItems)
             Button("EXPORT DATA", action: self.exportData)
+            
+            Button("RESET APP", action: self.deleteAllItems)
+                .foregroundColor(.white)
+                .padding()
+                .background(Color.red)
+                .cornerRadius(10)
+                .font(.headline)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            
             Text("Version: \(self.getAppVersion())")
                 .font(.system(size: 12, weight: .heavy))
             }

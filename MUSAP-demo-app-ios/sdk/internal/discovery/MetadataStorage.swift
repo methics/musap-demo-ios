@@ -201,12 +201,24 @@ public class MetadataStorage {
         return MetadataStorage.SSCD_JSON_PREFIX + sscdId
     }
 
+    //TODO: get with keyId not keyName
     private func makeStoreName(keyName: String) -> String {
         return MetadataStorage.KEY_JSON_PREFIX + keyName
     }
     
+    //TODO: get with keyId not keyName
     private func getKeyJson(keyName: String) -> String {
         return self.makeStoreName(keyName: keyName)
+    }
+    
+    //TODO: Start using instead of keyname version
+    private func getKeyJson(keyid: String) -> String {
+        return self.makeStoreName(keyid: keyid)
+    }
+    
+    //TODO: Start using instead of keyname version
+    private func makeStoreName(keyid: String) -> String {
+        return MetadataStorage.KEY_JSON_PREFIX + keyid
     }
     
     func printAllData() {

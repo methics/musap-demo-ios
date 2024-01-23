@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import musap_ios
 
 struct CouplingView: View {
     @State private var couplingCode: String = ""

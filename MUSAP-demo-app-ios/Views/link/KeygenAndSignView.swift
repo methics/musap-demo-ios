@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import musap_ios
 
 struct KeygenAndSignView: View {
     var payload: PollResponsePayload?

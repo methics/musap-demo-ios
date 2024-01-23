@@ -104,6 +104,7 @@ public class ExternalSscd: MusapSscdProtocol {
                         return
                     }
                      */
+                    //TODO: Get pubkey etc from LINK response instead after backend updates
                     print("Succesfully signed and got public keye")
                     
                     theKey =  MusapKey(
@@ -112,6 +113,7 @@ public class ExternalSscd: MusapSscdProtocol {
                         publicKey: PublicKey(publicKey: publicKey),
                         keyUri: KeyURI(name: req.getKeyAlias(), sscd: ExternalSscd.SSCD_TYPE, loa: "loa2") //TODO: What LoA?
                     )
+                    theKey?.addAttribute(attr: KeyAttribute(name: ExternalSscd.ATTRIBUTE_MSISDN, value: theMsisdn))
                     
                 case .failure(let error):
                     print("bindKey()->musapLink->sign() error while binding key: \(error)")

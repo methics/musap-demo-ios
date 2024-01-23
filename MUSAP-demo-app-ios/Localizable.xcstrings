@@ -12,12 +12,6 @@
         }
       }
     },
-    "Algorithms" : {
-
-    },
-    "App needs your MSISDN" : {
-
-    },
     "Available Keys" : {
 
     },
@@ -30,10 +24,10 @@
     "Choose what to sign" : {
 
     },
-    "Confirm Sign" : {
+    "Country" : {
 
     },
-    "Country" : {
+    "ENABLED SSCDS" : {
 
     },
     "ENABLED_SSCD_LIST" : {
@@ -47,22 +41,13 @@
         }
       }
     },
-    "ENABLED_SSCDS" : {
-
-    },
     "Enter Coupling Code" : {
 
     },
     "Enter key name" : {
 
     },
-    "Enter MSISDN" : {
-
-    },
     "Enter PIN" : {
-
-    },
-    "Enter your YubiKey PIV PIN" : {
 
     },
     "Error" : {
@@ -163,13 +148,13 @@
     "Next" : {
 
     },
+    "No SSCD's activated." : {
+
+    },
     "OK" : {
 
     },
     "PIN" : {
-
-    },
-    "PIN code" : {
 
     },
     "PIN confirm" : {
@@ -227,9 +212,6 @@
 
     },
     "Successfully created a key" : {
-
-    },
-    "TODO" : {
 
     },
     "Version: %@" : {

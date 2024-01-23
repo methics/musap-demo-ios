@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import musap_ios
 
 struct KeystoreListView: View {
     @State private var isPopupVisible = false
@@ -20,7 +21,7 @@ struct KeystoreListView: View {
     
     var body: some View {
         List {
-            Section(header: Text(LocalizedStringKey("ENABLED_SSCDS")).font(.system(size: 12, weight: .bold))) {
+            Section(header: Text(LocalizedStringKey("ENABLED SSCDS")).font(.system(size: 12, weight: .bold))) {
                 ForEach(enabledSscdList) { sscd in
                      NavigationLink(
                          destination: KeystoreDetailView(targetSscd: sscd),
@@ -34,17 +35,23 @@ struct KeystoreListView: View {
             }
             
             Section(header: Text(LocalizedStringKey("ACTIVE_SSCD_LIST")).font(.system(size: 12, weight: .bold)).padding(.top, 25)) {
-                ForEach(activatedSscdList) { sscd in
-                    NavigationLink(
-                        destination: KeystoreDetailView(targetSscd: sscd),
-                        tag: sscd.sscdName!,
-                        selection: $selectedSscd,
-                        label: {
-                            Text(sscd.sscdName!)
-                        }
-                    )
+                if activatedSscdList.isEmpty  {
+                    Text("No SSCD's activated.")
+                } else {
+                    ForEach(activatedSscdList) { sscd in
+                        NavigationLink(
+                            destination: KeystoreDetailView(targetSscd: sscd),
+                            tag: sscd.sscdName!,
+                            selection: $selectedSscd,
+                            label: {
+                                Text(sscd.sscdName!)
+                            }
+                        )
+                    }
                 }
+
             }
+
         }
         .onAppear {
             enabledSscdList = [MusapSscd]()
@@ -74,6 +81,10 @@ struct KeystoreListView: View {
             
         }
         
+        
+    }
+    
+    private func getKeys() {
         
     }
     

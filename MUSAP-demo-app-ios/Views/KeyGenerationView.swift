@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import musap_ios
 
 struct KeyGenerationView: View {
     
@@ -18,9 +19,10 @@ struct KeyGenerationView: View {
     @State private var errorMessage = ""
     
     @State private var pin1 = ""
+    @State private var isTextFieldActive = true
     
-    let availableKeystores = ["Methics demo", "Yubikey", "SE", "Keychain"]
-    var keystoreIndex: KeyValuePairs = [0: "Methics demo", 1: "Yubikey", 2: "SE", 3: "Keychain"]
+    let availableKeystores = ["Yubikey", "SE", "Keychain"]
+    var keystoreIndex: KeyValuePairs = [0: "Yubikey", 1: "SE", 2: "Keychain"]
     
     
     var body: some View {
@@ -33,8 +35,6 @@ struct KeyGenerationView: View {
                     TextField("Enter key name", text: $keyAlias)
                         .foregroundColor(.blue)
                         .autocorrectionDisabled()
-                        
-                        
                 }
                 
                 HStack {
@@ -47,20 +47,6 @@ struct KeyGenerationView: View {
                     .font(.system(size: 16, weight: .semibold))
                 }
             }
-            
-            //TODO: Display only if required
-            if (selectedKeystoreIndex == 0 || selectedKeystoreIndex == 1) {
-                Section("PIN code") {
-                    HStack {
-                        Text("Enter PIN")
-                            .font(.system(size: 16, weight: .semibold))
-                        SecureField("Enter PIN", text: $pin1)
-                            .keyboardType(.numberPad)
-                    }
-
-                }
-            }
-
             
             Section {
                 Button("Generate the key", action: self.generatedButtonTapped)
@@ -104,11 +90,10 @@ struct KeyGenerationView: View {
         if !self.isKeyNameOk() {
             self.errorMessage = "Keyname must have at least 3 characters"
             self.isErrorPopupVisible = true
-        }
+            print("ERROR! BAD Key name")
+        }            
         
         self.generateKeyWithMusap()
-        
-        
 
         
     }
@@ -148,6 +133,11 @@ struct KeyGenerationView: View {
                 case .success(let musapKey):
                     print("Success! Keyname: \(String(describing: musapKey.getKeyAlias()))")
                     print("Musap Key:        \(String(describing: musapKey.getPublicKey()?.getPEM()))")
+                    
+                    print("isEC? \(String(describing: musapKey.getAlgorithm()?.isEc()))")
+                    print("isRSA? \(String(describing: musapKey.getAlgorithm()?.isRsa()))")
+                    print("Bits: \(String(describing: musapKey.getAlgorithm()?.bits))")
+                    
                     self.isKeyGenerationSuccess = true
                     print("sscd type: \(String(describing: musapKey.getSscdType()))")
                 case .failure(let error):
@@ -168,7 +158,6 @@ struct KeyGenerationView: View {
         self.pin1 = ""
     }
     
-    //TODO: Do we have some requirements for this?
     func isKeyNameOk() -> Bool {
         return self.keyAlias.count >= 3
     }

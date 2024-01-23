@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import musap_ios
 
 struct PollView: View {
     @State private var payload: PollResponsePayload? = nil

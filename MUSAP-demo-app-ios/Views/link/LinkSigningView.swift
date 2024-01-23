@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import musap_ios
 
 struct LinkSigningView: View {
     @State private var dtbd: String? = ""

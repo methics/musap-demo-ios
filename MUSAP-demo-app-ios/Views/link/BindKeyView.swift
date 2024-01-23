@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import musap_ios
 
 struct BindKeyView: View {
     
@@ -56,8 +57,7 @@ struct BindKeyView: View {
         
         Task {
             await MusapClient.bindKey(sscd: sscd, req: keyBindReq) { result in
-                
-                print("Do we run this")
+            
                 switch result {
                 case .success(let musapKey):
                     print("musapKey: \(String(describing: musapKey.getKeyAlias()))")
