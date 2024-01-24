@@ -59,7 +59,7 @@ struct PollView: View {
                         break
                     }
                     
-                    self.showSignView = true
+                    //self.showSignView = true
                 case .failure(let error):
                     print("Error in pollLink: \(error)")
                 }

@@ -95,6 +95,11 @@ struct LinkSigningView: View {
                     print("failed to get signatureReq")
                     return
                 }
+                guard let transId = payload?.getTransId() else {
+                    print("NO Transid")
+                    return
+                }
+                //signatureReq.setTransId(transId: transId)
 
                 Task {
                     await MusapClient.sign(req: signatureReq) { result in
@@ -105,6 +110,9 @@ struct LinkSigningView: View {
                             alertTitle = "Success"
                             alertMessage = "Signature: \(signature.getB64Signature())"
                             showAlert = true
+                            
+                            MusapClient.sendSignatureCallback(signature: signature, txnId: transId)
+                            
                         case .failure(let error):
                             alertTitle = "Error"
                             alertMessage = "Error in LinkSigningView: \(error)"

@@ -13,10 +13,14 @@ struct BindKeyView: View {
     var payload: PollResponsePayload? = nil
     var mode: String? = "" // if is generate-sign, after generate, add poll button?
                            // if is generate, go to homeview?
+    //var musapKeyFromBind: MusapKey? = nil
     
     @State private var showAlert = false
     @State private var alertMessage = ""
     @State private var isLoading = false
+    @State private var isKeyBinded = false
+    
+    @State private var musapKeyFromBind: MusapKey? = nil
     
     var body: some View {
         Text("You need to bind a key")
@@ -34,6 +38,43 @@ struct BindKeyView: View {
                 .progressViewStyle(CircularProgressViewStyle())
                 .scaleEffect(2)
         }
+        
+        if isKeyBinded {
+            Button("Sign") {
+                self.sign()
+            }
+        }
+        
+    }
+    
+    private func sign() {
+        
+        guard let musapKey = musapKeyFromBind else {
+            return
+        }
+        guard let signatureReq = payload?.getSignaturePayload().toSignatureReq(key: musapKey) else {
+            return
+        }
+        
+        guard let transId = payload?.getTransId() else {
+            return
+        }
+        
+        Task {
+            await MusapClient.sign(req: signatureReq) { result in
+                switch result {
+                case .success(let signature):
+                    print("got signature: \(signature.getB64Signature())")
+                    
+                    MusapClient.sendSignatureCallback(signature: signature, txnId: transId)
+                    
+                case .failure(let error):
+                    print("error: \(error)")
+                }
+                
+            }
+        }
+        
         
     }
     
@@ -79,6 +120,8 @@ struct BindKeyView: View {
                     alertMessage = "Key binding successful!"
                     showAlert    = true
                     isLoading    = false
+                    isKeyBinded  = true
+                    musapKeyFromBind     = musapKey
                 case .failure(let error):
                     print("BindKeyView: error in bindkey: \(error)")
                     alertMessage = "Error in key binding: \(error.localizedDescription)"
