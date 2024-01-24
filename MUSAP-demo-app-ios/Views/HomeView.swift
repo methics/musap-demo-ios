@@ -134,7 +134,7 @@ struct HomeView: View {
         print("Enabling YubikeySscd")
         MusapClient.enableSscd(sscd: YubikeySscd())
         
-        let externalSettings = ExternalSscdSettings(clientId: "1") //TODO: client ID's available at /opt/me/conf/musaplink.conf
+        let externalSettings = ExternalSscdSettings(clientId: "1")
                 
         print("Got external sscd settings")
     
@@ -158,6 +158,12 @@ struct HomeView: View {
             }
         } else {
             print("Musap Link enrolled!")
+            guard let link = MusapClient.getMusapLink() else {
+                print("NO link")
+                return
+            }
+            MusapClient.enableSscd(sscd: ExternalSscd(settings: externalSettings, clientid: "1", musapLink: link))
+
             
         }
         

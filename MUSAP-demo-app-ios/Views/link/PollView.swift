@@ -25,14 +25,10 @@ struct PollView: View {
         NavigationLink(destination: BindKeyView(payload: self.payload, mode: payload?.getMode()), isActive: $showBindKeyView) {
             
         }
-        /*
-        //TODO: Decide where to send the user by payload.getMode()
+
         NavigationLink(destination: LinkSigningView(payload: self.payload, mode: self.payload?.getMode()), isActive: $showSignView) {
             
         }
-         */
-        
-
         
     }
     

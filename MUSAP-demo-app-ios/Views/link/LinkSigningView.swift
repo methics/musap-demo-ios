@@ -10,6 +10,9 @@ import musap_ios
 
 struct LinkSigningView: View {
     @State private var dtbd: String? = ""
+    @State private var showAlert = false
+    @State private var alertMessage = ""
+    @State private var alertTitle = ""
     
     var payload: PollResponsePayload? // property that needs to be set when moving to LinkSigningView
     var mode: String? = ""
@@ -31,45 +34,88 @@ struct LinkSigningView: View {
             }
             .onAppear {
                 self.dtbd = payload?.getDisplayText()
+            }        
+            .alert(isPresented: $showAlert) {
+                Alert(
+                    title: Text(alertTitle),
+                    message: Text(alertMessage),
+                    dismissButton: .default(Text("OK"))
+                )
             }
-        }
-        
-        if mode == PollResponsePayload.MODE_GENONLY {
-            // Display Generate key only UI
-            Text("GENERATE ONLY")
-        }
-        
-        if mode == PollResponsePayload.MODE_GENSIGN {
-            // Display generate and then sign UI
-            Text("GENERATE and SIGN")
         }
     
     }
     
     private func sendSignReq() {
         if mode == PollResponsePayload.MODE_SIGN {
-            //let signaturePayload = payload?.getSignaturePayload().toSignatureReq(key: <#T##MusapKey#>)
             
+            print("starting signing")
+ 
             guard let sscds = MusapClient.listEnabledSscds() else {
                 print("NO enabled sscds")
                 return
             }
             
-            var theSscd: any MusapSscdProtocol
+            var theSscd: (any MusapSscdProtocol)?
             for sscd in sscds {
                 if sscd.getSscdInfo().sscdType == "External Signature" {
+                    print("Found external signature sscd")
                     theSscd = sscd
                 }
+                
+                print("Provider:")
+                print(sscd.getSscdInfo().provider)
                                 
             }
             
-            
-            Task {
-                //MusapClient.sign(req: <#T##SignatureReq#>, completion: <#T##(Result<MusapSignature, MusapError>) -> Void#>)
+            if let sscdType = theSscd?.getSscdInfo().sscdType {
+                print("Search req")
+                let req = KeySearchReq(sscdType: sscdType)
+                let keys = MusapClient.listKeys()
+                
+                print("list keys done")
+                
+                var musapKey: MusapKey?
+                for key in keys {
+                    print("key: \(key.getKeyAlias())")
+                    print("\(String(describing: key.getSscdType())) vs. \(sscdType)")
+                    if key.getSscdType() == sscdType {
+                        print("key set")
+                        musapKey = key
+                    }
+                }
+                
+                guard let theKey = musapKey else {
+                    print("musap key was nil")
+                    return
+                }
+                
+                print("getting signatureReq from signaturePayload")
+                guard let signatureReq = payload?.getSignaturePayload().toSignatureReq(key: theKey) else {
+                    print("failed to get signatureReq")
+                    return
+                }
 
+                Task {
+                    await MusapClient.sign(req: signatureReq) { result in
+                        
+                        switch result {
+                        case .success(let signature):
+                            print("signature: \(signature.getB64Signature())")
+                            alertTitle = "Success"
+                            alertMessage = "Signature: \(signature.getB64Signature())"
+                            showAlert = true
+                        case .failure(let error):
+                            alertTitle = "Error"
+                            alertMessage = "Error in LinkSigningView: \(error)"
+                            showAlert = true
+                            print("error in LinkSigningView: \(error)")
+                        }
+                        
+                    }
+                }
+                
             }
-             
-            
             
         }
         

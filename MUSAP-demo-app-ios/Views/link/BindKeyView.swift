@@ -16,6 +16,7 @@ struct BindKeyView: View {
     
     @State private var showAlert = false
     @State private var alertMessage = ""
+    @State private var isLoading = false
     
     var body: some View {
         Text("You need to bind a key")
@@ -27,6 +28,13 @@ struct BindKeyView: View {
         .alert(isPresented: $showAlert) {
             Alert(title: Text("Key Binding"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
         }
+        
+        if isLoading {
+            ProgressView()
+                .progressViewStyle(CircularProgressViewStyle())
+                .scaleEffect(2)
+        }
+        
     }
     
     private func bindKey() {
@@ -62,6 +70,7 @@ struct BindKeyView: View {
         )
         
         Task {
+            self.isLoading = true
             await MusapClient.bindKey(sscd: sscd, req: keyBindReq) { result in
             
                 switch result {
@@ -69,10 +78,12 @@ struct BindKeyView: View {
                     print("musapKey: \(String(describing: musapKey.getKeyAlias()))")
                     alertMessage = "Key binding successful!"
                     showAlert    = true
+                    isLoading    = false
                 case .failure(let error):
                     print("BindKeyView: error in bindkey: \(error)")
                     alertMessage = "Error in key binding: \(error.localizedDescription)"
-                    showAlert = true
+                    showAlert    = true
+                    isLoading    = false
                 }
                 
                 
