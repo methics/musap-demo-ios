@@ -8,24 +8,39 @@
 import Foundation
 
 /// Message between the MUSAP library and MUSAP link
-public class MusapMessage {
+public class MusapMessage: Codable {
     
-    public let payload: String
-    public let type: String
-    public let uuid: String
-    public let transId: String
-    public let requestId: String
-    public let mac: String
-    public let iv: String
+    public var payload:   String?
+    public var musapid:   String?
+    public var type:      String?
+    public var uuid:      String?
+    public var transid:   String?
+    public var requestid: String?
+    public var mac:       String?
+    public var iv:        String?
     
-    init(payload: String, type: String, uuid: String, transId: String, requestId: String, mac: String, iv: String) {
+    init(payload:   String,
+         musapid:   String,
+         type:      String,
+         uuid:      String,
+         transid:   String,
+         requestid: String,
+         mac:       String,
+         iv:        String
+    ) {
         self.payload = payload
+        self.musapid = musapid
         self.type = type
         self.uuid = uuid
-        self.transId = transId
-        self.requestId = requestId
+        self.transid = transid
+        self.requestid = requestid
         self.mac = mac
         self.iv = iv
     }
+    
+    init() {
+        
+    }
+
     
 }

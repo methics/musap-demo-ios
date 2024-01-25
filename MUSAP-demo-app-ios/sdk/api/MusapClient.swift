@@ -18,7 +18,7 @@ public class MusapClient {
 
      - Note: The method handles the asynchronous task internally and uses the `GenerateKeyTask` for the key generation process.
      */
-    static func generateKey(sscd: any MusapSscdProtocol, req: KeyGenReq, completion: @escaping (Result<MusapKey, MusapError>) -> Void) async {
+    public static func generateKey(sscd: any MusapSscdProtocol, req: KeyGenReq, completion: @escaping (Result<MusapKey, MusapError>) -> Void) async {
         do {
             let generateKeyTask = GenerateKeyTask()
             let key = try await generateKeyTask.generateKeyAsync(sscd: sscd, req: req, completion: completion)
@@ -246,24 +246,120 @@ public class MusapClient {
         //TODO: code this
     }
     
-    //TODO: return new MusapLink
-    public static func enableLink() {
+    public static func listRelyingParties() -> [RelyingParty]? {
+        return MusapStorage().listRelyingParties()
+    }
+    
+    public static func removeRelyingParty(relyingParty: RelyingParty) -> Bool {
+        return MusapStorage().removeRelyingParty(rp: relyingParty)
+    }
+    
+    /**
+        Enable a MUSAP Link connection
+        Enabling allows the MUSAP Link to securely request signatures from this MUSAP.
+     - Note: Only one connection can be active at a time
+     - Parameters:
+       - url: URL of the MUSAP Link service
+       - apnsToken: apple push notification service token
+     */
+    public static func enableLink(url: String, apnsToken: String?) async -> MusapLink? {
+        let link = MusapLink(url: url, musapId: nil)
+        let enrollTask = EnrollDataTask(link: link, apnsToken: apnsToken)
+        do {
+            let link = try await enrollTask.enrollData()
+            return link
+        } catch {
+            print("error enabling link: \(error)")
+            return nil
+        }
+    }
+    
+    public static func disableLink() -> Void {
+        MusapStorage().removeLink()
+    }
+    
+    public static func sendSignatureCallback() {
+        //TODO: DO THIS?
+    }
+    
+    public static func sendKeygenCallback() {
+        //TODO: Do this?
+    }
+    
+    public static func updateApnsToken() {
+        //TODO: Do this
+    }
+    
+    static func pollLink(completion: @escaping (Result<PollResponsePayload, MusapError>) -> Void) async {
+        guard let link = self.getMusapLink() else {
+            completion(.failure(MusapError.internalError))
+            return
+        }
+        
+        do {
+            let pollResponsePayload = try await PollTask(link: link).pollAsync() { result in
+                
+                switch result {
+                case .success(let payload):
+                    completion(.success(payload))
+                    return
+                case .failure(let error):
+                    completion(.failure(error))
+                    return
+                }
+                
+            }
+        } catch {
+            completion(.failure(MusapError.internalError))
+        }
         
     }
     
-    public static func disableLink() {
-        
-    }
-    
-    //TODO: returns signatureReq
-    public static func pollLink() {
-        
+    public static func isLinkEnabled() -> Bool {
+        return self.getMusapId() != nil
     }
     
     public static func updateKey(req: UpdateKeyReq) -> Bool {
         let storage = MetadataStorage()
         return storage.updateKeyMetaData(req: req)
     }
+    
+    public static func getMusapId() -> String? {
+        return MusapStorage().getMusapId()
+    }
+    
+    public static func getMusapLink() -> MusapLink? {
+        return MusapStorage().getMusaplink()
+    }
+    
+    /**
+     Request coupling with an RP.
+     This requires a coupling code which can be retrieved by the web service via the MUSAP Link API.
+     - parameters:
+        - couplingCode: Coupling code entered by the user.
+        - completion:   CompletionHandler
+     */
+    static func coupleWithRelyingParty(couplingCode: String, completion: @escaping (Result<RelyingParty, MusapError>) -> Void) async {
+        guard let musapId = self.getMusapId() else {
+            print("Error in coupling with relying party: No Musap ID")
+            return
+        }
+        
+        guard let link = self.getMusapLink() else {
+            print("No musap link")
+            return
+        }
+        
+        do {
+            let rp = try await CoupleTask().couple(link: link, couplingCode: couplingCode, appId: musapId)
+            completion(.success(rp))
+        } catch {
+            print("Error in coupleWithRelyingParty: \(error)")
+            completion(.failure(MusapError.internalError))
+        }
+        
+    }
+    
     
 }
 

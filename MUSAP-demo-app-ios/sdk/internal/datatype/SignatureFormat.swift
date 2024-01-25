@@ -23,5 +23,16 @@ public class SignatureFormat: Codable {
         return self.format
     }
     
+    public static func fromString(format: String) -> SignatureFormat {
+        switch format.uppercased() {
+        case "CMS":
+            return SignatureFormat.CMS
+        case "RAW":
+            return SignatureFormat.RAW
+        default:
+            return SignatureFormat.RAW
+        }
+    }
+    
     
 }

@@ -6,6 +6,7 @@
 //
 
 import SwiftUI
+import musap_ios
 
 struct ConfirmSignView: View {
     
@@ -13,6 +14,7 @@ struct ConfirmSignView: View {
     var musapKey: MusapKey?
     @State private var base64Signature: String? = nil
     @State private var keyUri: String? = nil
+    @State private var isSignDone = false
     
     var body: some View {
         VStack(alignment: .leading) {
@@ -41,10 +43,12 @@ struct ConfirmSignView: View {
                     .padding()
             }
         
-            Button("Confirm Sign", action: self.confirmSignTapped)
+            Button("Sign", action: self.confirmSignTapped)
                 .buttonStyle(.borderedProminent)
                 .padding()
-            
+                .disabled(isSignDone)
+  
+    
         }
         .padding()
         .frame(maxWidth: 300, alignment: .leading)
@@ -79,7 +83,7 @@ struct ConfirmSignView: View {
         }
         let algo = SignatureAlgorithm(algorithm: .ecdsaSignatureMessageX962SHA256)
         let signatureFormat = SignatureFormat("RAW")
-        let sigReq = SignatureReq(key: musapKey, data: data, algorithm: algo, format: signatureFormat)
+        let sigReq = SignatureReq(key: musapKey, data: data, algorithm: algo, format: signatureFormat, displayText: "Display text", attributes: [SignatureAttribute(name: "yes", value: "yes")])
         
         Task {
             await MusapClient.sign(req: sigReq) { result in
@@ -89,8 +93,10 @@ struct ConfirmSignView: View {
                     print("Success!")
                     print(" B64 signature: \(musapSignature.getB64Signature()) ")
                     base64Signature = musapSignature.getB64Signature()
+                    self.isSignDone = true
                 case .failure(let error):
                     print("ERROR: \(error.localizedDescription)")
+                    self.isSignDone = true
                 }
             }
             

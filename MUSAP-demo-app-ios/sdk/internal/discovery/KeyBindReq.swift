@@ -9,12 +9,13 @@ import Foundation
 
 public class KeyBindReq {
     
-    var keyAlias: String
-    var did: String
-    var role: String
-    var stepUpPolicy: StepUpPolicy //TODO: StepUpPolicy class
-    var attributes: [KeyAttribute]
-    var generateNewKey: Bool
+    private var keyAlias: String
+    private var did: String
+    private var role: String
+    private var stepUpPolicy: StepUpPolicy //TODO: StepUpPolicy class
+    private var attributes: [KeyAttribute]
+    private var generateNewKey: Bool
+    private var displayText: String
     
     init(
         keyAlias:       String,
@@ -22,8 +23,9 @@ public class KeyBindReq {
         role:           String,
         stepUpPolicy:   StepUpPolicy,
         attributes:     [KeyAttribute],
-        generateNewKey: Bool = false
-    ) 
+        generateNewKey: Bool = false,
+        displayText: String
+    )
     {
         self.keyAlias = keyAlias
         self.did = did
@@ -31,6 +33,7 @@ public class KeyBindReq {
         self.stepUpPolicy = stepUpPolicy
         self.attributes = attributes
         self.generateNewKey = generateNewKey
+        self.displayText = displayText
     }
     
     private func addAttribute(key: String, value: String) -> Void {
@@ -42,8 +45,33 @@ public class KeyBindReq {
         self.attributes.append(attribute)
     }
     
+    public func getAttributes() -> [KeyAttribute] {
+        return self.attributes
+    }
     
+    public func getAttribute(name: String) -> String? {
+        for attribute in self.getAttributes() {
+            if name == attribute.name {
+                guard let attrValue = attribute.value else {
+                    return nil
+                }
+                return attrValue
+            }
+        }
+        return nil
+    }
     
+    public func getKeyAlias() -> String {
+        return self.keyAlias
+    }
+    
+    /**
+     * Get the text to display to the user during the signature request
+     * @return Display text (a.k.a. DTBD). Default is "Sign with MUSAP".
+     */
+    public func getDisplayText() -> String {
+        return self.displayText
+    }
     
 }
 

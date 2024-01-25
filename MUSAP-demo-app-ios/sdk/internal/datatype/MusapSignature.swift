@@ -58,5 +58,12 @@ public class MusapSignature {
         return self.rawSignature.base64EncodedString()
     }
     
+    public func getPublicKey() -> PublicKey? {
+        guard let key = self.getKey() else {
+            return nil
+        }
+        return self.key?.getPublicKey()
+    }
+    
     
 }

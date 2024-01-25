@@ -1,6 +1,15 @@
 {
   "pins" : [
     {
+      "identity" : "musap-ios-package",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/methics/musap-ios-package",
+      "state" : {
+        "branch" : "main",
+        "revision" : "8a292cff7526ffffb9561bcfb4b0521d2a159a6a"
+      }
+    },
+    {
       "identity" : "yubikit-ios",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/Yubico/yubikit-ios",

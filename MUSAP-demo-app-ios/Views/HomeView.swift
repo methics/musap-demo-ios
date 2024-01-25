@@ -7,6 +7,7 @@
 
 import SwiftUI
 import Foundation
+import musap_ios
 
 struct HomeView: View {
     var body: some View {
@@ -15,22 +16,32 @@ struct HomeView: View {
             Text(LocalizedStringKey("WELCOME_TEXT"))
                 .font(.system(size: 24, weight: .heavy))
             Spacer()
-            
-            NavigationLink(destination: YubiKeyView()) {
-                Text("GO TO YUBIKEY")
-                    .background(Color.gray)
+        
+            NavigationLink(destination: CouplingView()) {
+                Text("GO TO MUSAP COUPLING")
+                    .background(Color.green)
             }
+            //Button("EXPORT DATA", action: self.exportData)
+            
             Button("RESET APP", action: self.deleteAllItems)
-            Button("EXPORT DATA", action: self.exportData)
+                .foregroundColor(.white)
+                .padding()
+                .background(Color.red)
+                .cornerRadius(10)
+                .font(.headline)
+                .frame(maxWidth: .infinity, maxHeight: .infinity)
+            
             Text("Version: \(self.getAppVersion())")
                 .font(.system(size: 12, weight: .heavy))
             }
         .padding(.top, 50)
         .padding()
         .onAppear {
+            Task {
+                await self.enableSscds()
+            }
             self.checkKeys()
             self.printAllKeysInfo()
-            self.enableSscds()
         }
     }
     
@@ -41,7 +52,6 @@ struct HomeView: View {
         }
         
         return "1.0.0"
-        
     }
     
     func checkKeys() {
@@ -116,10 +126,47 @@ struct HomeView: View {
         }
     }
     
-    func enableSscds() {
+    func enableSscds() async {
+        print("Enabling SecureEnclaveSscd")
         MusapClient.enableSscd(sscd: SecureEnclaveSscd())
+        print("Enabling KeychainSscd")
         MusapClient.enableSscd(sscd: KeychainSscd())
+        print("Enabling YubikeySscd")
         MusapClient.enableSscd(sscd: YubikeySscd())
+        
+        let externalSettings = ExternalSscdSettings(clientId: "1")
+                
+        print("Got external sscd settings")
+    
+        let musapId = MusapClient.getMusapId() // We also have MusapClient.isLinkEnabled()
+        print("got musap ID: \(String(describing: musapId))")
+        
+        if musapId == nil {
+            print("Musap ID was nil")
+            
+            if let link = await MusapClient.enableLink(url: "https://demo.methics.fi/musapdemo/", apnsToken: "123") {
+                //MusapClient.enableSscd(sscd: ExternalSscd(settings: externalSettings, clientId: "", musapLink: link))
+                print("ENabled Musap Link")
+                MusapClient.enableSscd(sscd: ExternalSscd(settings: externalSettings, clientid: "1", musapLink: link))
+
+            } else {
+                print("Enabling link failed")
+                guard let link = MusapClient.getMusapLink() else {
+                    return
+                }
+                MusapClient.enableSscd(sscd: ExternalSscd(settings: externalSettings, clientid: "1", musapLink: link))
+            }
+        } else {
+            print("Musap Link enrolled!")
+            guard let link = MusapClient.getMusapLink() else {
+                print("NO link")
+                return
+            }
+            MusapClient.enableSscd(sscd: ExternalSscd(settings: externalSettings, clientid: "1", musapLink: link))
+
+            
+        }
+        
     }
     
     func exportData() {

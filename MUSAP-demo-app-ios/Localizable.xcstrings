@@ -12,9 +12,6 @@
         }
       }
     },
-    "Algorithms" : {
-
-    },
     "Available Keys" : {
 
     },
@@ -27,10 +24,10 @@
     "Choose what to sign" : {
 
     },
-    "Confirm Sign" : {
+    "Country" : {
 
     },
-    "Country" : {
+    "ENABLED SSCDS" : {
 
     },
     "ENABLED_SSCD_LIST" : {
@@ -44,7 +41,7 @@
         }
       }
     },
-    "ENABLED_SSCDS" : {
+    "Enter Coupling Code" : {
 
     },
     "Enter key name" : {
@@ -53,25 +50,22 @@
     "Enter PIN" : {
 
     },
-    "Enter your YubiKey PIV PIN" : {
-
-    },
     "Error" : {
-
-    },
-    "EXPORT DATA" : {
 
     },
     "Generate the key" : {
 
     },
-    "GO TO YUBIKEY" : {
+    "GO TO MUSAP COUPLING" : {
 
     },
     "Hello, World!" : {
 
     },
     "Home" : {
+
+    },
+    "Key Binding" : {
 
     },
     "Key details" : {
@@ -90,6 +84,9 @@
 
     },
     "KeyURI:" : {
+
+    },
+    "Loading..." : {
 
     },
     "MENU_HOME" : {
@@ -136,7 +133,13 @@
         }
       }
     },
+    "MUSAP Link is active" : {
+
+    },
     "Next" : {
+
+    },
+    "No SSCD's activated." : {
 
     },
     "OK" : {
@@ -145,10 +148,10 @@
     "PIN" : {
 
     },
-    "PIN code" : {
+    "PIN confirm" : {
 
     },
-    "PIN confirm" : {
+    "Poll" : {
 
     },
     "RESET APP" : {
@@ -187,16 +190,19 @@
     "SSCD Type" : {
 
     },
+    "Start Binding" : {
+
+    },
     "Submit" : {
 
     },
     "Success!" : {
 
     },
-    "Successfully created a key" : {
+    "Successfully coupled!" : {
 
     },
-    "TODO" : {
+    "Successfully created a key" : {
 
     },
     "Version: %@" : {
@@ -212,6 +218,9 @@
           }
         }
       }
+    },
+    "You need to bind a key" : {
+
     }
   },
   "version" : "1.0"

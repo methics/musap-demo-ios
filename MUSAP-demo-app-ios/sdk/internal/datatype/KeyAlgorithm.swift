@@ -63,6 +63,35 @@ public struct KeyAlgorithm: Codable, Equatable {
             return "[\(primitive)/\(bits)]"
         }
     }
+    
+    func toSignatureAlgorithm() -> SignatureAlgorithm {
+        if isRsa() {
+            switch bits {
+            case 1024, 2048:
+                return SignatureAlgorithm(algorithm: SecKeyAlgorithm.rsaSignatureMessagePKCS1v15SHA256)
+            case 4096:
+                return SignatureAlgorithm(algorithm: SecKeyAlgorithm.rsaSignatureMessagePKCS1v15SHA256)
+            default:
+                return SignatureAlgorithm(algorithm: SecKeyAlgorithm.rsaSignatureMessagePKCS1v15SHA256)
+            }
+        }
+        
+        if isEc() {
+            switch bits {
+            case 256:
+                return SignatureAlgorithm(algorithm: SecKeyAlgorithm.ecdsaSignatureMessageX962SHA256)
+            case 384:
+                return SignatureAlgorithm(algorithm: SecKeyAlgorithm.ecdsaSignatureMessageX962SHA384)
+            case 512:
+                return SignatureAlgorithm(algorithm: SecKeyAlgorithm.ecdsaSignatureMessageX962SHA512)
+            default:
+                return SignatureAlgorithm(algorithm: SecKeyAlgorithm.ecdsaSignatureMessageX962SHA256)
+            }
+        }
+        
+        return SignatureAlgorithm(algorithm: SecKeyAlgorithm.ecdsaSignatureMessageX962SHA256)
+        
+    }
 }
 
 enum KeyAlgorithmEnum {
