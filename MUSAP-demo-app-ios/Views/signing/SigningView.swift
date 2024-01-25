@@ -43,6 +43,11 @@ struct SigningView: View {
             
             NavigationLink(destination: ChooseKeyForSigningView(dataToBeSigned: self.dataToBeSigned)) {
                 Text("Next")
+                    .padding()
+                    .foregroundColor(.white)
+                    .background(Color.blue)
+                    .cornerRadius(10)
+                    .font(.headline)
             }
             
             

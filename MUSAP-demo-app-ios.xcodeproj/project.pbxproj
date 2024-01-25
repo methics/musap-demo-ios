@@ -115,11 +115,67 @@
 			path = "MUSAP-demo-app-ios.xcodeproj/project.xcworkspace/xcuserdata/teemu.xcuserdatad/xcschemes";
 			sourceTree = "<group>";
 		};
+		692180D6AE4EB5CE055BD91F /* 3c */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = 3c;
+			sourceTree = "<group>";
+		};
 		692180EC3502ABF08211CEEB /* docs */ = {
 			isa = PBXGroup;
 			children = (
 			);
 			path = docs;
+			sourceTree = "<group>";
+		};
+		69218136359BC5AFD18CEF20 /* 11 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = 11;
+			sourceTree = "<group>";
+		};
+		69218190393A69982A544C00 /* a3 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = a3;
+			sourceTree = "<group>";
+		};
+		692182AE4F5606D74D46179F /* 65 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = 65;
+			sourceTree = "<group>";
+		};
+		692183BB8E0599C40CA45253 /* b1 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = b1;
+			sourceTree = "<group>";
+		};
+		692183CA0A2AC1A5CB4AB326 /* 7a */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = 7a;
+			sourceTree = "<group>";
+		};
+		6921845AFC29D1393D32953F /* 40 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = 40;
+			sourceTree = "<group>";
+		};
+		6921845C8C8FF65FA7DE4621 /* 46 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = 46;
 			sourceTree = "<group>";
 		};
 		6921846C1B67199AA2B4367F /* ab */ = {
@@ -130,9 +186,97 @@
 			path = .git/objects/ab;
 			sourceTree = "<group>";
 		};
+		69218591FEFA49D557C2C36C /* af */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = af;
+			sourceTree = "<group>";
+		};
+		6921871631A84D922CAAC2F6 /* 23 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = 23;
+			sourceTree = "<group>";
+		};
+		69218A2B2D92BD2E5166EAF4 /* b4 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = b4;
+			sourceTree = "<group>";
+		};
+		69218B7AFE30D8C0207EAA22 /* d9 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = d9;
+			sourceTree = "<group>";
+		};
+		69218BEB93606F06AB5E2381 /* 37 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = 37;
+			sourceTree = "<group>";
+		};
+		69218D3D15670ACA0ADE94BB /* ca */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ca;
+			sourceTree = "<group>";
+		};
+		69218DD3D06ADC3930E20FAA /* 4b */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = 4b;
+			sourceTree = "<group>";
+		};
+		69218E2A59F53B693884C88C /* c1 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = c1;
+			sourceTree = "<group>";
+		};
+		69218F1623D226092E9115B4 /* ed */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = ed;
+			sourceTree = "<group>";
+		};
+		69218FA400C0EA211DF2CB24 /* 70 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			path = 70;
+			sourceTree = "<group>";
+		};
 		69218FCB314321D31F4FA2CB /* objects */ = {
 			isa = PBXGroup;
 			children = (
+				69218DD3D06ADC3930E20FAA /* 4b */,
+				69218FA400C0EA211DF2CB24 /* 70 */,
+				69218136359BC5AFD18CEF20 /* 11 */,
+				69218B7AFE30D8C0207EAA22 /* d9 */,
+				69218E2A59F53B693884C88C /* c1 */,
+				69218D3D15670ACA0ADE94BB /* ca */,
+				69218591FEFA49D557C2C36C /* af */,
+				6921871631A84D922CAAC2F6 /* 23 */,
+				692182AE4F5606D74D46179F /* 65 */,
+				69218F1623D226092E9115B4 /* ed */,
+				692183CA0A2AC1A5CB4AB326 /* 7a */,
+				692183BB8E0599C40CA45253 /* b1 */,
+				69218A2B2D92BD2E5166EAF4 /* b4 */,
+				6921845C8C8FF65FA7DE4621 /* 46 */,
+				6921845AFC29D1393D32953F /* 40 */,
+				69218190393A69982A544C00 /* a3 */,
+				692180D6AE4EB5CE055BD91F /* 3c */,
+				69218BEB93606F06AB5E2381 /* 37 */,
 			);
 			name = objects;
 			path = .git/objects;
