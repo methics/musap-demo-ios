@@ -46,6 +46,15 @@ struct NavigationTabView: View {
                 Text("Sign")
             }
             
+            NavigationView {
+                LinkStatusView()
+                    .navigationTitle("Link")
+            }
+            .tabItem {
+                Image(systemName: "personalhotspot")
+                Text("Link")
+            }
+            
         }
     }}
 

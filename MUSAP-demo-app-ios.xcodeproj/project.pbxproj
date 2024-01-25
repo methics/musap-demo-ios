@@ -7,6 +7,7 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		692181FA7B275E3A0EFF30CD /* LinkStatusView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 69218797CFD7DEB9307D7F84 /* LinkStatusView.swift */; };
 		C41F6B0D2B57CDE400C175CE /* PollView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41F6B0C2B57CDE400C175CE /* PollView.swift */; };
 		C41F6B112B57E75500C175CE /* LinkSigningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41F6B102B57E75500C175CE /* LinkSigningView.swift */; };
 		C41F6B152B57FCEC00C175CE /* KeygenAndSignView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C41F6B142B57FCEC00C175CE /* KeygenAndSignView.swift */; };
@@ -50,6 +51,7 @@
 /* End PBXContainerItemProxy section */
 
 /* Begin PBXFileReference section */
+		69218797CFD7DEB9307D7F84 /* LinkStatusView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LinkStatusView.swift; sourceTree = "<group>"; };
 		C41F6B0C2B57CDE400C175CE /* PollView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PollView.swift; sourceTree = "<group>"; };
 		C41F6B102B57E75500C175CE /* LinkSigningView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LinkSigningView.swift; sourceTree = "<group>"; };
 		C41F6B142B57FCEC00C175CE /* KeygenAndSignView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KeygenAndSignView.swift; sourceTree = "<group>"; };
@@ -120,6 +122,30 @@
 			path = docs;
 			sourceTree = "<group>";
 		};
+		6921846C1B67199AA2B4367F /* ab */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = ab;
+			path = .git/objects/ab;
+			sourceTree = "<group>";
+		};
+		69218FCB314321D31F4FA2CB /* objects */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = objects;
+			path = .git/objects;
+			sourceTree = "<group>";
+		};
+		69218FF196C6550A4CB6B7F1 /* 31 */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = 31;
+			path = .git/objects/31;
+			sourceTree = "<group>";
+		};
 		C41FA6022AFE0F2E0060A0FD /* signing */ = {
 			isa = PBXGroup;
 			children = (
@@ -138,6 +164,7 @@
 				C41F6B102B57E75500C175CE /* LinkSigningView.swift */,
 				C41F6B142B57FCEC00C175CE /* KeygenAndSignView.swift */,
 				C41F6B162B581B7F00C175CE /* BindKeyView.swift */,
+				69218797CFD7DEB9307D7F84 /* LinkStatusView.swift */,
 			);
 			path = link;
 			sourceTree = "<group>";
@@ -151,6 +178,9 @@
 				C4DBFFC22AF2504300253DE4 /* MUSAP-demo-app-iosUITests */,
 				C4DBFFA62AF2504100253DE4 /* Products */,
 				6921801BB87D0518B985BAFD /* xcschemes */,
+				6921846C1B67199AA2B4367F /* ab */,
+				69218FF196C6550A4CB6B7F1 /* 31 */,
+				69218FCB314321D31F4FA2CB /* objects */,
 			);
 			sourceTree = "<group>";
 		};
@@ -396,6 +426,7 @@
 				C41F6B0D2B57CDE400C175CE /* PollView.swift in Sources */,
 				C41F6B112B57E75500C175CE /* LinkSigningView.swift in Sources */,
 				C4DBFFE22AF28F9A00253DE4 /* KeystoreDetailView.swift in Sources */,
+				692181FA7B275E3A0EFF30CD /* LinkStatusView.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

@@ -25,24 +25,35 @@ struct BindKeyView: View {
     var body: some View {
         Text("You need to bind a key")
             .padding()
-        Button("Start Binding") {
-            self.bindKey()
-        }
-        .padding()
-        .alert(isPresented: $showAlert) {
-            Alert(title: Text("Key Binding"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+            .font(.headline)
+        
+        if isKeyBinded {
+            Button("Sign") {
+                self.sign()
+            }
+            .padding()
+            .foregroundColor(.white)
+            .background(Color.blue)
+            .cornerRadius(10)
+            .font(.headline)
+        } else {
+            Button("Start Binding") {
+                self.bindKey()
+            }
+            .padding()
+            .foregroundColor(.white)
+            .background(Color.blue)
+            .cornerRadius(10)
+            .font(.headline)
+            .alert(isPresented: $showAlert) {
+                Alert(title: Text("Key Binding"), message: Text(alertMessage), dismissButton: .default(Text("OK")))
+            }
         }
         
         if isLoading {
             ProgressView()
                 .progressViewStyle(CircularProgressViewStyle())
                 .scaleEffect(2)
-        }
-        
-        if isKeyBinded {
-            Button("Sign") {
-                self.sign()
-            }
         }
         
     }

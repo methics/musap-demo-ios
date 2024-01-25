@@ -1,6 +1,5 @@
 # MUSAP Demo App
 
-![Musap Library](docs/musap-lib-overview.png)
 
 ## Goals
 
@@ -15,5 +14,8 @@ This app aims to demonstrate a wide variety of SSCDs that can be integrated to M
 
 ## Library
 
-MUSAP iOS library can be found in separate github repository, https://github.com/methics/MUSAP-Demo-App-iOS
+MUSAP iOS library can be found in separate github repository, https://github.com/methics/musap-ios
 
+## Architecture
+
+![Musap Library](docs/musap-lib-overview.png)

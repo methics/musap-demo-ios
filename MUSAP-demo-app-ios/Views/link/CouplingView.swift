@@ -17,40 +17,59 @@ struct CouplingView: View {
     @State private var showPollView   = false
     
     var body: some View {
-        TextField("Enter Coupling Code", text: $couplingCode)
-            .padding()
-            .border(Color.blue, width: 1)
-        
-        Button("Submit") {
-            print("Submit pressed")
-            sendCoupleReq()
-        }
-        .padding()
-        .alert(isPresented: $isCouplingSuccess) {
-            Alert(
-                title: Text("Successfully coupled!"),
-                message: Text(successMessage),
-                dismissButton: .default(Text("OK"), action: {
-                    self.isCouplingSuccess = false
-                })
-            )
-        }
-        .alert(isPresented: $isError) {
-            Alert(
-                title: Text("Error"),
-                message: Text(errorMessage),
-                dismissButton: .default(Text("OK"), action: {
-                    self.isError = false
-                })
-            )
-        }
-        
-        NavigationLink(destination: PollView(), isActive: $showPollView) {
+        VStack {
+            Text("Enter Coupling Code")
+                .padding()
+                .font(.headline)
             
+            Text("You can get the coupling code from relying party website")
+                .padding()
+                .font(.subheadline)
+
+            TextField("Enter Coupling Code", text: $couplingCode)
+                .padding()
+                .border(Color.blue, width: 1)
+                .frame(maxWidth: .infinity)
+                .padding(.horizontal, UIScreen.main.bounds.width * 0.1) // 10% padding on each side
+            
+            Button("Submit") {
+                print("Submit pressed")
+                sendCoupleReq()
+            }
+            .padding()
+            .foregroundColor(.white)
+            .background(Color.blue)
+            .cornerRadius(10)
+            .font(.headline)
+            
+            .alert(isPresented: $isCouplingSuccess) {
+                Alert(
+                    title: Text("Successfully coupled!"),
+                    message: Text(successMessage),
+                    dismissButton: .default(Text("OK"), action: {
+                        self.isCouplingSuccess = false
+                    })
+                )
+            }
+            .alert(isPresented: $isError) {
+                Alert(
+                    title: Text("Error"),
+                    message: Text(errorMessage),
+                    dismissButton: .default(Text("OK"), action: {
+                        self.isError = false
+                    })
+                )
+            }
+            
+            NavigationLink(destination: LinkStatusView(), isActive: $showPollView) {
+                
+            }
+            .onAppear {
+                isCoupledAlready()
+            }
         }
-        .onAppear {
-            isCoupledAlready()
-        }
+
+    
         
     }
     

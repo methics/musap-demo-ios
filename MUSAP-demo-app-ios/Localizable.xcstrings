@@ -27,6 +27,9 @@
     "Country" : {
 
     },
+    "Couple with MUSAP Link" : {
+
+    },
     "ENABLED SSCDS" : {
 
     },
@@ -41,6 +44,9 @@
         }
       }
     },
+    "Enabled, ready to couple" : {
+
+    },
     "Enter Coupling Code" : {
 
     },
@@ -54,9 +60,6 @@
 
     },
     "Generate the key" : {
-
-    },
-    "GO TO MUSAP COUPLING" : {
 
     },
     "Hello, World!" : {
@@ -84,6 +87,12 @@
 
     },
     "KeyURI:" : {
+
+    },
+    "Link" : {
+
+    },
+    "LINK is coupled. Ready to sign." : {
 
     },
     "Loading..." : {
@@ -133,6 +142,9 @@
         }
       }
     },
+    "MUSAP Link" : {
+
+    },
     "MUSAP Link is active" : {
 
     },
@@ -140,6 +152,9 @@
 
     },
     "No SSCD's activated." : {
+
+    },
+    "Not in use" : {
 
     },
     "OK" : {
@@ -193,6 +208,9 @@
     "Start Binding" : {
 
     },
+    "Start Coupling" : {
+
+    },
     "Submit" : {
 
     },
@@ -218,6 +236,9 @@
           }
         }
       }
+    },
+    "You can get the coupling code from relying party website" : {
+
     },
     "You need to bind a key" : {
 

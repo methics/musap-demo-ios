@@ -23,10 +23,15 @@ struct LinkSigningView: View {
                 if let dtbd = dtbd {
                     Text(dtbd)
                         .padding()
+                        .font(.headline)
                     Button("Sign") {
                         self.sendSignReq()
                     }
                     .padding()
+                    .foregroundColor(.white)
+                    .background(Color.blue)
+                    .cornerRadius(10)
+                    .font(.headline)
                     
                 } else {
                     Text("Loading...")
@@ -87,6 +92,9 @@ struct LinkSigningView: View {
                 
                 guard let theKey = musapKey else {
                     print("musap key was nil")
+                    showAlert = true
+                    alertTitle = "Failure"
+                    alertMessage = "No keys available. Please bind key first."
                     return
                 }
                 

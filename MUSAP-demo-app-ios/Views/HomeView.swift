@@ -16,11 +16,7 @@ struct HomeView: View {
             Text(LocalizedStringKey("WELCOME_TEXT"))
                 .font(.system(size: 24, weight: .heavy))
             Spacer()
-        
-            NavigationLink(destination: CouplingView()) {
-                Text("GO TO MUSAP COUPLING")
-                    .background(Color.green)
-            }
+            
             //Button("EXPORT DATA", action: self.exportData)
             
             Button("RESET APP", action: self.deleteAllItems)
@@ -146,8 +142,10 @@ struct HomeView: View {
             
             if let link = await MusapClient.enableLink(url: "https://demo.methics.fi/musapdemo/", apnsToken: "123") {
                 //MusapClient.enableSscd(sscd: ExternalSscd(settings: externalSettings, clientId: "", musapLink: link))
-                print("ENabled Musap Link")
+                print("Enabled Musap Link")
                 MusapClient.enableSscd(sscd: ExternalSscd(settings: externalSettings, clientid: "1", musapLink: link))
+                
+                
 
             } else {
                 print("Enabling link failed")
