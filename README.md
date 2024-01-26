@@ -24,6 +24,10 @@ MUSAP iOS library can be found in separate github repository, https://github.com
 
 See [CONTRIBUTING](CONTRIBUTING.md)
 
+## Security Policy
+
+See [SECURITY](SECURITY.md)
+
 ## License
 
 This project is licensed under the Apache License 2.0 - see the [LICENSE](LICENSE) file for details.
