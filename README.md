@@ -20,6 +20,9 @@ MUSAP iOS library can be found in separate github repository, https://github.com
 
 ![Musap Library](docs/musap-lib-overview.png)
 
+## Contributing
+
+See [CONTRIBUTING](CONTRIBUTING.md)
 
 ## License
 
