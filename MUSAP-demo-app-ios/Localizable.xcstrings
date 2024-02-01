@@ -77,6 +77,9 @@
     "Key Generation" : {
 
     },
+    "Key has been bound!" : {
+
+    },
     "Key name" : {
 
     },
@@ -92,7 +95,7 @@
     "Link" : {
 
     },
-    "LINK is coupled. Ready to sign." : {
+    "LINK is coupled. Ready to generate keys and sign." : {
 
     },
     "Loading..." : {

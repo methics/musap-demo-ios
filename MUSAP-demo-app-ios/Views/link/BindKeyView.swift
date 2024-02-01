@@ -23,11 +23,17 @@ struct BindKeyView: View {
     @State private var musapKeyFromBind: MusapKey? = nil
     
     var body: some View {
-        Text("You need to bind a key")
-            .padding()
-            .font(.headline)
-        
+        if !isKeyBinded {
+            Text("You need to bind a key")
+                .padding()
+                .font(.headline)
+        }
+
         if isKeyBinded {
+            Text("Key has been bound!")
+                .padding()
+                .font(.headline)
+            
             Button("Sign") {
                 self.sign()
             }
@@ -72,15 +78,19 @@ struct BindKeyView: View {
         }
         
         Task {
+            self.isLoading = true
+
             await MusapClient.sign(req: signatureReq) { result in
                 switch result {
                 case .success(let signature):
                     print("got signature: \(signature.getB64Signature())")
                     
                     MusapClient.sendSignatureCallback(signature: signature, txnId: transId)
+                    self.isLoading = false
                     
                 case .failure(let error):
                     print("error: \(error)")
+                    self.isLoading = false
                 }
                 
             }

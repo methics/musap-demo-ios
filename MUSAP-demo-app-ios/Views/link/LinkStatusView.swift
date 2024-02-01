@@ -43,7 +43,7 @@ struct LinkStatusView: View {
                     .frame(maxWidth: .infinity, maxHeight: .infinity)
                     
                 } else {
-                    Text("LINK is coupled. Ready to sign.")
+                    Text("LINK is coupled. Ready to generate keys and sign.")
                         .foregroundColor(.green)
                         .padding()
                     
