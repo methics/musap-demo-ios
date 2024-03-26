@@ -117,8 +117,9 @@ struct BindKeyView: View {
         let settings = ExternalSscdSettings(clientId: "1")
         
         print("getting externalSSCD")
-        let sscd = ExternalSscd(settings: settings, clientid: "1", musapLink: link)
+        let externalSscd = ExternalSscd(settings: settings, clientid: "1", musapLink: link)
         
+        let musapSscd = MusapSscd(impl: externalSscd)
 
         print("Creating key bind req")
         let keyBindReq = KeyBindReq(
@@ -133,7 +134,7 @@ struct BindKeyView: View {
         
         Task {
             self.isLoading = true
-            await MusapClient.bindKey(sscd: sscd, req: keyBindReq) { result in
+            await MusapClient.bindKey(sscd: musapSscd, req: keyBindReq) { result in
             
                 switch result {
                 case .success(let musapKey):

@@ -92,6 +92,8 @@ struct KeystoreListView: View {
     
     private func getActivatedSscds() {
         let activatedSscds = MusapClient.listActiveSscds()
+        print("ACTIVE SSCD")
+        print("---------------")
         for sscd in activatedSscds {
             print("SSCD things: \(sscd.getSscdId() ?? "No SSCD ID")")
             print("Keys amount: \(sscd.listKeys().count)")
@@ -103,6 +105,8 @@ struct KeystoreListView: View {
             print("SSCD: \(sscdName)")
             activatedSscdList.append(sscd)
         }
+        
+        print("---------------")
     }
 
 }
