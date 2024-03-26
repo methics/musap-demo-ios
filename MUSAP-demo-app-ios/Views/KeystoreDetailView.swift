@@ -8,7 +8,7 @@
 import SwiftUI
 import musap_ios
 
-struct KeystoreDetailView: View {   
+struct KeystoreDetailView: View {
     @State private var keys: [MusapKey] = [MusapKey]()
     
     let targetSscd: MusapSscd
@@ -25,26 +25,26 @@ struct KeystoreDetailView: View {
                     HStack {
                         Text("SSCD Name")
                         Spacer()
-                        Text(targetSscd.sscdName ?? "")
+                        Text(targetSscd.getSscdInfo()?.getSscdName() ?? "")
                     }
 
                     HStack {
                         Text("SSCD Type")
                         Spacer()
-                        Text(targetSscd.sscdType ?? "")
+                        Text(targetSscd.getSscdInfo()?.getSscdType() ?? "")
                     }
                     
                     HStack {
                         Text("SSCD Provider")
                         Spacer()
-                        Text(targetSscd.provider ?? "")
+                        Text(targetSscd.getSscdInfo()?.getSscdType() ?? "")
                         
                     }
                     
                     HStack {
                         Text("Country")
                         Spacer()
-                        Text(targetSscd.country ?? "")
+                        Text(targetSscd.getSscdInfo()?.getCountry() ?? "")
                     }
                     
                     /*
@@ -73,7 +73,7 @@ struct KeystoreDetailView: View {
     }
     
     private func getKeys() {
-        let req = KeySearchReq(sscdType: targetSscd.sscdType)
+        let req = KeySearchReq(sscdType: targetSscd.getSscdInfo()?.getSscdType())
         let keys = MusapClient.listKeys(req: req)
         self.keys = keys
         

@@ -21,8 +21,8 @@ struct KeyGenerationView: View {
     @State private var pin1 = ""
     @State private var isTextFieldActive = true
     
-    let availableKeystores = ["Yubikey", "SE", "Keychain"]
-    var keystoreIndex: KeyValuePairs = [0: "Yubikey", 1: "SE", 2: "Keychain"]
+    @State private var keystoreMappings: [String: MusapSscd] = [:]
+    @State private var enabledKeystoresNames: [String] = []
     
     
     var body: some View {
@@ -39,12 +39,15 @@ struct KeyGenerationView: View {
                 
                 HStack {
                     Picker("Select Keystore", selection: $selectedKeystoreIndex) {
-                        ForEach(0..<availableKeystores.count) { index in
-                            Text(availableKeystores[index]).tag(index)
+                        ForEach(0..<enabledKeystoresNames.count, id: \.self) { index in
+                            Text(enabledKeystoresNames[index]).tag(index)
                         }
                     }
                     .pickerStyle(DefaultPickerStyle())
                     .font(.system(size: 16, weight: .semibold))
+                    .onAppear {
+                        self.loadEnabledKeystores()
+                    }
                 }
             }
             
@@ -84,8 +87,7 @@ struct KeyGenerationView: View {
     //TODO: This skips to last check. Fix?
     func generatedButtonTapped() {
         //self.isPopupVisible = true
-        
-        print("Selected keystore: \(availableKeystores[selectedKeystoreIndex])")
+    
         
         if !self.isKeyNameOk() {
             self.errorMessage = "Keyname must have at least 3 characters"
@@ -98,23 +100,31 @@ struct KeyGenerationView: View {
         
     }
     
+    private func loadEnabledKeystores() {
+        let enabledKeystores = MusapClient.listEnabledSscds() ?? []
+        self.enabledKeystoresNames = enabledKeystores.compactMap { $0.getSscdInfo()?.getSscdName() }
+        self.keystoreMappings = enabledKeystores.reduce(into: [:]) { dict, sscd in
+            if let name = sscd.getSscdInfo()?.getSscdName() {
+                dict[name] = sscd
+            }
+        }
+    }
+
     
     func generateKeyWithMusap() {
         print("GENERATING KEY WITH MUSAP (keygenerationview)")
-        let selectedKeystore = availableKeystores[selectedKeystoreIndex]
+        let selectedKeystore = enabledKeystoresNames[selectedKeystoreIndex]
         
-        var sscdImplementation: any MusapSscdProtocol = SecureEnclaveSscd()
         
-        if selectedKeystore == "Keychain" {
-            print("Selected keystore was: \(selectedKeystore)")
-            sscdImplementation = KeychainSscd()
+        
+        //let secureEnclaveSettings = SecureEnclaveSettings()
+        //secureEnclaveSettings.setSscdName(name: "SecureEnclave")
+
+        let selectedKeystoreName = enabledKeystoresNames[selectedKeystoreIndex]
+        guard let musapSscd = keystoreMappings[selectedKeystoreName] else {
+            print("Selected keystore is not available")
+            return
         }
-        
-        if selectedKeystore == "Yubikey" {
-            print("selected keystore was: \(selectedKeystore)")
-            sscdImplementation = YubikeySscd()
-        }
-        
         
         //let keyAlgo            = KeyAlgorithm(primitive: KeyAlgorithm.PRIMITIVE_EC, bits: 256)
         let keyAlgo            = KeyAlgorithm(primitive: KeyAlgorithm.PRIMITIVE_EC, bits: 384)
@@ -124,10 +134,8 @@ struct KeyGenerationView: View {
         print("KeyGenerationView: Keyalgo: \(keyAlgo.primitive) \(keyAlgo.bits)")
         print("Keygrenreq: Alias \(keyGenReq.keyAlias)")
         
-        Task { [sscdImplementation] in
-            await MusapClient.generateKey(sscd: sscdImplementation, req: keyGenReq) {
-                result in
-                
+        Task { [musapSscd] in
+            await MusapClient.generateKey(sscd: musapSscd, req: keyGenReq) { result in
                 
                 switch result {
                 case .success(let musapKey):
@@ -147,6 +155,7 @@ struct KeyGenerationView: View {
                     self.isErrorPopupVisible = true
                 }
             }
+            
         }
         
     }

@@ -16,8 +16,8 @@
 		C44494E82AF3B1F300D8096C /* ChooseKeyForSigningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44494E72AF3B1F300D8096C /* ChooseKeyForSigningView.swift */; };
 		C44494EA2AF3B89C00D8096C /* ConfirmSignView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C44494E92AF3B89C00D8096C /* ConfirmSignView.swift */; };
 		C45F2E4A2B147A200091203C /* YubiKit in Frameworks */ = {isa = PBXBuildFile; productRef = C45F2E492B147A200091203C /* YubiKit */; };
-		C47BC39C2B5E946C0065DDC7 /* musap-ios in Frameworks */ = {isa = PBXBuildFile; productRef = C47BC39B2B5E946C0065DDC7 /* musap-ios */; };
 		C4A3B6922B5156AC0019D54D /* CouplingView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4A3B6912B5156AC0019D54D /* CouplingView.swift */; };
+		C4B6D78B2BB1897900BF025B /* musap-ios in Frameworks */ = {isa = PBXBuildFile; productRef = C4B6D78A2BB1897900BF025B /* musap-ios */; };
 		C4DBFFA92AF2504100253DE4 /* MUSAP_demo_app_ios.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DBFFA82AF2504100253DE4 /* MUSAP_demo_app_ios.swift */; };
 		C4DBFFAB2AF2504100253DE4 /* HomeView.swift in Sources */ = {isa = PBXBuildFile; fileRef = C4DBFFAA2AF2504100253DE4 /* HomeView.swift */; };
 		C4DBFFAD2AF2504200253DE4 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = C4DBFFAC2AF2504200253DE4 /* Assets.xcassets */; };
@@ -86,7 +86,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				C45F2E4A2B147A200091203C /* YubiKit in Frameworks */,
-				C47BC39C2B5E946C0065DDC7 /* musap-ios in Frameworks */,
+				C4B6D78B2BB1897900BF025B /* musap-ios in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -626,7 +626,7 @@
 			name = "MUSAP-demo-app-ios";
 			packageProductDependencies = (
 				C45F2E492B147A200091203C /* YubiKit */,
-				C47BC39B2B5E946C0065DDC7 /* musap-ios */,
+				C4B6D78A2BB1897900BF025B /* musap-ios */,
 			);
 			productName = "MUSAP-demo-app-ios";
 			productReference = C4DBFFA52AF2504100253DE4 /* MUSAP-demo-app-ios.app */;
@@ -702,7 +702,7 @@
 			mainGroup = C4DBFF9C2AF2504100253DE4;
 			packageReferences = (
 				C45F2E482B147A200091203C /* XCRemoteSwiftPackageReference "yubikit-ios" */,
-				C47BC39A2B5E946C0065DDC7 /* XCRemoteSwiftPackageReference "musap-ios-package" */,
+				C4B6D7892BB1897900BF025B /* XCRemoteSwiftPackageReference "musap-ios-package" */,
 			);
 			productRefGroup = C4DBFFA62AF2504100253DE4 /* Products */;
 			projectDirPath = "";
@@ -1118,11 +1118,11 @@
 				minimumVersion = 4.4.0;
 			};
 		};
-		C47BC39A2B5E946C0065DDC7 /* XCRemoteSwiftPackageReference "musap-ios-package" */ = {
+		C4B6D7892BB1897900BF025B /* XCRemoteSwiftPackageReference "musap-ios-package" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/methics/musap-ios-package";
 			requirement = {
-				branch = main;
+				branch = d4;
 				kind = branch;
 			};
 		};
@@ -1134,9 +1134,9 @@
 			package = C45F2E482B147A200091203C /* XCRemoteSwiftPackageReference "yubikit-ios" */;
 			productName = YubiKit;
 		};
-		C47BC39B2B5E946C0065DDC7 /* musap-ios */ = {
+		C4B6D78A2BB1897900BF025B /* musap-ios */ = {
 			isa = XCSwiftPackageProductDependency;
-			package = C47BC39A2B5E946C0065DDC7 /* XCRemoteSwiftPackageReference "musap-ios-package" */;
+			package = C4B6D7892BB1897900BF025B /* XCRemoteSwiftPackageReference "musap-ios-package" */;
 			productName = "musap-ios";
 		};
 /* End XCSwiftPackageProductDependency section */

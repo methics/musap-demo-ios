@@ -123,13 +123,19 @@ struct HomeView: View {
     }
     
     func enableSscds() async {
-        print("Enabling SecureEnclaveSscd")
-        MusapClient.enableSscd(sscd: SecureEnclaveSscd())
-        print("Enabling KeychainSscd")
-        MusapClient.enableSscd(sscd: KeychainSscd())
-        print("Enabling YubikeySscd")
-        MusapClient.enableSscd(sscd: YubikeySscd())
+        //let secureEnclaveSettings = SecureEnclaveSettings()
+        //secureEnclaveSettings.setSscdName(name: "SecureEnclave")
         
+        //let test = SecureEnclaveSscd(settings: secureEnclaveSettings)
+        //print("NAME: \(test.getSscdInfo().getSscdName())")
+        
+        print("Enabling SecureEnclaveSscd")
+        MusapClient.enableSscd(sscd: SecureEnclaveSscd(), sscdId: "1")
+        print("Enabling KeychainSscd")
+        MusapClient.enableSscd(sscd: KeychainSscd(), sscdId: "2")
+        //print("Enabling YubikeySscd")
+        //MusapClient.enableSscd(sscd: YubikeySscd(), sscdId: "3")
+    
         let externalSettings = ExternalSscdSettings(clientId: "1")
                 
         print("Got external sscd settings")
@@ -143,7 +149,7 @@ struct HomeView: View {
             if let link = await MusapClient.enableLink(url: "https://demo.methics.fi/musapdemo/", apnsToken: "123") {
                 //MusapClient.enableSscd(sscd: ExternalSscd(settings: externalSettings, clientId: "", musapLink: link))
                 print("Enabled Musap Link")
-                MusapClient.enableSscd(sscd: ExternalSscd(settings: externalSettings, clientid: "1", musapLink: link))
+                MusapClient.enableSscd(sscd: ExternalSscd(settings: externalSettings, clientid: "1", musapLink: link), sscdId: "10")
                 
                 
 
@@ -152,7 +158,7 @@ struct HomeView: View {
                 guard let link = MusapClient.getMusapLink() else {
                     return
                 }
-                MusapClient.enableSscd(sscd: ExternalSscd(settings: externalSettings, clientid: "1", musapLink: link))
+                MusapClient.enableSscd(sscd: ExternalSscd(settings: externalSettings, clientid: "2", musapLink: link), sscdId: "10")
             }
         } else {
             print("Musap Link enrolled!")
@@ -160,7 +166,7 @@ struct HomeView: View {
                 print("NO link")
                 return
             }
-            MusapClient.enableSscd(sscd: ExternalSscd(settings: externalSettings, clientid: "1", musapLink: link))
+            MusapClient.enableSscd(sscd: ExternalSscd(settings: externalSettings, clientid: "3", musapLink: link), sscdId: "10")
 
             
         }

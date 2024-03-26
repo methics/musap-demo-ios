@@ -1,12 +1,13 @@
 {
+  "originHash" : "8ba5fa216704df79cbf954c72fea4e22cd0487e0258b852935ff6cb83e979abd",
   "pins" : [
     {
       "identity" : "musap-ios-package",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/methics/musap-ios-package",
       "state" : {
-        "branch" : "main",
-        "revision" : "23c395c96b13b7ee22f81ca07a9f143e2beb9045"
+        "branch" : "d4",
+        "revision" : "e241e6d7563b26b2f5d849580762b9ae834c8243"
       }
     },
     {
@@ -19,5 +20,5 @@
       }
     }
   ],
-  "version" : 2
+  "version" : 3
 }

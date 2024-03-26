@@ -39,7 +39,7 @@ struct LinkSigningView: View {
             }
             .onAppear {
                 self.dtbd = payload?.getDisplayText()
-            }        
+            }
             .alert(isPresented: $showAlert) {
                 Alert(
                     title: Text(alertTitle),
@@ -61,19 +61,20 @@ struct LinkSigningView: View {
                 return
             }
             
-            var theSscd: (any MusapSscdProtocol)?
+            //var theSscd: (any MusapSscdProtocol)?
+            var theSscd: MusapSscd?
             for sscd in sscds {
-                if sscd.getSscdInfo().sscdType == "External Signature" {
+                if sscd.getSscdInfo()?.getSscdType() == "External Signature" {
                     print("Found external signature sscd")
                     theSscd = sscd
                 }
                 
                 print("Provider:")
-                print(sscd.getSscdInfo().provider)
+                print(sscd.getSscdInfo()?.getProvider())
                                 
             }
             
-            if let sscdType = theSscd?.getSscdInfo().sscdType {
+            if let sscdType = theSscd?.getSscdInfo()?.getSscdType() {
                 print("Search req")
                 let req = KeySearchReq(sscdType: sscdType)
                 let keys = MusapClient.listKeys()
@@ -138,4 +139,3 @@ struct LinkSigningView: View {
     }
     
 }
-

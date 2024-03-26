@@ -25,10 +25,10 @@ struct KeystoreListView: View {
                 ForEach(enabledSscdList) { sscd in
                      NavigationLink(
                          destination: KeystoreDetailView(targetSscd: sscd),
-                         tag: sscd.sscdName!,
+                         tag: sscd.getSscdInfo()?.getSscdType() ?? "No sscd type",
                          selection: $selectedSscd,
                          label: {
-                             Text(sscd.sscdName!)
+                             Text(sscd.getSscdInfo()?.getSscdName() ?? "No name")
                          }
                      )
                  }
@@ -41,10 +41,10 @@ struct KeystoreListView: View {
                     ForEach(activatedSscdList) { sscd in
                         NavigationLink(
                             destination: KeystoreDetailView(targetSscd: sscd),
-                            tag: sscd.sscdName!,
+                            tag: sscd.getSscdInfo()?.getSscdName() ?? "no name",
                             selection: $selectedSscd,
                             label: {
-                                Text(sscd.sscdName!)
+                                Text(sscd.getSscdInfo()?.getSscdName() ?? "no name")
                             }
                         )
                     }
@@ -70,13 +70,15 @@ struct KeystoreListView: View {
         }
 
         for sscd in enabledSscds {
-            guard let sscdName = sscd.getSscdInfo().sscdName else {
+            print("Keys for enabled SSCD: \(sscd.listKeys())")
+            guard let sscdName = sscd.getSscdInfo()?.getSscdName() else {
                 print("No name for sscd ")
                 continue
             }
-            print("SSCD: \(sscdName)")
+            print("SSCD name: \(sscdName)")
+            print("SSCD ID FROM SSCD: \(sscd.getSscdId() ?? "NO SSCD ID" ) ")
             
-            enabledSscdList.append(sscd.getSscdInfo())
+            enabledSscdList.append(sscd)
             
             
         }
@@ -91,7 +93,9 @@ struct KeystoreListView: View {
     private func getActivatedSscds() {
         let activatedSscds = MusapClient.listActiveSscds()
         for sscd in activatedSscds {
-            guard let sscdName = sscd.sscdName else {
+            print("SSCD things: \(sscd.getSscdId() ?? "No SSCD ID")")
+            print("Keys amount: \(sscd.listKeys().count)")
+            guard let sscdName = sscd.getSscdInfo()?.getSscdName() else {
                 print("No name for sscd")
                 continue
             }

@@ -13,7 +13,7 @@ struct MUSAP_demo_app_ios: App {
     
     init() {
         // Enable SSCDs. For example YubikeySscd
-        MusapClient.enableSscd(sscd: YubikeySscd())
+        MusapClient.enableSscd(sscd: YubikeySscd(), sscdId: "10")
     }
     
     var body: some Scene {
